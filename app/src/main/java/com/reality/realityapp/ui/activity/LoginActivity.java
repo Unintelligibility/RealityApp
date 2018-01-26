@@ -1,14 +1,14 @@
-package com.reality.realityapp;
+package com.reality.realityapp.ui.activity;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.reality.realityapp.base.BaseActivity;
+import com.reality.realityapp.R;
+import com.reality.realityapp.ui.activity.base.BaseActivity;
 
 public class LoginActivity extends BaseActivity {
 

@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/register_bg"
     android:orientation="vertical"
-    tools:context="com.reality.realityapp.RegisterActivity">
+    tools:context="com.reality.realityapp.ui.activity.RegisterActivity">
 
     <include layout="@layout/common_toolbar"></include>
     

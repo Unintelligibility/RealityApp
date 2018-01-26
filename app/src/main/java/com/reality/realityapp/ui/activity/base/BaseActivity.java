@@ -1,4 +1,4 @@
-package com.reality.realityapp.base;
+package com.reality.realityapp.ui.activity.base;
 
 import android.os.Build;
 import android.os.Bundle;
