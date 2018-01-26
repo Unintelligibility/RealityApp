@@ -8,7 +8,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class LoginActivity extends AppCompatActivity {
+import com.reality.realityapp.base.BaseActivity;
+
+public class LoginActivity extends BaseActivity {
 
     private EditText usernameEdt;
     private EditText passwordEdt;

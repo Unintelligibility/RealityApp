@@ -3,4 +3,8 @@
     <string name="login_name_hint">请输入用户名</string>
     <string name="login_password_hint">请输入密码</string>
     <string name="login_submit">确定</string>
+    <string name="register_phone_hint">请输入手机号</string>
+    <string name="register_password_hint">请输入密码</string>
+    <string name="register_repassword_hint">请重复输入密码</string>
+    <string name="register_submit">提交</string>
 </resources>
