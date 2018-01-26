@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:background="@drawable/example_start"></View>
+            android:background="@drawable/start_example"></View>
 
         <!--这个ImageView用来放置附属的解说图片，比如我们的谣言分析系统logo，视情况可以去除-->
         <ImageView
@@ -37,7 +37,7 @@
         android:paddingBottom="4dp"
         android:paddingLeft="12dp"
         android:paddingRight="12dp"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/white"
         android:textSize="14dp"
         android:background="@drawable/btn_bg_skip"
         />

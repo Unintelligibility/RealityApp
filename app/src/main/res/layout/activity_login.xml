@@ -1,9 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_example"
     tools:context="com.reality.realityapp.LoginActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/id_tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="鉴闻"
+        android:textColor="@color/white"
+        android:textSize="48dp"
+        android:textStyle="bold"
+        android:layout_marginTop="90dp"/>
+
+    <EditText
+        android:id="@+id/id_edt_username"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_below="@+id/id_tv_title"
+        android:layout_marginTop="40dp"
+        android:background="@color/login_text_bg"
+        android:hint="@string/login_name_hint"
+        android:inputType="text"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"/>
+
+    <EditText
+        android:id="@+id/id_edt_password"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_below="@+id/id_edt_username"
+        android:layout_marginTop="4dp"
+        android:background="@color/login_text_bg"
+        android:hint="@string/login_password_hint"
+        android:inputType="textWebPassword"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"/>
+
+    <Button
+        android:id="@+id/id_btn_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/id_edt_password"
+        android:layout_marginLeft="60dp"
+        android:layout_marginRight="60dp"
+        android:layout_marginTop="50dp"
+        android:text="@string/login_submit"
+        style="@style/Button_Large_Black"
+        />
+
+    <TextView
+        android:id="@+id/id_tv_register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/id_btn_login"
+        android:layout_centerHorizontal="true"
+        android:text="手机注册"
+        android:textColor="@color/white"
+        android:layout_marginTop="30dp"/>
+
+</RelativeLayout>
