@@ -10,7 +10,16 @@ public class NewsItem {
     private String office;
     private String time;
     private String reliability;
-    private boolean isBadTitle;
+    private String isBadTitle;
+    private String picUrl;
+
+    public String getPicUrl() {
+        return picUrl;
+    }
+
+    public void setPicUrl(String picUrl) {
+        this.picUrl = picUrl;
+    }
 
     public long getId() {
         return id;
@@ -52,11 +61,11 @@ public class NewsItem {
         this.reliability = reliability;
     }
 
-    public boolean isBadTitle() {
+    public String isBadTitle() {
         return isBadTitle;
     }
 
-    public void setBadTitle(boolean badTitle) {
+    public void setBadTitle(String badTitle) {
         isBadTitle = badTitle;
     }
 }
