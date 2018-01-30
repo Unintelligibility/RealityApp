@@ -1,10 +1,12 @@
 package com.reality.realityapp.bean;
 
+import java.io.Serializable;
+
 /**
  * Created by 铠联 on 2018/1/26.
  */
 
-public class User {
+public class User implements Serializable {
     private long id;
     private String password;
     private String username;

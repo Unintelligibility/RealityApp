@@ -25,8 +25,6 @@ public class FirstPageActivity extends AppCompatActivity implements TabHost.TabC
 
     private ViewPager viewPager;
 
-    private SwipeRefreshLayout swipeRefreshLayout;
-    private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +41,6 @@ public class FirstPageActivity extends AppCompatActivity implements TabHost.TabC
         tabHost = (TabHost) findViewById(R.id.id_tab_host);
         //fragment组成的viewpager
         viewPager = (ViewPager) findViewById(R.id.id_viewpager);
-        recyclerView = (RecyclerView) findViewById(R.id.id_recyclerview);
-        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.id_swiperefresh);
 
         final Fragment[] fragments = new Fragment[]{
                 NewsListFragment.newInstance(NewsListMock.getNewItemList1()),

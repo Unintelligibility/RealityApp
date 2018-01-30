@@ -1,17 +1,29 @@
 package com.reality.realityapp.bean;
 
+import java.io.Serializable;
+
 /**
- * Created by 铠联 on 2018/1/27.
+ * Created by 铠联 on 2018/1/30.
  */
 
-public class NewsItem {
+public class NewsItem implements Serializable{
     private long id;
-    private String title;
-    private String office;
-    private String time;
-    private String reliability;
-    private String isBadTitle;
     private String picUrl;
+    private String picInfo;
+    private String title;
+    private String content;
+    private String source;
+    private String time;
+//    private String reliability;
+//    private String isBadTitle;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getPicUrl() {
         return picUrl;
@@ -21,12 +33,12 @@ public class NewsItem {
         this.picUrl = picUrl;
     }
 
-    public long getId() {
-        return id;
+    public String getPicInfo() {
+        return picInfo;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setPicInfo(String picInfo) {
+        this.picInfo = picInfo;
     }
 
     public String getTitle() {
@@ -37,12 +49,20 @@ public class NewsItem {
         this.title = title;
     }
 
-    public String getOffice() {
-        return office;
+    public String getContent() {
+        return content;
     }
 
-    public void setOffice(String office) {
-        this.office = office;
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
     }
 
     public String getTime() {
@@ -53,19 +73,19 @@ public class NewsItem {
         this.time = time;
     }
 
-    public String getReliability() {
-        return reliability;
-    }
-
-    public void setReliability(String reliability) {
-        this.reliability = reliability;
-    }
-
-    public String isBadTitle() {
-        return isBadTitle;
-    }
-
-    public void setBadTitle(String badTitle) {
-        isBadTitle = badTitle;
-    }
+//    public String getReliability() {
+//        return reliability;
+//    }
+//
+//    public void setReliability(String reliability) {
+//        this.reliability = reliability;
+//    }
+//
+//    public String getIsBadTitle() {
+//        return isBadTitle;
+//    }
+//
+//    public void setIsBadTitle(String isBadTitle) {
+//        this.isBadTitle = isBadTitle;
+//    }
 }

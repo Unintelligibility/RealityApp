@@ -9,15 +9,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.reality.realityapp.R;
 import com.reality.realityapp.bean.NewsItem;
 import com.reality.realityapp.business.NewsBusiness;
+import com.reality.realityapp.mock.NewsListMock;
 import com.reality.realityapp.ui.adapter.NewsListAdapter;
 import com.reality.realityapp.ui.view.refresh.SwipeRefresh;
 import com.reality.realityapp.ui.view.refresh.SwipeRefreshLayout;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -56,6 +57,10 @@ public class NewsListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_newslist, null);
         SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.id_swiperefresh);
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.id_recyclerview);
+        // TODO 测试数据，还未接受服务器的新闻列表数据
+        List<NewsItem> newsItemList = NewsListMock.getNewItemList2();
+        NewsListAdapter newsListAdapter = new NewsListAdapter(getActivity(),newsItemList);
+
 
         //swipeRefreshLayout设置
         swipeRefreshLayout.setMode(SwipeRefresh.Mode.BOTH);
@@ -63,7 +68,7 @@ public class NewsListFragment extends Fragment {
 
         //recyclerview设置
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-//        recyclerView.setAdapter(new NewsListAdapter());
+        recyclerView.setAdapter(newsListAdapter);
 //        final TextView textView = (TextView) view.findViewById(R.id.id_tv_title);
 //        textView.setText(title);
 //
@@ -76,5 +81,6 @@ public class NewsListFragment extends Fragment {
 //        });
         return view;
     }
+
 
 }
