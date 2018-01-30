@@ -36,14 +36,14 @@ public class NewsBusiness {
             @Override
             public void run() {
                 Request.Builder builder = new Request.Builder();
-                builder.url(Url.testUrl);
+                builder.url(Url.newsUrl);
                 Request request = builder.build();
                 Log.d(TAG,"run: "+request);
                 Call call = okHttpClient.newCall(request);
                 try {
                     Response response = call.execute();
                     if (response.isSuccessful()) {
-                        final String data = response.headers().toString();
+                        final String data = response.body().string();
                         Log.d(TAG,"responese: "+data);
                         activity.runOnUiThread(new Runnable() {
                             @Override

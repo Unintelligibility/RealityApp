@@ -1,30 +1,50 @@
 package com.reality.realityapp.ui.activity;
 
+import android.graphics.Color;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TabHost;
 import android.widget.TextView;
 
 import com.reality.realityapp.R;
 import com.reality.realityapp.business.NewsBusiness;
 import com.reality.realityapp.mock.NewsListMock;
-import com.reality.realityapp.ui.fragment.NewsListFragment;
+import com.reality.realityapp.ui.view.fragment.NewsListFragment;
+import com.reality.realityapp.ui.view.refresh.SwipeRefresh;
+import com.reality.realityapp.ui.view.refresh.SwipeRefreshLayout;
 
 public class FirstPageActivity extends AppCompatActivity implements TabHost.TabContentFactory {
 
     private TabHost tabHost;
 
-    private NewsBusiness newsBusiness = new NewsBusiness();
+    private ViewPager viewPager;
+
+    private SwipeRefreshLayout swipeRefreshLayout;
+    private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first_page);
+
+        initView();
+
+        initEvent();
+
+    }
+
+    private void initView() {
+        tabHost = (TabHost) findViewById(R.id.id_tab_host);
+        //fragment组成的viewpager
+        viewPager = (ViewPager) findViewById(R.id.id_viewpager);
+        recyclerView = (RecyclerView) findViewById(R.id.id_recyclerview);
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.id_swiperefresh);
 
         final Fragment[] fragments = new Fragment[]{
                 NewsListFragment.newInstance(NewsListMock.getNewItemList1()),
@@ -33,7 +53,6 @@ public class FirstPageActivity extends AppCompatActivity implements TabHost.TabC
         };
 
         //初始化总布局
-        tabHost = (TabHost) findViewById(R.id.id_tab_host);
         tabHost.setup();
 
         //tab做处理
@@ -56,9 +75,6 @@ public class FirstPageActivity extends AppCompatActivity implements TabHost.TabC
             );
         }
 
-        //fragment组成的viewpager
-        final ViewPager viewPager = (ViewPager) findViewById(R.id.id_viewpager);
-
         //将viewPager的滑动行为和tab关联
         viewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
             @Override
@@ -70,14 +86,11 @@ public class FirstPageActivity extends AppCompatActivity implements TabHost.TabC
             public int getCount() {
                 return fragments.length;
             }
-
-//            @Override
-//            public Object instantiateItem(ViewGroup container, int position) {
-//                NewsListFragment newsListFragment = (NewsListFragment) super.instantiateItem(container,position);
-//                return super.instantiateItem(container, position);
-//            }
         });
 
+    }
+
+    private void initEvent() {
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -108,17 +121,6 @@ public class FirstPageActivity extends AppCompatActivity implements TabHost.TabC
                 }
             }
         });
-
-//        for (int index = 0; index < fragments.length; index++) {
-            // TODO 暂时供测试使用，后面需要替换成服务器端获得是的新闻列表数据
-//        viewPager.setCurrentItem(0);
-//        int index = viewPager.getCurrentItem();
-//        Fragment fragment = (Fragment) viewPager.getAdapter().instantiateItem(viewPager, index);
-//            Log.d("FirstPageActivity","fragment:"+fragment.getView()+index);
-//            TextView textView = (TextView) fragment.getView().findViewById(R.id.id_tv_title);
-//            newsBusiness.newsArrayDisplay(textView);
-//        }
-
     }
 
     @Override

@@ -1,9 +1,11 @@
-package com.reality.realityapp.ui.fragment;
+package com.reality.realityapp.ui.view.fragment;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,17 +14,11 @@ import android.widget.TextView;
 import com.reality.realityapp.R;
 import com.reality.realityapp.bean.NewsItem;
 import com.reality.realityapp.business.NewsBusiness;
-import com.reality.realityapp.constant.Url;
+import com.reality.realityapp.ui.adapter.NewsListAdapter;
+import com.reality.realityapp.ui.view.refresh.SwipeRefresh;
+import com.reality.realityapp.ui.view.refresh.SwipeRefreshLayout;
 
-import java.io.IOException;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
-import okhttp3.Call;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 
 /**
  * 用来存放首页新闻（专题）列表的fragment（容器）,由viewPager控制，可在不同fragment间切换
@@ -58,16 +54,26 @@ public class NewsListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_newslist, null);
-        final TextView textView = (TextView) view.findViewById(R.id.id_tv_title);
-        textView.setText(title);
+        SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.id_swiperefresh);
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.id_recyclerview);
 
-        textView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                newsBusiness.newsArrayDisplay(textView,getActivity());
+        //swipeRefreshLayout设置
+        swipeRefreshLayout.setMode(SwipeRefresh.Mode.BOTH);
+        swipeRefreshLayout.setColorSchemeColors(Color.RED,Color.BLACK,Color.GREEN,Color.YELLOW);
 
-            }
-        });
+        //recyclerview设置
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+//        recyclerView.setAdapter(new NewsListAdapter());
+//        final TextView textView = (TextView) view.findViewById(R.id.id_tv_title);
+//        textView.setText(title);
+//
+//        textView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                newsBusiness.newsArrayDisplay(textView,getActivity());
+//
+//            }
+//        });
         return view;
     }
 
