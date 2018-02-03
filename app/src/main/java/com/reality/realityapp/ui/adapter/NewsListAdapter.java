@@ -1,6 +1,7 @@
 package com.reality.realityapp.ui.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import com.reality.realityapp.R;
 import com.reality.realityapp.bean.NewsItem;
+import com.reality.realityapp.ui.activity.NewsInfoActivity;
 import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
@@ -27,6 +29,16 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.NewsLi
     private Context context;
     private LayoutInflater inflater;
 
+    private OnItemClickListener onItemClickListener;
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener){
+        this.onItemClickListener = onItemClickListener;
+    }
+
+    public interface OnItemClickListener{
+        void onClick(View view,int position);
+    }
+
     public NewsListAdapter(Context context, List<NewsItem> newsItemList) {
         this.context = context;
         this.newsItemList = newsItemList;
@@ -40,7 +52,7 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.NewsLi
     }
 
     @Override
-    public void onBindViewHolder(NewsListItemViewHolder holder, int position) {
+    public void onBindViewHolder(NewsListItemViewHolder holder, final int position) {
         NewsItem newsItem = newsItemList.get(position);
 
         Picasso.with(context)
@@ -51,6 +63,15 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.NewsLi
         holder.titleTv.setText(newsItem.getTitle());
         holder.sourceTv.setText(newsItem.getSource());
         holder.timeTv.setText(newsItem.getTime());
+
+        if (onItemClickListener!=null){
+            holder.titleTv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onItemClickListener.onClick(v,position);
+                }
+            });
+        }
     }
 
     @Override
@@ -67,13 +88,6 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.NewsLi
 
         public NewsListItemViewHolder(View itemView) {
             super(itemView);
-
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //TODO
-                }
-            });
 
             imageView = (ImageView) itemView.findViewById(R.id.id_iv_image);
             titleTv = (TextView) itemView.findViewById(R.id.id_tv_title);

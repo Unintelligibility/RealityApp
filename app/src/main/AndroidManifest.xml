@@ -24,7 +24,8 @@
         <activity android:name=".ui.activity.LoginActivity" />
         <activity android:name=".ui.activity.FirstPageActivity" />
         <activity android:name=".ui.activity.RegisterActivity" />
-        <activity android:name=".ui.activity.ThemeSelectActivity"></activity>
+        <activity android:name=".ui.activity.ThemeSelectActivity" />
+        <activity android:name=".ui.activity.NewsInfoActivity"></activity>
     </application>
 
 </manifest>

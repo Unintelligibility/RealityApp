@@ -106,7 +106,8 @@ public class FirstPageActivity extends AppCompatActivity implements TabHost.TabC
             }
         });
 
-//        viewPager.setOffscreenPageLimit(1);
+        //缓存五页fragment，即当前fragment左右两个fragment会被缓存，切换时不访问服务器，提高速度
+        viewPager.setOffscreenPageLimit(5);
 
         tabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
             @Override
