@@ -13,7 +13,6 @@ import java.util.concurrent.Executors;
 
 import okhttp3.Call;
 import okhttp3.Callback;
-import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -31,7 +30,7 @@ public class NewsBusiness {
 
     public void newsListDisplay(Callback callback){
         Request.Builder builder = new Request.Builder();
-        builder.url(Url.newsUrl);
+        builder.url(Url.baseUrl+"read");
         final Request request = builder.build();
         Call call = okHttpClient.newCall(request);
         call.enqueue(callback);
@@ -45,7 +44,7 @@ public class NewsBusiness {
             @Override
             public void run() {
                 Request.Builder builder = new Request.Builder();
-                builder.url(Url.newsUrl);
+                builder.url(Url.baseUrl+"read");
                 Request request = builder.build();
                 Log.d(TAG,"run: "+request);
                 Call call = okHttpClient.newCall(request);

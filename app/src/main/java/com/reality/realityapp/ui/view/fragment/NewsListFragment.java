@@ -44,6 +44,8 @@ public class NewsListFragment extends Fragment {
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerView;
     private TextView textView;
+    private NewsListAdapter newsListAdapter;
+    private List<NewsItem> newsItemList;
 
     public static NewsListFragment newInstance(List<NewsItem> newsItems) {
         NewsListFragment fragment = new NewsListFragment();
@@ -88,8 +90,8 @@ public class NewsListFragment extends Fragment {
     }
 
     private void initView() {
-        List<NewsItem> newsItemList = NewsListMock.getNewItemList2();
-        NewsListAdapter newsListAdapter = new NewsListAdapter(getActivity(), newsItemList);
+        newsItemList = NewsListMock.getNewItemList2();
+        newsListAdapter = new NewsListAdapter(getActivity(), newsItemList);
 
 
         //swipeRefreshLayout设置
@@ -147,9 +149,12 @@ public class NewsListFragment extends Fragment {
                     @Override
                     public void run() {
                         textView.setText(data);
+//                        newsListAdapter.notifyDataSetChanged();
+                        if (swipeRefreshLayout.isRefreshing()){
+                            swipeRefreshLayout.setRefreshing(false);
+                        }
                     }
                 });
-
             }
         });
     }
