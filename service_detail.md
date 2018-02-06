@@ -8,6 +8,8 @@
 
 - 登录后会返回token, 前端持有
 
+- 注册成功后需要再次调用登录接口，才能获得token，token失效后需调用 /token 获得新的
+
 ------
 
 
@@ -42,3 +44,7 @@
 
 *return*
 
+```
+1. {'resultCode': 1, 'data': {'_id': str(g.uid), 'token': token.decode('ascii')}}
+2. {'resultCode': 0}
+```
