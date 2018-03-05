@@ -14,8 +14,8 @@ public class NewsItem implements Serializable{
     private String content;
     private String source;
     private String time;
-//    private String reliability;
-//    private String isBadTitle;
+    private String reliability;
+    private String isBadTitle;
 
     public long getId() {
         return id;
@@ -73,19 +73,19 @@ public class NewsItem implements Serializable{
         this.time = time;
     }
 
-//    public String getReliability() {
-//        return reliability;
-//    }
-//
-//    public void setReliability(String reliability) {
-//        this.reliability = reliability;
-//    }
-//
-//    public String getIsBadTitle() {
-//        return isBadTitle;
-//    }
-//
-//    public void setIsBadTitle(String isBadTitle) {
-//        this.isBadTitle = isBadTitle;
-//    }
+    public String getReliability() {
+        return reliability;
+    }
+
+    public void setReliability(String reliability) {
+        this.reliability = reliability;
+    }
+
+    public String getIsBadTitle() {
+        return isBadTitle;
+    }
+
+    public void setIsBadTitle(String isBadTitle) {
+        this.isBadTitle = isBadTitle;
+    }
 }

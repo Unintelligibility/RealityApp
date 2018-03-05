@@ -4,6 +4,156 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     tools:context="com.reality.realityapp.ui.activity.ThemeSelectActivity">
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="0dp"
+        android:layout_height="228dp"
+        android:layout_marginBottom="13dp"
+        android:background="@drawable/deepgray"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Button
+            android:id="@+id/id_btn_skip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_margin="32dp"
+            android:background="@drawable/btn_bg_skip"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+            android:paddingBottom="4dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:paddingTop="4dp"
+            android:text="跳过"
+            android:textColor="@color/white"
+            android:textSize="14dp"
+            tools:layout_editor_absoluteX="315dp"
+            tools:layout_editor_absoluteY="16dp" />
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="16dp"
+        android:text="请选择感兴趣的领域："
+        app:layout_constraintBottom_toTopOf="@+id/gridLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout" />
+
+    <GridLayout
+        android:id="@+id/gridLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:rowCount="3"
+        android:columnCount="3"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="119dp"
+            android:layout_height="119dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            app:layout_rowWeight="1"
+            app:layout_columnWeight="1"
+
+            app:srcCompat="@drawable/时政" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="119dp"
+            android:layout_height="119dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            app:layout_rowWeight="1"
+            app:layout_columnWeight="1"
+            app:srcCompat="@drawable/体育" />
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="119dp"
+            android:layout_height="119dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            app:layout_rowWeight="1"
+            app:layout_columnWeight="1"
+            app:srcCompat="@drawable/科技" />
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="119dp"
+            android:layout_height="119dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1"
+            app:srcCompat="@drawable/财经" />
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="119dp"
+            android:layout_height="119dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1"
+            app:srcCompat="@drawable/军事" />
+
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="119dp"
+            android:layout_height="119dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1"
+            app:srcCompat="@drawable/汽车" />
+
+        <ImageView
+            android:id="@+id/imageView7"
+            android:layout_width="119dp"
+            android:layout_height="119dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1"
+            app:srcCompat="@drawable/娱乐" />
+
+        <ImageView
+            android:id="@+id/imageView8"
+            android:layout_width="119dp"
+            android:layout_height="119dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1"
+            app:srcCompat="@drawable/房产" />
+
+        <ImageView
+            android:id="@+id/imageView9"
+            android:layout_width="119dp"
+            android:layout_height="119dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1"
+            app:srcCompat="@drawable/游戏" />
+    </GridLayout>
 
 </android.support.constraint.ConstraintLayout>
