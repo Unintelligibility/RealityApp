@@ -46,9 +46,11 @@ public abstract class CommonCallback<T> extends StringCallback {
             JSONObject resp = new JSONObject(response);
             int resultCode = resp.getInt("resultCode");
 
-            if (resultCode==1) {
+            if (resultCode == 1) {
                 String data = resp.getString("data");
                 onResponse((T) GsonUtil.getGson().fromJson(data, type));
+            } else {
+                onError(new Exception(resp.getString("resultMessage")));
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -56,6 +58,17 @@ public abstract class CommonCallback<T> extends StringCallback {
 
     }
 
+    /**
+     * 返回true使得所有请求，无论response code为多少都当做响应成功，交给onResponse方法处理，
+     * 便于不同错误响应的返回
+     * @param response
+     * @param id
+     * @return
+     */
+    @Override
+    public boolean validateReponse(Response response, int id) {
+        return true;
+    }
     //    @Override
 //    public void onResponse(Call call, Response response) throws IOException {
 //        Gson gson = new Gson();

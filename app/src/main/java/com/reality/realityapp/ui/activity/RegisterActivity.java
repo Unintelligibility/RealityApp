@@ -72,7 +72,6 @@ public class RegisterActivity extends BaseActivity {
                         //携带着username和password
                         LoginActivity.lauch(RegisterActivity.this,response.getUsername(),response.getPassword());
                         finish();
-                        toThemeSelectActivity();
                     }
                 });
             }

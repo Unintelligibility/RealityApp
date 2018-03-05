@@ -5,8 +5,12 @@ import com.reality.realityapp.constant.Url;
 import com.reality.realityapp.net.CommonCallback;
 import com.zhy.http.okhttp.OkHttpUtils;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import okhttp3.Call;
 import okhttp3.FormBody;
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 
@@ -19,23 +23,37 @@ public class UserBusiness {
     private final OkHttpClient okHttpClient = new OkHttpClient();
 
     public void login(String username, String password, CommonCallback<User> commonCallback) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("username",username);
+            jsonObject.put("password",password);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         OkHttpUtils
-                .post()
-                .url(Url.baseUrl+"login")
+                .postString()
+                .mediaType(MediaType.parse("application/json"))
+                .content(jsonObject.toString())
+                .url(Url.baseUrl+"signin")
                 .tag(this)
-                .addParams("username",username)
-                .addParams("password",password)
                 .build()
                 .execute(commonCallback);
     }
 
     public void register(String username, String password, CommonCallback<User> commonCallback) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("username",username);
+            jsonObject.put("password",password);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         OkHttpUtils
-                .post()
+                .postString()
+                .mediaType(MediaType.parse("application/json"))
+                .content(jsonObject.toString())
                 .url(Url.baseUrl+"signup")
                 .tag(this)
-                .addParams("username",username)
-                .addParams("password",password)
                 .build()
                 .execute(commonCallback);
     }
