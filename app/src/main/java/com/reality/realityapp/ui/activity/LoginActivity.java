@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.reality.realityapp.R;
 import com.reality.realityapp.UserInfoHolder;
+import com.reality.realityapp.bean.Token;
 import com.reality.realityapp.bean.User;
 import com.reality.realityapp.business.UserBusiness;
 import com.reality.realityapp.net.CommonCallback;
@@ -66,8 +67,8 @@ public class LoginActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
 
-                String username = usernameEdt.getText().toString();
-                String password = passwordEdt.getText().toString();
+                final String username = usernameEdt.getText().toString();
+                final String password = passwordEdt.getText().toString();
 
                 if (TextUtils.isEmpty(username) || TextUtils.isEmpty(password)) {
                     T.showToast("账号或者密码不能为空");
@@ -76,7 +77,7 @@ public class LoginActivity extends BaseActivity {
 
                 startLoadingProgress();
 
-                userBusiness.login(username, password, new CommonCallback<User>() {
+                userBusiness.login(username, password, new CommonCallback<Token>() {
                     @Override
                     public void onError(Exception e) {
                         stopLoadingProgress();
@@ -84,12 +85,13 @@ public class LoginActivity extends BaseActivity {
                     }
 
                     @Override
-                    public void onResponse(User response) {
+                    public void onResponse(Token response) {
                         stopLoadingProgress();
-                        T.showToast("登陆成功");
+                        T.showToast("登陆成功:"+response.getToken());
 
                         //保存用户的信息
-                        UserInfoHolder.getInstance().setUser(response);
+                        User user = new User(response.get_id(),username,password,response.getToken());
+                        UserInfoHolder.getInstance().setUser(user);
 
                         toFirstPageActivity();
                     }

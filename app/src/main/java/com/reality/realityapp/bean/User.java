@@ -7,17 +7,27 @@ import java.io.Serializable;
  */
 
 public class User implements Serializable {
-    private long id;
+    private String userid;
     private String password;
     private String username;
     private String icon;
+    private String token;
 
-    public long getId() {
-        return id;
+    public User(){}
+
+    public User(String userid,String username,String password,String token){
+        this.userid = userid;
+        this.username = username;
+        this.password = password;
+        this.token = token;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public String getUserid() {
+        return userid;
+    }
+
+    public void setUserid(String userid) {
+        this.userid = userid;
     }
 
     public String getPassword() {
@@ -42,5 +52,13 @@ public class User implements Serializable {
 
     public void setIcon(String icon) {
         this.icon = icon;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }

@@ -13,11 +13,13 @@ import android.widget.TabHost;
 import android.widget.TextView;
 
 import com.reality.realityapp.R;
+import com.reality.realityapp.UserInfoHolder;
 import com.reality.realityapp.business.NewsBusiness;
 import com.reality.realityapp.mock.NewsListMock;
 import com.reality.realityapp.ui.view.fragment.NewsListFragment;
 import com.reality.realityapp.ui.view.refresh.SwipeRefresh;
 import com.reality.realityapp.ui.view.refresh.SwipeRefreshLayout;
+import com.reality.realityapp.utils.T;
 
 public class FirstPageActivity extends AppCompatActivity implements TabHost.TabContentFactory {
 
@@ -34,6 +36,8 @@ public class FirstPageActivity extends AppCompatActivity implements TabHost.TabC
         initView();
 
         initEvent();
+
+        T.showToast("id:"+UserInfoHolder.getInstance().getUser().getUserid()+"token:"+ UserInfoHolder.getInstance().getUser().getToken());
 
     }
 

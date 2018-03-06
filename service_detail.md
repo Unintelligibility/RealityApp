@@ -54,7 +54,8 @@
 *return*
 
 ```
-1. {'resultCode': 1, 'data': {'_id': str(g.uid), 'token': token.decode('ascii')}}
+1. {'resultCode': 1, 
+'data': {'_id': str(g.uid), 'token': token.decode('ascii'),'selected':boolean}}
 2. {'resultCode': 0}
 ```
 #### read

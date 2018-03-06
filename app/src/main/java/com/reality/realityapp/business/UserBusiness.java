@@ -1,5 +1,6 @@
 package com.reality.realityapp.business;
 
+import com.reality.realityapp.bean.Token;
 import com.reality.realityapp.bean.User;
 import com.reality.realityapp.constant.Url;
 import com.reality.realityapp.net.CommonCallback;
@@ -22,7 +23,7 @@ public class UserBusiness {
 
     private final OkHttpClient okHttpClient = new OkHttpClient();
 
-    public void login(String username, String password, CommonCallback<User> commonCallback) {
+    public void login(String username, String password, CommonCallback<Token> commonCallback) {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("username",username);
@@ -34,7 +35,7 @@ public class UserBusiness {
                 .postString()
                 .mediaType(MediaType.parse("application/json"))
                 .content(jsonObject.toString())
-                .url(Url.testUrl+"signin")
+                .url(Url.baseUrl+"signin")
                 .tag(this)
                 .build()
                 .execute(commonCallback);
@@ -52,7 +53,7 @@ public class UserBusiness {
                 .postString()
                 .mediaType(MediaType.parse("application/json"))
                 .content(jsonObject.toString())
-                .url(Url.testUrl+"signup")
+                .url(Url.baseUrl+"signup")
                 .tag(this)
                 .build()
                 .execute(commonCallback);
