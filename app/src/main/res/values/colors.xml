@@ -9,10 +9,9 @@
     <color name="black">#121111</color>
     <color name="register_bg">#f3f5f7</color>
 
-    <drawable name="darkgray">#808080</drawable>
-    <drawable name="white">#FFFFFF</drawable>
-    <drawable name="blue">#0000FF</drawable>
-    <drawable name="lightred">#90FF0000</drawable>
-    <drawable name="lightgray">#90505050</drawable>
-    <drawable name="deepgray">#333</drawable>
+    <color name="darkgray">#808080</color>
+    <color name="blue">#0000FF</color>
+    <color name="lightred">#90FF0000</color>
+    <color name="lightgray">#90505050</color>
+    <color name="deepgray">#333</color>
 </resources>

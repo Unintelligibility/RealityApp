@@ -34,7 +34,7 @@ public class UserBusiness {
                 .postString()
                 .mediaType(MediaType.parse("application/json"))
                 .content(jsonObject.toString())
-                .url(Url.baseUrl+"signin")
+                .url(Url.testUrl+"signin")
                 .tag(this)
                 .build()
                 .execute(commonCallback);
@@ -52,7 +52,7 @@ public class UserBusiness {
                 .postString()
                 .mediaType(MediaType.parse("application/json"))
                 .content(jsonObject.toString())
-                .url(Url.baseUrl+"signup")
+                .url(Url.testUrl+"signup")
                 .tag(this)
                 .build()
                 .execute(commonCallback);

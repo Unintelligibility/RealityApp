@@ -69,11 +69,6 @@ public abstract class CommonCallback<T> extends StringCallback {
     public boolean validateReponse(Response response, int id) {
         return true;
     }
-    //    @Override
-//    public void onResponse(Call call, Response response) throws IOException {
-//        Gson gson = new Gson();
-//        onResponse((T) GsonUtil.getGson().fromJson(response.body().string(),type));
-//    }
 
     public abstract void onError(Exception e);
 
