@@ -8,25 +8,34 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.TabHost;
 import android.widget.TextView;
 
 import com.reality.realityapp.R;
 import com.reality.realityapp.UserInfoHolder;
+import com.reality.realityapp.bean.NewsItem;
 import com.reality.realityapp.business.NewsBusiness;
 import com.reality.realityapp.mock.NewsListMock;
+import com.reality.realityapp.net.CommonCallback;
+import com.reality.realityapp.ui.activity.base.BaseActivity;
 import com.reality.realityapp.ui.view.fragment.NewsListFragment;
 import com.reality.realityapp.ui.view.refresh.SwipeRefresh;
 import com.reality.realityapp.ui.view.refresh.SwipeRefreshLayout;
 import com.reality.realityapp.utils.T;
 
-public class FirstPageActivity extends AppCompatActivity implements TabHost.TabContentFactory {
+import java.util.List;
+import java.util.Map;
 
+public class FirstPageActivity extends BaseActivity implements TabHost.TabContentFactory {
+
+    private static final String TAG = "firstPage";
     private TabHost tabHost;
 
     private ViewPager viewPager;
 
+    private NewsBusiness newsBusiness = new NewsBusiness();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +46,7 @@ public class FirstPageActivity extends AppCompatActivity implements TabHost.TabC
 
         initEvent();
 
-        T.showToast("id:"+UserInfoHolder.getInstance().getUser().getUserid()+"token:"+ UserInfoHolder.getInstance().getUser().getToken());
+        T.showToast("id:" + UserInfoHolder.getInstance().getUser().getUserid() + "token:" + UserInfoHolder.getInstance().getUser().getToken());
 
     }
 
@@ -46,11 +55,29 @@ public class FirstPageActivity extends AppCompatActivity implements TabHost.TabC
         //fragment组成的viewpager
         viewPager = (ViewPager) findViewById(R.id.id_viewpager);
 
+        //TODO 还未加入真正的页面切换,暂时定为3
         final Fragment[] fragments = new Fragment[]{
-                NewsListFragment.newInstance(NewsListMock.getNewItemList1()),
                 NewsListFragment.newInstance(NewsListMock.getNewItemList2()),
-                NewsListFragment.newInstance(NewsListMock.getNewItemList3())
+                NewsListFragment.newInstance(NewsListMock.getNewItemList2()),
+                NewsListFragment.newInstance(NewsListMock.getNewItemList2())
         };
+
+//        newsBusiness.newsListDisplay(new CommonCallback<Map<String, NewsItem>>() {
+//            @Override
+//            public void onError(Exception e) {
+//                stopLoadingProgress();
+//                T.showToast(e.getMessage());
+//            }
+//
+//            @Override
+//            public void onResponse(Map<String, NewsItem> response) {
+//                Log.d(TAG, "response size: " + response.size());
+//                //TODO 还未加入真正的页面切换
+//                for (int i = 0; i < 3; i++) {
+//                    fragments[i] = NewsListFragment.newInstance(response);
+//                }
+//            }
+//        });
 
         //初始化总布局
         tabHost.setup();
@@ -99,7 +126,7 @@ public class FirstPageActivity extends AppCompatActivity implements TabHost.TabC
 
             @Override
             public void onPageSelected(int position) {
-                if (tabHost!=null){
+                if (tabHost != null) {
                     tabHost.setCurrentTab(position);
                 }
             }
@@ -116,7 +143,7 @@ public class FirstPageActivity extends AppCompatActivity implements TabHost.TabC
         tabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
             @Override
             public void onTabChanged(String tabId) {
-                if (tabHost!=null){
+                if (tabHost != null) {
                     int position = tabHost.getCurrentTab();
                     viewPager.setCurrentItem(position);
                 }

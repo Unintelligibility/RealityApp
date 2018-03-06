@@ -7,38 +7,30 @@ import java.io.Serializable;
  */
 
 public class NewsItem implements Serializable{
-    private long id;
-    private String picUrl;
-    private String picInfo;
+    private String _id;
+    private String picture;
     private String title;
     private String content;
     private String source;
     private String time;
     private String reliability;
     private String isBadTitle;
+    private String picture_info;
 
-    public long getId() {
-        return id;
+    public String get_id() {
+        return _id;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void set_id(String _id) {
+        this._id = _id;
     }
 
-    public String getPicUrl() {
-        return picUrl;
+    public String getPicture() {
+        return picture;
     }
 
-    public void setPicUrl(String picUrl) {
-        this.picUrl = picUrl;
-    }
-
-    public String getPicInfo() {
-        return picInfo;
-    }
-
-    public void setPicInfo(String picInfo) {
-        this.picInfo = picInfo;
+    public void setPicture(String picture) {
+        this.picture = picture;
     }
 
     public String getTitle() {
@@ -71,6 +63,14 @@ public class NewsItem implements Serializable{
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public String getPicture_info() {
+        return picture_info;
+    }
+
+    public void setPicture_info(String picture_info) {
+        this.picture_info = picture_info;
     }
 
     public String getReliability() {

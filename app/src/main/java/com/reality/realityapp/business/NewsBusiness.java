@@ -5,9 +5,14 @@ import android.app.DownloadManager;
 import android.util.Log;
 import android.widget.TextView;
 
+import com.reality.realityapp.bean.NewsItem;
 import com.reality.realityapp.constant.Url;
+import com.reality.realityapp.net.CommonCallback;
+import com.zhy.http.okhttp.OkHttpUtils;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -26,45 +31,62 @@ public class NewsBusiness {
 
     private static final String TAG = "NewsBusiness-request";
 
-    private final OkHttpClient okHttpClient = new OkHttpClient();
+//    private final OkHttpClient okHttpClient = new OkHttpClient();
 
-    public void newsListDisplay(Callback callback){
-        Request.Builder builder = new Request.Builder();
-        builder.url(Url.baseUrl+"read");
-        final Request request = builder.build();
-        Call call = okHttpClient.newCall(request);
-        call.enqueue(callback);
+    public void newsListFirstDisplay(CommonCallback<Map<String,NewsItem>> commonCallback){
+        OkHttpUtils
+                .get()
+                .url(Url.baseUrl+"read")
+                .tag(this)
+                .build()
+                .execute(commonCallback);
     }
-    /**
-     * 首页新闻列表展示，即注册时选择的感兴趣的各个方向的新闻推荐
-     */
-    public void newsListDisplay2(final TextView textView, final Activity activity){
-        ExecutorService executor = Executors.newSingleThreadExecutor();
-        executor.submit(new Runnable() {
-            @Override
-            public void run() {
-                Request.Builder builder = new Request.Builder();
-                builder.url(Url.baseUrl+"read");
-                Request request = builder.build();
-                Log.d(TAG,"run: "+request);
-                Call call = okHttpClient.newCall(request);
-                try {
-                    Response response = call.execute();
-                    if (response.isSuccessful()) {
-                        final String data = response.body().string();
-                        Log.d(TAG,"responese: "+data);
-                        activity.runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                textView.setText(data);
-                            }
-                        });
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
 
+    public void newsListDisplay(CommonCallback<Map<String,NewsItem>> commonCallback){
+        OkHttpUtils
+                .get()
+                .url(Url.baseUrl+"read")
+                .tag(this)
+                .build()
+                .execute(commonCallback);
     }
+//    public void newsListDisplay(Callback callback){
+//        Request.Builder builder = new Request.Builder();
+//        builder.url(Url.baseUrl+"read");
+//        final Request request = builder.build();
+//        Call call = okHttpClient.newCall(request);
+//        call.enqueue(callback);
+//    }
+//    /**
+//     * 首页新闻列表展示，即注册时选择的感兴趣的各个方向的新闻推荐
+//     */
+//    public void newsListDisplay2(final TextView textView, final Activity activity){
+//        ExecutorService executor = Executors.newSingleThreadExecutor();
+//        executor.submit(new Runnable() {
+//            @Override
+//            public void run() {
+//                Request.Builder builder = new Request.Builder();
+//                builder.url(Url.baseUrl+"read");
+//                Request request = builder.build();
+//                Log.d(TAG,"run: "+request);
+//                Call call = okHttpClient.newCall(request);
+//                try {
+//                    Response response = call.execute();
+//                    if (response.isSuccessful()) {
+//                        final String data = response.body().string();
+//                        Log.d(TAG,"responese: "+data);
+//                        activity.runOnUiThread(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                textView.setText(data);
+//                            }
+//                        });
+//                    }
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
+//
+//    }
 }

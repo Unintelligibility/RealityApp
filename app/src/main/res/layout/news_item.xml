@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="130dp"
-    android:background="@drawable/divider_normal_bottom"
     android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp">
+    android:layout_marginRight="16dp"
+    android:background="@drawable/divider_normal_bottom">
 
     <ImageView
         android:id="@+id/id_iv_image"
@@ -25,19 +25,7 @@
         android:layout_marginLeft="8dp"
         android:layout_toRightOf="@id/id_iv_image"
         android:text="搜狐新闻"
-        android:textSize="13dp"
-        android:textColor="#CC3366" />
-
-    <TextView
-        android:id="@+id/id_tv_reliability"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/id_tv_time"
-        android:layout_alignBottom="@+id/id_tv_time"
-        android:layout_alignEnd="@+id/linearLayout"
-        android:layout_marginEnd="10dp"
-        android:text="12月29日"
-        android:textColor="#666"
+        android:textColor="#CC3366"
         android:textSize="13dp" />
 
     <TextView
@@ -46,21 +34,33 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/id_tv_source"
         android:layout_alignBottom="@+id/id_tv_source"
-        android:layout_marginStart="19dp"
+        android:layout_marginStart="8dp"
         android:layout_toEndOf="@+id/id_tv_source"
-        android:text="比较可信"
+        android:text="12月29日"
         android:textColor="#222"
         android:textSize="13dp" />
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/id_tv_reliability"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_alignBaseline="@+id/id_tv_time"
+        android:layout_alignBottom="@+id/id_tv_time"
+        android:layout_alignEnd="@+id/linearLayout"
+        android:layout_marginEnd="12dp"
+        android:text="比较可信"
+        android:textColor="#666"
+        android:textSize="13dp" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
+        android:layout_marginTop="30dp"
         android:layout_toRightOf="@id/id_iv_image"
-        android:orientation="vertical"
-        android:id="@+id/linearLayout">
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/id_tv_title"

@@ -17,6 +17,7 @@ import com.squareup.picasso.Picasso;
 import org.w3c.dom.Text;
 
 import java.util.List;
+import java.util.Map;
 import java.util.zip.Inflater;
 
 /**
@@ -25,7 +26,7 @@ import java.util.zip.Inflater;
 
 public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.NewsListItemViewHolder> {
 
-    private List<NewsItem> newsItemList;
+    private Map<String,NewsItem> newsItems;
     private Context context;
     private LayoutInflater inflater;
 
@@ -39,9 +40,9 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.NewsLi
         void onClick(View view,int position);
     }
 
-    public NewsListAdapter(Context context, List<NewsItem> newsItemList) {
+    public NewsListAdapter(Context context, Map<String,NewsItem> newsItems) {
         this.context = context;
-        this.newsItemList = newsItemList;
+        this.newsItems = newsItems;
         inflater = LayoutInflater.from(context);
     }
 
@@ -53,10 +54,10 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.NewsLi
 
     @Override
     public void onBindViewHolder(NewsListItemViewHolder holder, final int position) {
-        NewsItem newsItem = newsItemList.get(position);
+        NewsItem newsItem = newsItems.get(String.valueOf(position));
 
         Picasso.with(context)
-                .load(newsItem.getPicUrl())
+                .load(newsItem.getPicture())
                 .placeholder(R.drawable.item_image)
                 .into(holder.imageView);
 
@@ -76,7 +77,7 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.NewsLi
 
     @Override
     public int getItemCount() {
-        return newsItemList.size();
+        return newsItems.size();
     }
 
     class NewsListItemViewHolder extends RecyclerView.ViewHolder {

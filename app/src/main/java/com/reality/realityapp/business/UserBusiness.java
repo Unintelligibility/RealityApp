@@ -21,7 +21,7 @@ import okhttp3.Request;
 
 public class UserBusiness {
 
-    private final OkHttpClient okHttpClient = new OkHttpClient();
+//    private final OkHttpClient okHttpClient = new OkHttpClient();
 
     public void login(String username, String password, CommonCallback<Token> commonCallback) {
         JSONObject jsonObject = new JSONObject();

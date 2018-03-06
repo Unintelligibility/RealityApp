@@ -123,7 +123,7 @@ public class LoginActivity extends BaseActivity {
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         intent.putExtra(KEY_USERNAME, username);
         intent.putExtra(KEY_PASSWORD, password);
-        Log.d("login activity", "string1: "+username);
+//        Log.d("login activity", "string1: "+username);
         context.startActivity(intent);
     }
 
@@ -134,7 +134,7 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void initIntent(Intent intent) {
-        Log.d("login activity", "initIntent: "+intent);
+//        Log.d("login activity", "initIntent: "+intent);
         if (intent == null) {
             return;
         }
