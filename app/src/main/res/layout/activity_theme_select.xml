@@ -71,10 +71,9 @@
             android:layout_height="119dp"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
-            app:layout_rowWeight="1"
-            app:layout_columnWeight="1"
 
-            app:srcCompat="@drawable/时政" />
+
+            app:srcCompat="@drawable/politics" />
 
         <ImageView
             android:id="@+id/imageView2"
@@ -82,18 +81,16 @@
             android:layout_height="119dp"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
-            app:layout_rowWeight="1"
-            app:layout_columnWeight="1"
-            app:srcCompat="@drawable/体育" />
+
+            app:srcCompat="@drawable/sport" />
         <ImageView
             android:id="@+id/imageView3"
             android:layout_width="119dp"
             android:layout_height="119dp"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
-            app:layout_rowWeight="1"
-            app:layout_columnWeight="1"
-            app:srcCompat="@drawable/科技" />
+
+            app:srcCompat="@drawable/technology" />
 
         <ImageView
             android:id="@+id/imageView4"
@@ -101,9 +98,8 @@
             android:layout_height="119dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
-            app:layout_columnWeight="1"
-            app:layout_rowWeight="1"
-            app:srcCompat="@drawable/财经" />
+
+            app:srcCompat="@drawable/finance" />
 
         <ImageView
             android:id="@+id/imageView5"
@@ -111,9 +107,8 @@
             android:layout_height="119dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
-            app:layout_columnWeight="1"
-            app:layout_rowWeight="1"
-            app:srcCompat="@drawable/军事" />
+
+            app:srcCompat="@drawable/military" />
 
         <ImageView
             android:id="@+id/imageView6"
@@ -121,9 +116,8 @@
             android:layout_height="119dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
-            app:layout_columnWeight="1"
-            app:layout_rowWeight="1"
-            app:srcCompat="@drawable/汽车" />
+
+            app:srcCompat="@drawable/cars" />
 
         <ImageView
             android:id="@+id/imageView7"
@@ -131,9 +125,7 @@
             android:layout_height="119dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
-            app:layout_columnWeight="1"
-            app:layout_rowWeight="1"
-            app:srcCompat="@drawable/娱乐" />
+            app:srcCompat="@drawable/entertainment" />
 
         <ImageView
             android:id="@+id/imageView8"
@@ -141,9 +133,7 @@
             android:layout_height="119dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
-            app:layout_columnWeight="1"
-            app:layout_rowWeight="1"
-            app:srcCompat="@drawable/房产" />
+            app:srcCompat="@drawable/house" />
 
         <ImageView
             android:id="@+id/imageView9"
@@ -151,9 +141,7 @@
             android:layout_height="119dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
-            app:layout_columnWeight="1"
-            app:layout_rowWeight="1"
-            app:srcCompat="@drawable/游戏" />
+            app:srcCompat="@drawable/game" />
     </GridLayout>
 
 </android.support.constraint.ConstraintLayout>
