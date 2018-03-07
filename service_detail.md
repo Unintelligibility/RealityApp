@@ -66,6 +66,8 @@ return
 
 ```
 {
+'resultCode':1,
+'data':{
 "0": {
 "_id": "5a705014c3666e341a37bffa",
 "picture": "",
@@ -84,6 +86,7 @@ return
 "time": "2018年01月30日 08:16",
 "picture_info": ""
 }...
+}
 }
 ```
 
