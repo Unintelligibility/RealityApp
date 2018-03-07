@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:background="@drawable/start_example"></View>
+            android:background="@drawable/cloud"></View>
 
         <!--这个ImageView用来放置附属的解说图片，比如我们的谣言分析系统logo，视情况可以去除-->
         <ImageView
