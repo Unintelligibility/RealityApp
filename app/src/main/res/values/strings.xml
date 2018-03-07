@@ -3,10 +3,10 @@
     <string name="login_name_hint">用户名</string>
     <string name="login_password_hint">密码</string>
     <string name="login_submit">登录</string>
-    <string name="register_phone_hint">请输入手机号</string>
-    <string name="register_password_hint">请输入密码</string>
-    <string name="register_repassword_hint">请重复输入密码</string>
-    <string name="register_submit">提交</string>
+    <string name="register_phone_hint">手机号</string>
+    <string name="register_password_hint">密码</string>
+    <string name="register_repassword_hint">确认密码</string>
+    <string name="register_submit">注册</string>
     <string name="recommend">推荐</string>
     <string name="sports">体育</string>
     <string name="entertainment">娱乐</string>

@@ -27,9 +27,12 @@
                 android:id="@+id/imageView10"
                 android:layout_width="141dp"
                 android:layout_height="46dp"
-                app:srcCompat="@drawable/jianwenlogo"
-                tools:layout_editor_absoluteX="125dp"
-                tools:layout_editor_absoluteY="20dp" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/jianwenlogo" />
         </android.support.constraint.ConstraintLayout>
 
         <!--这个ImageView用来放置附属的解说图片，比如我们的谣言分析系统logo，视情况可以去除-->
