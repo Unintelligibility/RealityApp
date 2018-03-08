@@ -77,9 +77,9 @@ public class ThemeSelectActivity extends AppCompatActivity implements OnClickLis
         entertainmentImg.setOnClickListener(this);
         houseImg.setOnClickListener(this);
         gameImg.setOnClickListener(this);
-        //默认给第一个ImageView加边框
-        politicsImg.setImageResource(R.drawable.border);
-        currentImage = politicsImg;
+//        //默认给第一个ImageView加边框
+//        politicsImg.setImageResource(R.drawable.border);
+//        currentImage = politicsImg;
     }
 
     /**
@@ -95,14 +95,12 @@ public class ThemeSelectActivity extends AppCompatActivity implements OnClickLis
         int tag = (Integer)v.getTag();
         for (int i=0; i<chosenTags.size();i++) {
             if (tag==chosenTags.get(i)) {
-//                imageView.setImageDrawable(null);
                 chosenTags.remove(i);
                 cancelSelect((ImageView) v);
                 return;
             }
         }
         chosenTags.add(tag);
-//        imageView.setImageResource(R.drawable.border);
         select((ImageView) v);
     }
     /**
@@ -110,11 +108,7 @@ public class ThemeSelectActivity extends AppCompatActivity implements OnClickLis
      * @param imageView 要添加/取消边框的ImageView
      */
     public void select(ImageView imageView){
-
-//        currentImage.setImageDrawable(null);
-//        int tag = (Integer) imageView.getTag();
         imageView.setImageResource(R.drawable.border);
-//        currentImage = imageView;
     }
     public void cancelSelect(ImageView imageView){
         imageView.setImageDrawable(null);
