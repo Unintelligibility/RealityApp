@@ -10,19 +10,29 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TabWidget
-            android:id="@android:id/tabs"
+        <android.support.v4.view.ViewPager
+            android:id="@+id/id_viewpager"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:showDividers="none"
-            ></TabWidget>
+            android:layout_height="match_parent"
+            android:layout_above="@+id/tab_divider"
+            ></android.support.v4.view.ViewPager>
 
         <View
             android:id="@+id/tab_divider"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/black"
-            android:layout_below="@android:id/tabs"></View>
+            android:layout_above="@android:id/tabs"></View>
+
+        <TabWidget
+            android:id="@android:id/tabs"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:showDividers="none"
+            android:layout_alignParentBottom="true"
+            ></TabWidget>
+
+
 
         <FrameLayout
             android:id="@android:id/tabcontent"
@@ -31,11 +41,6 @@
             android:visibility="gone"
             android:layout_below="@id/tab_divider"></FrameLayout>
 
-        <android.support.v4.view.ViewPager
-            android:id="@+id/id_viewpager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/tab_divider"></android.support.v4.view.ViewPager>
-    </RelativeLayout>
+</RelativeLayout>
 
 </TabHost>

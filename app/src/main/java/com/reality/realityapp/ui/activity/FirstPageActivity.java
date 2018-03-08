@@ -10,6 +10,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TextView;
 
@@ -20,6 +21,7 @@ import com.reality.realityapp.business.NewsBusiness;
 import com.reality.realityapp.mock.NewsListMock;
 import com.reality.realityapp.net.CommonCallback;
 import com.reality.realityapp.ui.activity.base.BaseActivity;
+import com.reality.realityapp.ui.view.fragment.MyInfoFragment;
 import com.reality.realityapp.ui.view.fragment.NewsListFragment;
 import com.reality.realityapp.ui.view.refresh.SwipeRefresh;
 import com.reality.realityapp.ui.view.refresh.SwipeRefreshLayout;
@@ -57,40 +59,26 @@ public class FirstPageActivity extends BaseActivity implements TabHost.TabConten
 
         //TODO 还未加入真正的页面切换,暂时定为3
         final Fragment[] fragments = new Fragment[]{
-                NewsListFragment.newInstance(NewsListMock.getNewItemList2()),
-                NewsListFragment.newInstance(NewsListMock.getNewItemList2()),
-                NewsListFragment.newInstance(NewsListMock.getNewItemList2())
+                NewsListFragment.newInstance(),
+                NewsListFragment.newInstance(),
+                MyInfoFragment.newInstance()
         };
-
-//        newsBusiness.newsListDisplay(new CommonCallback<Map<String, NewsItem>>() {
-//            @Override
-//            public void onError(Exception e) {
-//                stopLoadingProgress();
-//                T.showToast(e.getMessage());
-//            }
-//
-//            @Override
-//            public void onResponse(Map<String, NewsItem> response) {
-//                Log.d(TAG, "response size: " + response.size());
-//                //TODO 还未加入真正的页面切换
-//                for (int i = 0; i < 3; i++) {
-//                    fragments[i] = NewsListFragment.newInstance(response);
-//                }
-//            }
-//        });
 
         //初始化总布局
         tabHost.setup();
 
         //tab做处理
         int typeIDs[] = {R.string.recommend, R.string.sports, R.string.entertainment};
+        int drawbleIDs[] = {R.drawable.home_img_skip, R.drawable.theme_img_skip, R.drawable.my_img_skip};
 
         for (int index = 0; index < typeIDs.length; index++) {
             //设置tab本身视图的内容
             View view = getLayoutInflater().inflate(R.layout.newslist_tab, null, false);
+            ImageView typesIcon = (ImageView) view.findViewById(R.id.id_img_types);
             TextView typesView = (TextView) view.findViewById(R.id.id_tv_type);
             View tab = view.findViewById(R.id.id_tab_bg);
 
+            typesIcon.setImageResource(drawbleIDs[index]);
             typesView.setText(typeIDs[index]);
 
             tab.setBackgroundColor(getResources().getColor(R.color.white));

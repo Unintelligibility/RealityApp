@@ -46,31 +46,20 @@ import okhttp3.Response;
 
 public class NewsListFragment extends Fragment {
 
-    public static final String TITLE = "title";
-    public static final String SOURCE = "source";
-    public static final String TIME = "time";
-    public static final String RELIABILITY = "reliability";
-    public static final String PICTURE = "picture";
-    public static final String BUNDLE_DATA = "bundleData";
 //    private BundleData bundleData;
     private Map<String ,NewsItem> newsItems = new HashMap<>();
-    private String title;
-    private String source;
-    private String time;
-    private String reliability;
-    private String picture;
 
     private NewsBusiness newsBusiness = new NewsBusiness();
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerView;
     private NewsListAdapter newsListAdapter;
 
-    public static NewsListFragment newInstance(Map<String, NewsItem> newsItems) {
+    public static NewsListFragment newInstance() {
         NewsListFragment fragment = new NewsListFragment();
-        Bundle bundle = new Bundle();
-        BundleData bundleData = new BundleData();
-        bundleData.setNewsItems(newsItems);
-        bundle.putSerializable(BUNDLE_DATA, bundleData);
+//        Bundle bundle = new Bundle();
+//        BundleData bundleData = new BundleData();
+//        bundleData.setNewsItems(newsItems);
+//        bundle.putSerializable(BUNDLE_DATA, bundleData);
 //        Iterator iterator = newsItems.iterator();
 //        while (iterator.hasNext()) {
 //            NewsItem newsItem = (NewsItem) iterator.next();
@@ -80,10 +69,9 @@ public class NewsListFragment extends Fragment {
 //            bundle.putString(RELIABILITY, newsItem.getReliability());
 //            bundle.putString(PICTURE, newsItem.getPicture());
 //        }
-        fragment.setArguments(bundle);
+//        fragment.setArguments(bundle);
         return fragment;
     }
-
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
