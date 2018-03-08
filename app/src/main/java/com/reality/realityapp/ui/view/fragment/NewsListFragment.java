@@ -30,6 +30,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -51,7 +52,8 @@ public class NewsListFragment extends Fragment {
     public static final String RELIABILITY = "reliability";
     public static final String PICTURE = "picture";
     public static final String BUNDLE_DATA = "bundleData";
-    private BundleData bundleData;
+//    private BundleData bundleData;
+    private Map<String ,NewsItem> newsItems = new HashMap<>();
     private String title;
     private String source;
     private String time;
@@ -62,7 +64,6 @@ public class NewsListFragment extends Fragment {
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerView;
     private NewsListAdapter newsListAdapter;
-    private List<NewsItem> newsItemList;
 
     public static NewsListFragment newInstance(Map<String, NewsItem> newsItems) {
         NewsListFragment fragment = new NewsListFragment();
@@ -88,8 +89,9 @@ public class NewsListFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            bundleData = (BundleData) getArguments().getSerializable(BUNDLE_DATA);
+//            bundleData = (BundleData) getArguments().getSerializable(BUNDLE_DATA);
         }
+
     }
 
     @Nullable
@@ -101,6 +103,8 @@ public class NewsListFragment extends Fragment {
         recyclerView = (RecyclerView) view.findViewById(R.id.id_recyclerview);
 
         initView();
+
+        refreshNews();
 
         initEvent();
 
@@ -118,7 +122,7 @@ public class NewsListFragment extends Fragment {
 
     private void initView() {
 //        newsItemList = NewsListMock.getNewItemList2();
-        newsListAdapter = new NewsListAdapter(getActivity(), bundleData.getNewsItems());
+        newsListAdapter = new NewsListAdapter(getActivity(), newsItems);
 
 
         //swipeRefreshLayout设置
@@ -128,13 +132,7 @@ public class NewsListFragment extends Fragment {
         //recyclerview设置
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(newsListAdapter);
-        newsListAdapter.setOnItemClickListener(new NewsListAdapter.OnItemClickListener() {
-            @Override
-            public void onClick(View view, int position) {
-                Intent intent = new Intent(getActivity(), NewsInfoActivity.class);
-                startActivity(intent);
-            }
-        });
+
     }
 
     private void initEvent() {
@@ -152,12 +150,27 @@ public class NewsListFragment extends Fragment {
             }
         });
 
+        newsListAdapter.setOnItemClickListener(new NewsListAdapter.OnItemClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                NewsItem newsItem = newsItems.get(String.valueOf(position));
+                String content = newsItem.getContent();
+                Log.d("content", "onClick---content: "+content);
+                toNewsInfoActivity(content);
+            }
+        });
+
     }
+//
+//    private Map<String ,NewsItem> getNewsItems(){
+//
+//    }
+
 
     /**
      * 刷新新闻列表
      */
-    public void refreshNews() {
+    private void refreshNews() {
         final String TAG = "NewsBusiness-request";
 //        T.showToast("size:"+recyclerView.getLayoutManager().getItemCount());
         newsBusiness.newsListDisplay(new CommonCallback<Map<String, NewsItem>>() {
@@ -168,36 +181,43 @@ public class NewsListFragment extends Fragment {
 
             @Override
             public void onResponse(Map<String, NewsItem> response) {
-                Log.d(TAG, "onResponse: " + response);
-
-                for (int i = 0; i < recyclerView.getLayoutManager().getItemCount(); i++) {
-                    final TextView titleTv = (TextView) recyclerView.getLayoutManager().findViewByPosition(i).findViewById(R.id.id_tv_title);
-                    final TextView sourceTv = (TextView) recyclerView.getLayoutManager().findViewByPosition(i).findViewById(R.id.id_tv_source);
-                    final TextView timeTv = (TextView) recyclerView.getLayoutManager().findViewByPosition(i).findViewById(R.id.id_tv_time);
-                    final TextView reliabilityTv = (TextView) recyclerView.getLayoutManager().findViewByPosition(i).findViewById(R.id.id_tv_reliability);
-                    final String title = response.get(String.valueOf(i)).getTitle();
-                    final String source = response.get(String.valueOf(i)).getSource();
-                    final String time = response.get(String.valueOf(i)).getTime();
-                    final String reliability = response.get(String.valueOf(i)).getReliability();
-                    Log.d(TAG, "onResponse: title:" + title);
-
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            titleTv.setText(title);
-                            sourceTv.setText(source);
-                            timeTv.setText(time);
-                            reliabilityTv.setText(reliability);
-//                        newsListAdapter.notifyDataSetChanged();
-                            if (swipeRefreshLayout.isRefreshing()) {
-                                swipeRefreshLayout.setRefreshing(false);
-                            }
-                        }
-                    });
+                newsItems.clear();
+                newsItems.putAll(response);
+//                Log.d(TAG, "map: " + newsItems.size());
+                newsListAdapter.notifyDataSetChanged();
+                if (swipeRefreshLayout.isRefreshing()){
+                    swipeRefreshLayout.setRefreshing(false);
                 }
+//                for (int i = 0; i < recyclerView.getLayoutManager().getItemCount(); i++) {
+//                    final TextView titleTv = (TextView) recyclerView.getLayoutManager().findViewByPosition(i).findViewById(R.id.id_tv_title);
+//                    final TextView sourceTv = (TextView) recyclerView.getLayoutManager().findViewByPosition(i).findViewById(R.id.id_tv_source);
+//                    final TextView timeTv = (TextView) recyclerView.getLayoutManager().findViewByPosition(i).findViewById(R.id.id_tv_time);
+//                    final TextView reliabilityTv = (TextView) recyclerView.getLayoutManager().findViewByPosition(i).findViewById(R.id.id_tv_reliability);
+//                    final String title = response.get(String.valueOf(i)).getTitle();
+//                    final String source = response.get(String.valueOf(i)).getSource();
+//                    final String time = response.get(String.valueOf(i)).getTime();
+//                    final String reliability = response.get(String.valueOf(i)).getReliability();
+//                    Log.d(TAG, "onResponse: title:" + title);
+//
+//                    getActivity().runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            titleTv.setText(title);
+//                            sourceTv.setText(source);
+//                            timeTv.setText(time);
+//                            reliabilityTv.setText(reliability);
+////                        newsListAdapter.notifyDataSetChanged();
+//                            if (swipeRefreshLayout.isRefreshing()) {
+//                                swipeRefreshLayout.setRefreshing(false);
+//                            }
+//                        }
+//                    });
+//                }
             }
         });
     }
+
+
 //    private void refreshNews() {
 //        final String TAG = "NewsBusiness-request";
 //        newsBusiness.newsListDisplay(new Callback() {
@@ -233,5 +253,10 @@ public class NewsListFragment extends Fragment {
     private void loadMore() {
     }
 
+    private void toNewsInfoActivity(String content){
+        Intent intent = new Intent(getActivity(), NewsInfoActivity.class);
+        intent.putExtra("content",content);
+        startActivity(intent);
+    }
 
 }
