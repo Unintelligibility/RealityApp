@@ -68,7 +68,7 @@ public class FirstPageActivity extends BaseActivity implements TabHost.TabConten
         tabHost.setup();
 
         //tab做处理
-        int typeIDs[] = {R.string.recommend, R.string.sports, R.string.entertainment};
+        int typeIDs[] = {R.string.home, R.string.theme, R.string.me};
         int drawbleIDs[] = {R.drawable.home_img_skip, R.drawable.theme_img_skip, R.drawable.my_img_skip};
 
         for (int index = 0; index < typeIDs.length; index++) {

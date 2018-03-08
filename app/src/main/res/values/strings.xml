@@ -7,7 +7,7 @@
     <string name="register_password_hint">密码</string>
     <string name="register_repassword_hint">确认密码</string>
     <string name="register_submit">注册</string>
-    <string name="recommend">推荐</string>
-    <string name="sports">体育</string>
-    <string name="entertainment">娱乐</string>
+    <string name="home">首页</string>
+    <string name="theme">主题</string>
+    <string name="me">我</string>
 </resources>
