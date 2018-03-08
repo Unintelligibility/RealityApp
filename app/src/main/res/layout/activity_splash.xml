@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -13,15 +14,28 @@
         <!--这个View放置初始图片-->
         <View
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="511dp"
             android:layout_weight="1"
-            android:background="@drawable/start_example"></View>
+            android:background="@drawable/cloud"></View>
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/imageView10"
+                android:layout_width="141dp"
+                android:layout_height="46dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/jianwenlogo" />
+        </android.support.constraint.ConstraintLayout>
 
         <!--这个ImageView用来放置附属的解说图片，比如我们的谣言分析系统logo，视情况可以去除-->
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:src="@mipmap/ic_launcher"/>
     </LinearLayout>
     
     <Button
