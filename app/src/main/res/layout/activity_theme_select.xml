@@ -66,82 +66,75 @@
         app:layout_constraintTop_toBottomOf="@+id/textView">
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/id_img_politics"
             android:layout_width="119dp"
             android:layout_height="119dp"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
-
-
-            app:srcCompat="@drawable/politics" />
+            android:background="@drawable/politics" />
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/id_img_sports"
             android:layout_width="119dp"
             android:layout_height="119dp"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
-
-            app:srcCompat="@drawable/sport" />
+            android:background="@drawable/sports" />
         <ImageView
-            android:id="@+id/imageView3"
+            android:id="@+id/id_img_science"
             android:layout_width="119dp"
             android:layout_height="119dp"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
-
-            app:srcCompat="@drawable/technology" />
+            android:background="@drawable/technology" />
 
         <ImageView
-            android:id="@+id/imageView4"
+            android:id="@+id/id_img_finance"
             android:layout_width="119dp"
             android:layout_height="119dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
-
-            app:srcCompat="@drawable/finance" />
+            android:background="@drawable/finance" />
 
         <ImageView
-            android:id="@+id/imageView5"
+            android:id="@+id/id_img_military"
             android:layout_width="119dp"
             android:layout_height="119dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
-
-            app:srcCompat="@drawable/military" />
+            android:background="@drawable/military" />
 
         <ImageView
-            android:id="@+id/imageView6"
+            android:id="@+id/id_img_cars"
             android:layout_width="119dp"
             android:layout_height="119dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
-
-            app:srcCompat="@drawable/cars" />
-
-        <ImageView
-            android:id="@+id/imageView7"
-            android:layout_width="119dp"
-            android:layout_height="119dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            app:srcCompat="@drawable/entertainment" />
+            android:background="@drawable/cars" />
 
         <ImageView
-            android:id="@+id/imageView8"
+            android:id="@+id/id_img_entertainment"
             android:layout_width="119dp"
             android:layout_height="119dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
-            app:srcCompat="@drawable/house" />
+            android:background="@drawable/entertainment" />
 
         <ImageView
-            android:id="@+id/imageView9"
+            android:id="@+id/id_img_house"
             android:layout_width="119dp"
             android:layout_height="119dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
-            app:srcCompat="@drawable/game" />
+            android:background="@drawable/house" />
+
+        <ImageView
+            android:id="@+id/id_img_game"
+            android:layout_width="119dp"
+            android:layout_height="119dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/game" />
     </GridLayout>
 
 </android.support.constraint.ConstraintLayout>

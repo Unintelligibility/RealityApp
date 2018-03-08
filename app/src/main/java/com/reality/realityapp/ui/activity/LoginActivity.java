@@ -93,7 +93,8 @@ public class LoginActivity extends BaseActivity {
                         User user = new User(response.get_id(),username,password,response.getToken());
                         UserInfoHolder.getInstance().setUser(user);
 
-                        toFirstPageActivity();
+//                        toFirstPageActivity();
+                        toThemeSelectActivity();
                     }
                 });
             }
@@ -116,6 +117,15 @@ public class LoginActivity extends BaseActivity {
     private void toRegisterActivity() {
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
+    }
+
+    /**
+     * 选择感兴趣的领域
+     */
+    private void toThemeSelectActivity() {
+        Intent intent = new Intent(this, ThemeSelectActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     public static void lauch(Context context, String username, String password) {
