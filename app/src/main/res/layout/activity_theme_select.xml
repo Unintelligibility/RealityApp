@@ -57,9 +57,9 @@
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:rowCount="3"
         android:columnCount="3"
         android:orientation="horizontal"
+        android:rowCount="3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -69,23 +69,24 @@
             android:id="@+id/id_img_politics"
             android:layout_width="119dp"
             android:layout_height="119dp"
-            android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/politics" />
 
         <ImageView
             android:id="@+id/id_img_sports"
             android:layout_width="119dp"
             android:layout_height="119dp"
-            android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/sports" />
+
         <ImageView
             android:id="@+id/id_img_science"
             android:layout_width="119dp"
             android:layout_height="119dp"
-            android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/technology" />
 
         <ImageView
@@ -136,5 +137,24 @@
             android:layout_marginTop="10dp"
             android:background="@drawable/game" />
     </GridLayout>
+
+    <Button
+        android:id="@+id/id_btn_submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_margin="32dp"
+        android:background="@drawable/btn_bg_submit"
+        android:minHeight="0dp"
+        android:minWidth="0dp"
+        android:paddingBottom="4dp"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:paddingTop="4dp"
+        android:text="确认"
+        android:textColor="@color/deepgray2"
+        android:textSize="14dp"
+        tools:layout_editor_absoluteX="325dp"
+        tools:layout_editor_absoluteY="238dp" />
 
 </android.support.constraint.ConstraintLayout>
