@@ -38,7 +38,7 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
+        //移除cookie中的记录，使得每次登陆都要输入账号和密码
         CookieJarImpl cookieJar = (CookieJarImpl) OkHttpUtils.getInstance().getOkHttpClient().cookieJar();
         cookieJar.getCookieStore().removeAll();
     }

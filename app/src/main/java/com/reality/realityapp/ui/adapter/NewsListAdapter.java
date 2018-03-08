@@ -3,6 +3,7 @@ package com.reality.realityapp.ui.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,6 +57,7 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.NewsLi
     public void onBindViewHolder(NewsListItemViewHolder holder, final int position) {
         NewsItem newsItem = newsItems.get(String.valueOf(position));
 
+        Log.d("picture", "picture: "+newsItem.getPicture());
         Picasso.with(context)
                 .load(newsItem.getPicture())
                 .placeholder(R.drawable.item_image)
@@ -64,6 +66,7 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.NewsLi
         holder.titleTv.setText(newsItem.getTitle());
         holder.sourceTv.setText(newsItem.getSource());
         holder.timeTv.setText(newsItem.getTime());
+        holder.reliabilityTv.setText(newsItem.getReliability());
 
         if (onItemClickListener!=null){
             holder.titleTv.setOnClickListener(new View.OnClickListener() {
@@ -86,6 +89,7 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.NewsLi
         public TextView titleTv;
         public TextView sourceTv;
         public TextView timeTv;
+        public TextView reliabilityTv;
 
         public NewsListItemViewHolder(View itemView) {
             super(itemView);
@@ -94,8 +98,7 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.NewsLi
             titleTv = (TextView) itemView.findViewById(R.id.id_tv_title);
             sourceTv= (TextView) itemView.findViewById(R.id.id_tv_source);
             timeTv= (TextView) itemView.findViewById(R.id.id_tv_time);
-
-
+            reliabilityTv = (TextView) itemView.findViewById(R.id.id_tv_reliability);
 
         }
     }
