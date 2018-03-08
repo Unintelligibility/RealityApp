@@ -10,6 +10,8 @@ import android.widget.ImageView;
 
 import com.reality.realityapp.R;
 
+import java.util.ArrayList;
+
 public class ThemeSelectActivity extends AppCompatActivity implements OnClickListener {
 
     private Button skipButton;
@@ -23,6 +25,7 @@ public class ThemeSelectActivity extends AppCompatActivity implements OnClickLis
     private ImageView houseImg;
     private ImageView gameImg;
 
+    private ArrayList<Integer> chosenTags = new ArrayList<Integer>();
     /** 当前的ImageView */
     private ImageView currentImage;
     @Override
@@ -37,14 +40,23 @@ public class ThemeSelectActivity extends AppCompatActivity implements OnClickLis
     private void initView() {
         skipButton = (Button) findViewById(R.id.id_btn_skip);
         politicsImg = (ImageView) findViewById(R.id.id_img_politics);
+        politicsImg.setTag(1);
         sportsImg = (ImageView) findViewById(R.id.id_img_sports);
+        sportsImg.setTag(2);
         scienceImg = (ImageView) findViewById(R.id.id_img_science);
+        scienceImg.setTag(3);
         financeImg = (ImageView) findViewById(R.id.id_img_finance);
+        financeImg.setTag(4);
         militaryImg = (ImageView) findViewById(R.id.id_img_military);
+        militaryImg.setTag(5);
         carsImg = (ImageView) findViewById(R.id.id_img_cars);
+        carsImg.setTag(6);
         entertainmentImg = (ImageView) findViewById(R.id.id_img_entertainment);
+        entertainmentImg.setTag(7);
         houseImg = (ImageView) findViewById(R.id.id_img_house);
+        houseImg.setTag(8);
         gameImg = (ImageView) findViewById(R.id.id_img_game);
+        gameImg.setTag(9);
     }
 
     private  void initEvent() {
@@ -80,15 +92,31 @@ public class ThemeSelectActivity extends AppCompatActivity implements OnClickLis
     }
     @Override
     public void onClick(View v) {
-        handleImageView((ImageView) v);
+        int tag = (Integer)v.getTag();
+        for (int i=0; i<chosenTags.size();i++) {
+            if (tag==chosenTags.get(i)) {
+//                imageView.setImageDrawable(null);
+                chosenTags.remove(i);
+                cancelSelect((ImageView) v);
+                return;
+            }
+        }
+        chosenTags.add(tag);
+//        imageView.setImageResource(R.drawable.border);
+        select((ImageView) v);
     }
     /**
-     * 给点击选中的ImageView加边框，并将之前的ImageView边框清除
-     * @param imageView 要添加边框的ImageView
+     * 给点击选中的ImageView加边框，若已选中则取消边框
+     * @param imageView 要添加/取消边框的ImageView
      */
-    public void handleImageView(ImageView imageView){
-        currentImage.setImageDrawable(null);
+    public void select(ImageView imageView){
+
+//        currentImage.setImageDrawable(null);
+//        int tag = (Integer) imageView.getTag();
         imageView.setImageResource(R.drawable.border);
-        currentImage = imageView;
+//        currentImage = imageView;
+    }
+    public void cancelSelect(ImageView imageView){
+        imageView.setImageDrawable(null);
     }
 }
