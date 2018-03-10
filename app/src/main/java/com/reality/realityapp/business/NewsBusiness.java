@@ -42,10 +42,10 @@ public class NewsBusiness {
                 .execute(commonCallback);
     }
 
-    public void newsListDisplay(CommonCallback<Map<String,NewsItem>> commonCallback){
+    public void newsListDisplay(String userid,CommonCallback<Map<String,NewsItem>> commonCallback){
         OkHttpUtils
                 .get()
-                .url(Url.baseUrl+"read")
+                .url(Url.baseUrl+userid+"/read")
                 .tag(this)
                 .build()
                 .execute(commonCallback);

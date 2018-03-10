@@ -58,7 +58,7 @@
 'data': {'_id': str(g.uid), 'token': token.decode('ascii'),'selected':boolean}}
 2. {'resultCode': 0}
 ```
-#### read
+#### <user_id>/read
 
 get
 
@@ -67,8 +67,10 @@ return
 ```
 {
 'resultCode':1,
-'data':{
-"0": {
+'data':
+{
+"0": 
+{
 "_id": "5a705014c3666e341a37bffa",
 "picture": "",
 "title": "陈吉宁当选北京市市长(图/简历)",
@@ -92,9 +94,52 @@ return
 
 
 
-#### <new_id>/recommend	单条新闻详情里的推荐阅读
+#### <new_id>/relate	单条新闻详情里的推荐阅读
+
+#### rank
+
+get
 
 return
+
+```json
+{
+    'resultCode':1,
+    'data':
+    {
+        'source':"新华社",
+        'score':"98.7"
+    },
+    {
+    	'source':"环球网",
+    	'score':"97.1"
+	}
+}
+```
+
+
+
+#### rankInfo
+
+post
+
+```json
+{
+    'source':source
+}
+```
+
+return
+
+```json
+{
+    'resultCode':1,
+    'data':
+    {
+        'totalNum':10000
+    }
+}
+```
 
 
 

@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.reality.realityapp.R;
+import com.reality.realityapp.UserInfoHolder;
 import com.reality.realityapp.bean.NewsItem;
 import com.reality.realityapp.business.NewsBusiness;
 import com.reality.realityapp.mock.NewsListMock;
@@ -143,8 +144,10 @@ public class NewsListFragment extends Fragment {
             public void onClick(View view, int position) {
                 NewsItem newsItem = newsItems.get(String.valueOf(position));
                 String content = newsItem.getContent();
+                String source = newsItem.getSource();
                 Log.d("content", "onClick---content: "+content);
-                toNewsInfoActivity(content);
+                Log.d("source", "onClick---source: "+source);
+                toNewsInfoActivity(content,source);
             }
         });
 
@@ -161,7 +164,9 @@ public class NewsListFragment extends Fragment {
     private void refreshNews() {
         final String TAG = "NewsBusiness-request";
 //        T.showToast("size:"+recyclerView.getLayoutManager().getItemCount());
-        newsBusiness.newsListDisplay(new CommonCallback<Map<String, NewsItem>>() {
+        String userid = UserInfoHolder.getInstance().getUser().getUserid();
+        Log.d(TAG, "userid-----: "+userid);
+        newsBusiness.newsListDisplay(userid,new CommonCallback<Map<String, NewsItem>>() {
             @Override
             public void onError(Exception e) {
                 T.showToast(e.getMessage());
@@ -241,9 +246,10 @@ public class NewsListFragment extends Fragment {
     private void loadMore() {
     }
 
-    private void toNewsInfoActivity(String content){
+    private void toNewsInfoActivity(String content,String source){
         Intent intent = new Intent(getActivity(), NewsInfoActivity.class);
         intent.putExtra("content",content);
+        intent.putExtra("source",source);
         startActivity(intent);
     }
 
