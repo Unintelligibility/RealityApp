@@ -12,7 +12,6 @@
 
 - 数据格式为json，记得http请求的header一般要有application/json，如果要改为form等其他，需要对接说明
 
-- get方法直接返回data，不加resultCode和resultMessage（没有意义）
 
 ------
 
@@ -142,4 +141,14 @@ return
 ```
 
 
+
+#### <user_id>/interest
+
+post
+
+```
+{'likes':['体育','政治'...]}
+```
+
+*（！！Notice：请求必须加上authentication，使用的协议为Basic Auth，在请求的auth加上username=<得到的token>，password可以不填*
 
