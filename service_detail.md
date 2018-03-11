@@ -142,7 +142,7 @@ return
 
 
 
-#### <user_id>/interest
+#### interest		用户兴趣选择
 
 post
 
@@ -151,4 +151,19 @@ post
 ```
 
 *（！！Notice：请求必须加上authentication，使用的协议为Basic Auth，在请求的auth加上username=<得到的token>，password可以不填*
+
+
+
+#### read_info	单条新闻阅读情况，用于推荐算法
+
+Auth: needed 格式同上
+
+post
+
+```
+{
+	'news_id': *** (类型：str)
+    'reading_time': 10 (单位是秒，类型：int)
+}
+```
 
