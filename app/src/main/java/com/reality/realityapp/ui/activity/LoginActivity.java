@@ -93,8 +93,11 @@ public class LoginActivity extends BaseActivity {
                         User user = new User(response.get_id(),username,password,response.getToken());
                         UserInfoHolder.getInstance().setUser(user);
 
+                        //传递token给兴趣领域选择界面，传输json的authentication要用
+                        ThemeSelectActivity.launch(LoginActivity.this, username, password, response.getToken());
+                        finish();
 //                        toFirstPageActivity();
-                        toThemeSelectActivity();
+//                        toThemeSelectActivity();
                     }
                 });
             }
@@ -125,6 +128,7 @@ public class LoginActivity extends BaseActivity {
     private void toThemeSelectActivity() {
         Intent intent = new Intent(this, ThemeSelectActivity.class);
         startActivity(intent);
+//        ThemeSelectActivity.launch(LoginActivity.this,response.getUsername(),response.getPassword());
         finish();
     }
 
