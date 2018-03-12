@@ -162,7 +162,8 @@ post
 
 ```
 {
-	'news_id': *** (类型：str)
+	'news_type': *** (类型：str)
+	'news_tags': *** (类型：str)
     'reading_time': 10 (单位是秒，类型：int)
 }
 ```
