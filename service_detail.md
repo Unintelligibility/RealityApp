@@ -161,7 +161,8 @@ Auth: needed 格式同上
 post
 
 ```
-{
+{	
+	'title':***
 	'news_type': *** (类型：str)
 	'news_tags': *** (类型：str)
 	'source': *** (类型：str)
