@@ -47,6 +47,13 @@ public class NewsInfoActivity extends BaseActivity {
         contentWv = (WebView) findViewById(R.id.id_wv_content);
         WebSettings webSettings = contentWv.getSettings();
         webSettings.setJavaScriptEnabled(true);
+        webSettings.setAllowFileAccess(true);
+//        webSettings.setUseWideViewPort(true);
+//        webSettings.setLoadWithOverviewMode(true);
+//
+//        webSettings.setSupportZoom(true);
+        webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+        webSettings.setLoadsImagesAutomatically(true);
 
     }
 
@@ -68,7 +75,7 @@ public class NewsInfoActivity extends BaseActivity {
         });
 
         String content = intent.getStringExtra(CONTENT);
-        content = "<img src='http://p0.ifengimg.com/pmop/2018/0219/ED77C409CF7D10AD0F61B41D125301C247A13D5B_size38_w532_h356.jpeg'/>";
+//        content = "<img src='http://p0.ifengimg.com/pmop/2018/0219/ED77C409CF7D10AD0F61B41D125301C247A13D5B_size38_w532_h356.jpeg'/>";
         if (TextUtils.isEmpty(content)){
             return;
         }
@@ -81,7 +88,7 @@ public class NewsInfoActivity extends BaseActivity {
 //            htmlContent = Html.fromHtml(content);
 //        }
 //        contentTv.setText(htmlContent);
-        contentWv.loadData(content,"text/html","UTF-8");
+        contentWv.loadData(content,"text/html;charset=utf-8","UTF-8");
     }
 
     private void toRankActivity(String source) {
@@ -109,5 +116,16 @@ public class NewsInfoActivity extends BaseActivity {
                     "}" +
                     "})()");
         }
+
+        private void aReset(){
+            contentWv.loadUrl("javascript:(function(){" +
+                "var objs = document.getElementsByTagName('a'); " +
+                "for(var i=0;i<objs.length;i++)  " +
+                "{"
+                + "var a = objs[i];   " +
+                " a.style.maxWidth = '100%';img.style.height='auto';" +
+                "}" +
+                "})()");}
+
     }
 }
