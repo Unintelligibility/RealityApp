@@ -46,6 +46,7 @@ public abstract class CommonCallback<T> extends StringCallback {
 
     @Override
     public void onResponse(String response, int id) {
+        Log.d(TAG, "onResponse-json: "+response);
         try {
             JSONObject resp = new JSONObject(response);
             int resultCode = resp.getInt("resultCode");

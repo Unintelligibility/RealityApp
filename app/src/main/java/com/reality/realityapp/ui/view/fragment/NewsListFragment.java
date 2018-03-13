@@ -47,8 +47,8 @@ import okhttp3.Response;
 
 public class NewsListFragment extends Fragment {
 
-//    private BundleData bundleData;
-    private Map<String ,NewsItem> newsItems = new HashMap<>();
+    //    private BundleData bundleData;
+    private Map<String, NewsItem> newsItems = new HashMap<>();
 
     private NewsBusiness newsBusiness = new NewsBusiness();
     private SwipeRefreshLayout swipeRefreshLayout;
@@ -145,9 +145,11 @@ public class NewsListFragment extends Fragment {
                 NewsItem newsItem = newsItems.get(String.valueOf(position));
                 String content = newsItem.getContent();
                 String source = newsItem.getSource();
-                Log.d("content", "onClick---content: "+content);
-                Log.d("source", "onClick---source: "+source);
-                toNewsInfoActivity(content,source);
+                String news_id = newsItem.get_id();
+                Log.d("content", "onClick---content: " + content);
+                Log.d("source", "onClick---source: " + source);
+                Log.d("news_id", "onClick-----news_id " + news_id);
+                toNewsInfoActivity(content, source, news_id);
             }
         });
 
@@ -165,8 +167,8 @@ public class NewsListFragment extends Fragment {
         final String TAG = "NewsBusiness-request";
 //        T.showToast("size:"+recyclerView.getLayoutManager().getItemCount());
         String userid = UserInfoHolder.getInstance().getUser().getUserid();
-        Log.d(TAG, "userid-----: "+userid);
-        newsBusiness.newsListDisplay(userid,new CommonCallback<Map<String, NewsItem>>() {
+        Log.d(TAG, "userid-----: " + userid);
+        newsBusiness.newsListDisplay(userid, new CommonCallback<Map<String, NewsItem>>() {
             @Override
             public void onError(Exception e) {
                 T.showToast(e.getMessage());
@@ -178,7 +180,7 @@ public class NewsListFragment extends Fragment {
                 newsItems.putAll(response);
 //                Log.d(TAG, "map: " + newsItems.size());
                 newsListAdapter.notifyDataSetChanged();
-                if (swipeRefreshLayout.isRefreshing()){
+                if (swipeRefreshLayout.isRefreshing()) {
                     swipeRefreshLayout.setRefreshing(false);
                 }
 //                for (int i = 0; i < recyclerView.getLayoutManager().getItemCount(); i++) {
@@ -244,12 +246,33 @@ public class NewsListFragment extends Fragment {
      * 加载更多新闻
      */
     private void loadMore() {
+        final String TAG = "NewsBusiness-request";
+//        T.showToast("size:"+recyclerView.getLayoutManager().getItemCount());
+        String userid = UserInfoHolder.getInstance().getUser().getUserid();
+        Log.d(TAG, "userid-----: " + userid);
+        newsBusiness.newsListDisplay(userid, new CommonCallback<Map<String, NewsItem>>() {
+            @Override
+            public void onError(Exception e) {
+                T.showToast(e.getMessage());
+            }
+
+            @Override
+            public void onResponse(Map<String, NewsItem> response) {
+                newsItems.putAll(response);
+//                Log.d(TAG, "map: " + newsItems.size());
+                newsListAdapter.notifyDataSetChanged();
+                if (swipeRefreshLayout.isRefreshing()) {
+                    swipeRefreshLayout.setRefreshing(false);
+                }
+            }
+        });
     }
 
-    private void toNewsInfoActivity(String content,String source){
+    private void toNewsInfoActivity(String content, String source, String news_id) {
         Intent intent = new Intent(getActivity(), NewsInfoActivity.class);
-        intent.putExtra("content",content);
-        intent.putExtra("source",source);
+        intent.putExtra("content", content);
+        intent.putExtra("source", source);
+        intent.putExtra("news_id", news_id);
         startActivity(intent);
     }
 

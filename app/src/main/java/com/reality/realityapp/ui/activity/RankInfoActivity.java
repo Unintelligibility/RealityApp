@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.reality.realityapp.R;
+import com.reality.realityapp.utils.T;
 
 public class RankInfoActivity extends AppCompatActivity {
 
