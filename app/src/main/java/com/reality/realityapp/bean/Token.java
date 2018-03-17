@@ -28,7 +28,7 @@ public class Token {
         this.token = token;
     }
 
-    public boolean isSelected() {
+    public boolean getSelected() {
         return selected;
     }
 

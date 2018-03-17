@@ -88,18 +88,22 @@ public class LoginActivity extends BaseActivity {
                     @Override
                     public void onResponse(Token response) {
                         stopLoadingProgress();
-                        T.showToast("登陆成功:"+response.getToken());
-                        OkHttpUtils.getInstance().getOkHttpClient().newBuilder().addInterceptor(new BasicAuthInterceptor(response.getToken(),""));
+                        T.showToast("登陆成功:" + response.getToken());
+                        OkHttpUtils.getInstance().getOkHttpClient().newBuilder().addInterceptor(new BasicAuthInterceptor(response.getToken(), ""));
 
                         //保存用户的信息
-                        User user = new User(response.get_id(),username,password,response.getToken());
+                        User user = new User(response.get_id(), username, password, response.getToken());
                         UserInfoHolder.getInstance().setUser(user);
 
 
                         //传递token给兴趣领域选择界面，传输json的authentication要用
-                        ThemeSelectActivity.launch(LoginActivity.this, username, password, response.getToken());
+                        Log.d("selected", "selected: " + response.getSelected());
+                        if (response.getSelected()) {
+                            toFirstPageActivity();
+                        } else {
+                            ThemeSelectActivity.launch(LoginActivity.this, username, password, response.getToken());
+                        }
                         finish();
-//                        toFirstPageActivity();
 //                        toThemeSelectActivity();
                     }
                 });
@@ -114,6 +118,9 @@ public class LoginActivity extends BaseActivity {
         });
     }
 
+    /**
+     * 跳转到首页
+     */
     private void toFirstPageActivity() {
         Intent intent = new Intent(this, FirstPageActivity.class);
         startActivity(intent);
@@ -159,8 +166,8 @@ public class LoginActivity extends BaseActivity {
 
         String username = intent.getStringExtra(KEY_USERNAME);
         String password = intent.getStringExtra(KEY_PASSWORD);
-        Log.d("login activity", "string: "+username);
-        if (TextUtils.isEmpty(username) || TextUtils.isEmpty(password)){
+        Log.d("login activity", "string: " + username);
+        if (TextUtils.isEmpty(username) || TextUtils.isEmpty(password)) {
             return;
         }
 
