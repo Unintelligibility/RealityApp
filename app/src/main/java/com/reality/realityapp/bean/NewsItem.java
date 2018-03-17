@@ -16,6 +16,8 @@ public class NewsItem implements Serializable{
     private String reliability;
     private String isBadTitle;
     private String picture_info;
+    private String news_type;
+    private String news_tags;
 
     public String get_id() {
         return _id;
@@ -87,5 +89,21 @@ public class NewsItem implements Serializable{
 
     public void setIsBadTitle(String isBadTitle) {
         this.isBadTitle = isBadTitle;
+    }
+
+    public String getNews_type() {
+        return news_type;
+    }
+
+    public void setNews_type(String news_type) {
+        this.news_type = news_type;
+    }
+
+    public String getNews_tags() {
+        return news_tags;
+    }
+
+    public void setNews_tags(String news_tags) {
+        this.news_tags = news_tags;
     }
 }

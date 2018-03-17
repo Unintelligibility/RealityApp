@@ -5,11 +5,12 @@ package com.reality.realityapp.bean;
  */
 
 /**
- * 用来接收登陆后服务端返回的token验证字段和用户id
+ * 用来接收登陆后服务端返回的token验证字段和用户id以及是否选择过兴趣
  */
 public class Token {
     private String _id;
     private String token;
+    private boolean selected;
 
     public String get_id() {
         return _id;
@@ -25,5 +26,13 @@ public class Token {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
     }
 }

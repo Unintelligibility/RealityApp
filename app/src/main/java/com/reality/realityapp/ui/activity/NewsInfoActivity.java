@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.webkit.JavascriptInterface;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
@@ -24,6 +25,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.reality.realityapp.R;
+import com.reality.realityapp.UserInfoHolder;
 import com.reality.realityapp.bean.Token;
 import com.reality.realityapp.business.NewsBusiness;
 import com.reality.realityapp.net.CommonCallback;
@@ -35,16 +37,23 @@ import java.io.InputStream;
 public class NewsInfoActivity extends BaseActivity {
 
     public static final String NEWS_ID = "news_id";
-    private WebView contentWv;
-
+    public static final String NEWS_TYPE = "news_type";
+    public static final String NEWS_TAGS = "news_tags";
     public static final String SOURCE = "source";
     public static final String CONTENT = "content";
+    public static final String TITLE = "title";
+
+    private WebView contentWv;
 
     //查看新闻详情的起止时间（毫秒）
     private long startMillis;
     private long endMillis;
     private long reading_time;
     private String news_id;
+    private String source;
+    private String news_type;
+    private String news_tags;
+    private String title;
 
     NewsBusiness newsBusiness = new NewsBusiness();
 
@@ -78,6 +87,7 @@ public class NewsInfoActivity extends BaseActivity {
         webSettings.setLoadsImagesAutomatically(true);
         webSettings.setMediaPlaybackRequiresUserGesture(false);
         contentWv.setLayerType(View.LAYER_TYPE_HARDWARE, null);
+        contentWv.addJavascriptInterface(this, "nativeMethod");
 //        // Use WideViewport and Zoom out if there is no viewport defined
 //        webSettings.setUseWideViewPort(true);
 //        webSettings.setLoadWithOverviewMode(true);
@@ -109,22 +119,26 @@ public class NewsInfoActivity extends BaseActivity {
         }
 
         news_id = intent.getStringExtra(NEWS_ID);
+        title = intent.getStringExtra(TITLE);
+        source = intent.getStringExtra(SOURCE);
+        news_type = intent.getStringExtra(NEWS_TYPE);
+        news_tags = intent.getStringExtra(NEWS_TAGS);
 
-        final String source = intent.getStringExtra(SOURCE);
         contentWv.setWebViewClient(new MyWebViewClient() {
             boolean isLoadUrl = false;
+
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 T.showToast("rankInfo1");
                 sendReadTime();
-                toRankActivity(source);
+                toRankActivity();
                 T.showToast("rankInfo2");
                 return true;
             }
 
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
-                if(!isLoadUrl){
+                if (!isLoadUrl) {
                     isLoadUrl = true;
                     view.loadUrl(url);
 
@@ -149,6 +163,7 @@ public class NewsInfoActivity extends BaseActivity {
 //        }
 //        contentTv.setText(htmlContent);
         contentWv.loadData(content, "text/html;charset=utf-8", "UTF-8");
+        Log.d("content", "content--: " + content);
     }
 
     @Override
@@ -157,21 +172,13 @@ public class NewsInfoActivity extends BaseActivity {
         sendReadTime();
     }
 
-    private void sendReadTime(){
+    private void sendReadTime() {
         endMillis = System.currentTimeMillis();
         reading_time = endMillis - startMillis;
-        Log.d("readingTime", "reading_time: "+reading_time);
-        newsBusiness.sendReadInfo(news_id, reading_time, new CommonCallback<Token>() {
-            @Override
-            public void onError(Exception e) {
-                Log.d("response1", "reading_error_back");
-            }
-
-            @Override
-            public void onResponse(Token response) {
-                Log.d("response2", "reading_success_back");
-            }
-        });
+        Log.d("readingTime", "reading_time: " + reading_time);
+        String username = UserInfoHolder.getInstance().getUser().getUsername();
+        String password = UserInfoHolder.getInstance().getUser().getPassword();
+        newsBusiness.sendReadInfo2(username, password, title, source, news_type, news_tags, reading_time);
     }
 
     //    void setChromeClient() {
@@ -191,7 +198,8 @@ public class NewsInfoActivity extends BaseActivity {
 //        });
 //    }
 
-    private void toRankActivity(String source) {
+    @JavascriptInterface
+    private void toRankActivity() {
         Intent intent = new Intent(this, NewsInfoActivity.class);
         intent.putExtra("source", source);
         startActivity(intent);
@@ -204,6 +212,7 @@ public class NewsInfoActivity extends BaseActivity {
         public void onPageFinished(WebView view, String url) {
             super.onPageFinished(view, url);
             imgReset();
+            aReset();
         }
 
         private void imgReset() {
@@ -221,12 +230,17 @@ public class NewsInfoActivity extends BaseActivity {
                     "})()");
         }
 
-//        private void aReset(){
-//            contentWv.loadUrl("javascript:(function(){" +
-//                    "var img0 = getElementsByClassName('auther-logo');"+
-//                    "img0.style.display='none';"+
-//                "})()");
-//        }
+        private void aReset() {
+            contentWv.loadUrl("javascript:(function(){" +
+                    "var as = document.getElementsByTagName('a');" +
+                    "for(var j=0;j<as.length;j++)  " +
+                    "{" +
+                    "var a = as[j];   " +
+                    "a.href='javascript:void(0);" +
+                    "a.onclick=function(e){return false;};" +
+                    "}" +
+                    "})()");
+        }
 
     }
 }

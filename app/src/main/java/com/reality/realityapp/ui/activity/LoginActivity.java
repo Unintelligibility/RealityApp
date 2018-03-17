@@ -17,6 +17,7 @@ import com.reality.realityapp.bean.User;
 import com.reality.realityapp.business.UserBusiness;
 import com.reality.realityapp.net.CommonCallback;
 import com.reality.realityapp.ui.activity.base.BaseActivity;
+import com.reality.realityapp.utils.BasicAuthInterceptor;
 import com.reality.realityapp.utils.T;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.cookie.CookieJarImpl;
@@ -88,10 +89,12 @@ public class LoginActivity extends BaseActivity {
                     public void onResponse(Token response) {
                         stopLoadingProgress();
                         T.showToast("登陆成功:"+response.getToken());
+                        OkHttpUtils.getInstance().getOkHttpClient().newBuilder().addInterceptor(new BasicAuthInterceptor(response.getToken(),""));
 
                         //保存用户的信息
                         User user = new User(response.get_id(),username,password,response.getToken());
                         UserInfoHolder.getInstance().setUser(user);
+
 
                         //传递token给兴趣领域选择界面，传输json的authentication要用
                         ThemeSelectActivity.launch(LoginActivity.this, username, password, response.getToken());

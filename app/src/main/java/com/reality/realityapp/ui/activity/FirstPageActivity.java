@@ -1,14 +1,9 @@
 package com.reality.realityapp.ui.activity;
 
-import android.graphics.Color;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TabHost;
@@ -16,19 +11,13 @@ import android.widget.TextView;
 
 import com.reality.realityapp.R;
 import com.reality.realityapp.UserInfoHolder;
-import com.reality.realityapp.bean.NewsItem;
 import com.reality.realityapp.business.NewsBusiness;
-import com.reality.realityapp.mock.NewsListMock;
-import com.reality.realityapp.net.CommonCallback;
 import com.reality.realityapp.ui.activity.base.BaseActivity;
 import com.reality.realityapp.ui.view.fragment.MyInfoFragment;
 import com.reality.realityapp.ui.view.fragment.NewsListFragment;
-import com.reality.realityapp.ui.view.refresh.SwipeRefresh;
-import com.reality.realityapp.ui.view.refresh.SwipeRefreshLayout;
+import com.reality.realityapp.ui.view.fragment.RankFragment;
+import com.reality.realityapp.ui.view.fragment.ThemeFragment;
 import com.reality.realityapp.utils.T;
-
-import java.util.List;
-import java.util.Map;
 
 public class FirstPageActivity extends BaseActivity implements TabHost.TabContentFactory {
 
@@ -60,7 +49,8 @@ public class FirstPageActivity extends BaseActivity implements TabHost.TabConten
         //TODO 还未加入真正的页面切换,暂时定为3
         final Fragment[] fragments = new Fragment[]{
                 NewsListFragment.newInstance(),
-                NewsListFragment.newInstance(),
+                ThemeFragment.newInstance(),
+                RankFragment.newInstance(),
                 MyInfoFragment.newInstance()
         };
 
@@ -68,8 +58,8 @@ public class FirstPageActivity extends BaseActivity implements TabHost.TabConten
         tabHost.setup();
 
         //tab做处理
-        int typeIDs[] = {R.string.home, R.string.theme, R.string.me};
-        int drawbleIDs[] = {R.drawable.home_img_skip, R.drawable.theme_img_skip, R.drawable.my_img_skip};
+        int typeIDs[] = {R.string.home, R.string.theme, R.string.rank, R.string.me};
+        int drawbleIDs[] = {R.drawable.home_img_skip, R.drawable.theme_img_skip, R.drawable.rank_img_skip, R.drawable.my_img_skip};
 
         for (int index = 0; index < typeIDs.length; index++) {
             //设置tab本身视图的内容
