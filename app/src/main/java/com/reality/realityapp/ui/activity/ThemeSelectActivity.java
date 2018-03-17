@@ -57,7 +57,6 @@ public class ThemeSelectActivity extends BaseActivity implements OnClickListener
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_theme_select);
-
         initView();
         initEvent();
         initIntent(getIntent());
@@ -113,7 +112,6 @@ public class ThemeSelectActivity extends BaseActivity implements OnClickListener
             public void onClick(View v) {
                 List<String> selectedThemes = new ArrayList<String>();
                 selectedThemes.addAll(chosenTagsStrs);
-                startLoadingProgress();
                 userBusiness.themeSelect(token, password, selectedThemes, new CommonCallback<Token>() {
                     @Override
                     public void onError(Exception e) {
@@ -133,6 +131,7 @@ public class ThemeSelectActivity extends BaseActivity implements OnClickListener
 //                        toThemeSelectActivity();
                     }
                 });
+                toFirstPageActivity();
             }
         });
     }

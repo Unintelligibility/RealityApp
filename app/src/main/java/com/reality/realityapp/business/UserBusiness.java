@@ -1,5 +1,7 @@
 package com.reality.realityapp.business;
 
+import android.util.Log;
+
 import com.reality.realityapp.bean.Token;
 import com.reality.realityapp.bean.User;
 import com.reality.realityapp.constant.Url;
@@ -7,11 +9,13 @@ import com.reality.realityapp.net.CommonCallback;
 import com.reality.realityapp.utils.BasicAuthInterceptor;
 import com.zhy.http.okhttp.OkHttpUtils;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -28,6 +32,7 @@ import okhttp3.Response;
 public class UserBusiness {
 
 //    private final OkHttpClient okHttpClient = new OkHttpClient();
+    private static final String TAG = "UserBusiness";
     public static final MediaType JSON=MediaType.parse("application/json; charset=utf-8");
 
     public void login(String username, String password, CommonCallback<Token> commonCallback) {
@@ -72,12 +77,23 @@ public class UserBusiness {
         //Stack OverFlow地址：https://stackoverflow.com/questions/22490057/android-okhttp-with-basic-authentication
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .addInterceptor(new BasicAuthInterceptor(username, password))
+                .connectTimeout(10, TimeUnit.SECONDS)
+                .writeTimeout(10,TimeUnit.SECONDS)
+                .readTimeout(20, TimeUnit.SECONDS)
                 .build();
+        //将List转化为JSONArray
+        JSONArray jsonArray = new JSONArray();
+        for (int i=0;i<selectedThemes.size();i++) {
+            System.out.println(selectedThemes.get(i));
+            jsonArray.put(selectedThemes.get(i));
+        }
         try {
-            jsonObject.put("likes",selectedThemes);
+            jsonObject.put("likes",jsonArray);
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        System.out.println("jsonObject: " +jsonObject);
+
         //创建一个RequestBody(参数1：数据类型 参数2传递的json串)
         RequestBody requestBody = RequestBody.create(JSON, jsonObject.toString());
         Request request = new Request.Builder()
@@ -92,11 +108,14 @@ public class UserBusiness {
             //请求错误回调方法
             @Override
             public void onFailure(Call call, IOException e) {
+//                Log.d(TAG, "失败惹");
                 System.out.println("连接失败");
             }
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 System.out.println(response.body().string());
+                System.out.println("连接成功");
+//                Log.v(TAG, response.body().string());
             }
         });
     }

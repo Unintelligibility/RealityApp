@@ -61,7 +61,6 @@ public abstract class CommonCallback<T> extends StringCallback {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
     }
 
     /**
