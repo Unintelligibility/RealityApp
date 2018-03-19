@@ -238,3 +238,54 @@ post
 }
 ```
 
+#### theme_list 主题列表获取
+
+theme_list
+
+get
+
+return
+
+```python
+{
+    'resultCode':1,
+    'data':
+    {
+        'theme_title':"两会最佳表情出炉",
+        'pic_url':"http://00.imgmini.eastday.com/mobile/20180306/20180306140953_b5c82b1cb55cc76ff1f37f1526b4c657_1.gif",
+        'time':"2017-03-18"
+    },
+    {
+    	#...
+	},
+    #...
+}
+```
+
+#### \<string : theme_name>/theme_news 获取主题对应新闻列表
+
+theme_news
+
+get
+
+return
+
+```python
+{
+     'resultCode':1,
+     'data':{
+         "0":{
+         'title':'两会表情包：“汪小兵”来了！这次他活跃在两会现场',
+         'source':'中国军网',
+         'picture':'http://00.imgmini.eastday.com/mobile/20180306/20180306140953_b5c82b1cb55cc76ff1f37f1526b4c657_1.gif',
+         'time':'2018-03-19',
+         'content':'html内容',#html格式
+         'url':'http://mini.eastday.com/a/n180306140952710.html?qid=360sousuo&vqid=5Lik5Lya5pyA5L2z6KGo5oOF5Ye654KJMjAxODAzMTg'#新闻url，前端视情况决定要不要
+     	},
+         "1":{
+             #...
+         }
+     }
+}
+```
+
