@@ -170,7 +170,7 @@ public class NewsListFragment extends Fragment {
         final String TAG = "NewsBusiness-request";
 //        T.showToast("size:"+recyclerView.getLayoutManager().getItemCount());
         String userid = UserInfoHolder.getInstance().getUser().getUserid();
-        Log.d(TAG, "userid-----: " + userid);
+        Log.d(TAG, "userid1-----: " + userid);
         newsBusiness.newsListDisplay(userid, new CommonCallback<Map<String, NewsItem>>() {
             @Override
             public void onError(Exception e) {

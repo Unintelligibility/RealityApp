@@ -19,6 +19,7 @@ import com.reality.realityapp.business.NewsBusiness;
 import com.reality.realityapp.net.CommonCallback;
 import com.reality.realityapp.ui.activity.NewsInfoActivity;
 import com.reality.realityapp.ui.adapter.NewsListAdapter;
+import com.reality.realityapp.ui.adapter.ThemeAdapter;
 import com.reality.realityapp.ui.view.refresh.SwipeRefresh;
 import com.reality.realityapp.ui.view.refresh.SwipeRefreshLayout;
 import com.reality.realityapp.utils.T;
@@ -39,24 +40,10 @@ public class ThemeFragment extends Fragment {
     private NewsBusiness newsBusiness = new NewsBusiness();
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerView;
-    private NewsListAdapter newsListAdapter;
+    private ThemeAdapter themeAdapter;
 
     public static ThemeFragment newInstance() {
         ThemeFragment fragment = new ThemeFragment();
-//        Bundle bundle = new Bundle();
-//        BundleData bundleData = new BundleData();
-//        bundleData.setNewsItems(newsItems);
-//        bundle.putSerializable(BUNDLE_DATA, bundleData);
-//        Iterator iterator = newsItems.iterator();
-//        while (iterator.hasNext()) {
-//            NewsItem newsItem = (NewsItem) iterator.next();
-//            bundle.putString(TITLE, newsItem.getTitle());
-//            bundle.putString(SOURCE, newsItem.getSource());
-//            bundle.putString(TIME, newsItem.getTime());
-//            bundle.putString(RELIABILITY, newsItem.getReliability());
-//            bundle.putString(PICTURE, newsItem.getPicture());
-//        }
-//        fragment.setArguments(bundle);
         return fragment;
     }
 
@@ -64,7 +51,6 @@ public class ThemeFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-//            bundleData = (BundleData) getArguments().getSerializable(BUNDLE_DATA);
         }
 
     }
@@ -72,32 +58,23 @@ public class ThemeFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_newslist, null);
+        View view = inflater.inflate(R.layout.fragment_themelist, null);
 
         swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.id_swiperefresh);
         recyclerView = (RecyclerView) view.findViewById(R.id.id_recyclerview);
 
         initView();
 
-        refreshNews();
+        refreshThemes();
 
         initEvent();
 
-//        textView.setText(title);
-//
-//        textView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                newsBusiness.newsArrayDisplay(textView,getActivity());
-//
-//            }
-//        });
         return view;
     }
 
     private void initView() {
 //        newsItemList = NewsListMock.getNewItemList2();
-        newsListAdapter = new NewsListAdapter(getActivity(), newsItems);
+        themeAdapter = new ThemeAdapter(getActivity(), newsItems);
 
 
         //swipeRefreshLayout设置
@@ -106,7 +83,7 @@ public class ThemeFragment extends Fragment {
 
         //recyclerview设置
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setAdapter(newsListAdapter);
+        recyclerView.setAdapter(themeAdapter);
 
     }
 
@@ -114,7 +91,7 @@ public class ThemeFragment extends Fragment {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefresh.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                refreshNews();
+                refreshThemes();
             }
         });
 
@@ -125,7 +102,7 @@ public class ThemeFragment extends Fragment {
             }
         });
 
-        newsListAdapter.setOnItemClickListener(new NewsListAdapter.OnItemClickListener() {
+        themeAdapter.setOnItemClickListener(new ThemeAdapter.OnItemClickListener() {
             @Override
             public void onClick(View view, int position) {
                 NewsItem newsItem = newsItems.get(String.valueOf(position));
@@ -149,7 +126,7 @@ public class ThemeFragment extends Fragment {
     /**
      * 刷新新闻列表
      */
-    private void refreshNews() {
+    private void refreshThemes() {
         final String TAG = "NewsBusiness-request";
 //        T.showToast("size:"+recyclerView.getLayoutManager().getItemCount());
         String userid = UserInfoHolder.getInstance().getUser().getUserid();
@@ -164,36 +141,11 @@ public class ThemeFragment extends Fragment {
             public void onResponse(Map<String, NewsItem> response) {
                 newsItems.clear();
                 newsItems.putAll(response);
-//                Log.d(TAG, "map: " + newsItems.size());
-                newsListAdapter.notifyDataSetChanged();
+                Log.d(TAG, "map: " + newsItems.size());
+                themeAdapter.notifyDataSetChanged();
                 if (swipeRefreshLayout.isRefreshing()) {
                     swipeRefreshLayout.setRefreshing(false);
                 }
-//                for (int i = 0; i < recyclerView.getLayoutManager().getItemCount(); i++) {
-//                    final TextView titleTv = (TextView) recyclerView.getLayoutManager().findViewByPosition(i).findViewById(R.id.id_tv_title);
-//                    final TextView sourceTv = (TextView) recyclerView.getLayoutManager().findViewByPosition(i).findViewById(R.id.id_tv_source);
-//                    final TextView timeTv = (TextView) recyclerView.getLayoutManager().findViewByPosition(i).findViewById(R.id.id_tv_time);
-//                    final TextView reliabilityTv = (TextView) recyclerView.getLayoutManager().findViewByPosition(i).findViewById(R.id.id_tv_reliability);
-//                    final String title = response.get(String.valueOf(i)).getTitle();
-//                    final String source = response.get(String.valueOf(i)).getSource();
-//                    final String time = response.get(String.valueOf(i)).getTime();
-//                    final String reliability = response.get(String.valueOf(i)).getReliability();
-//                    Log.d(TAG, "onResponse: title:" + title);
-//
-//                    getActivity().runOnUiThread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            titleTv.setText(title);
-//                            sourceTv.setText(source);
-//                            timeTv.setText(time);
-//                            reliabilityTv.setText(reliability);
-////                        newsListAdapter.notifyDataSetChanged();
-//                            if (swipeRefreshLayout.isRefreshing()) {
-//                                swipeRefreshLayout.setRefreshing(false);
-//                            }
-//                        }
-//                    });
-//                }
             }
         });
     }
@@ -235,7 +187,7 @@ public class ThemeFragment extends Fragment {
         final String TAG = "NewsBusiness-request";
 //        T.showToast("size:"+recyclerView.getLayoutManager().getItemCount());
         String userid = UserInfoHolder.getInstance().getUser().getUserid();
-        Log.d(TAG, "userid-----: " + userid);
+        Log.d(TAG, "userid-----theme: " + userid);
         newsBusiness.newsListDisplay(userid, new CommonCallback<Map<String, NewsItem>>() {
             @Override
             public void onError(Exception e) {
@@ -245,8 +197,8 @@ public class ThemeFragment extends Fragment {
             @Override
             public void onResponse(Map<String, NewsItem> response) {
                 newsItems.putAll(response);
-//                Log.d(TAG, "map: " + newsItems.size());
-                newsListAdapter.notifyDataSetChanged();
+                Log.d(TAG, "map----------------------: " + newsItems.size());
+                themeAdapter.notifyDataSetChanged();
                 if (swipeRefreshLayout.isRefreshing()) {
                     swipeRefreshLayout.setRefreshing(false);
                 }
