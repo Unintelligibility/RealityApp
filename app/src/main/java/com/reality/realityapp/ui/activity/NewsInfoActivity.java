@@ -1,38 +1,33 @@
 package com.reality.realityapp.ui.activity;
 
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.os.Build;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.print.PageRange;
-import android.text.Html;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.webkit.JavascriptInterface;
-import android.webkit.WebChromeClient;
-import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.FrameLayout;
-import android.widget.TextView;
 
 import com.reality.realityapp.R;
 import com.reality.realityapp.UserInfoHolder;
-import com.reality.realityapp.bean.Token;
+import com.reality.realityapp.bean.NewsItem;
 import com.reality.realityapp.business.NewsBusiness;
 import com.reality.realityapp.net.CommonCallback;
 import com.reality.realityapp.ui.activity.base.BaseActivity;
+import com.reality.realityapp.ui.adapter.RelatedNewsAdapter;
+import com.reality.realityapp.ui.view.refresh.SwipeRefresh;
+import com.reality.realityapp.ui.view.refresh.SwipeRefreshLayout;
 import com.reality.realityapp.utils.T;
 
-import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 public class NewsInfoActivity extends BaseActivity {
 
@@ -44,6 +39,9 @@ public class NewsInfoActivity extends BaseActivity {
     public static final String TITLE = "title";
 
     private WebView contentWv;
+    private SwipeRefreshLayout swipeRefreshLayout;
+    private RecyclerView recyclerView;
+    private RelatedNewsAdapter relatedNewsAdapter;
 
     //查看新闻详情的起止时间（毫秒）
     private long startMillis;
@@ -56,6 +54,7 @@ public class NewsInfoActivity extends BaseActivity {
     private String title;
 
     NewsBusiness newsBusiness = new NewsBusiness();
+    private List<NewsItem> newsItems = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +75,9 @@ public class NewsInfoActivity extends BaseActivity {
     private void initView() {
 //        contentTv = (TextView) findViewById(R.id.id_tv_content);
         contentWv = (WebView) findViewById(R.id.id_wv_content);
+        swipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.id_swiperefresh);
+        recyclerView = (RecyclerView)findViewById(R.id.id_recyclerview);
+
         WebSettings webSettings = contentWv.getSettings();
         webSettings.setJavaScriptEnabled(true);
         webSettings.setAllowFileAccess(true);
@@ -88,29 +90,51 @@ public class NewsInfoActivity extends BaseActivity {
         webSettings.setMediaPlaybackRequiresUserGesture(false);
         contentWv.setLayerType(View.LAYER_TYPE_HARDWARE, null);
         contentWv.addJavascriptInterface(this, "nativeMethod");
-//        // Use WideViewport and Zoom out if there is no viewport defined
-//        webSettings.setUseWideViewPort(true);
-//        webSettings.setLoadWithOverviewMode(true);
-//
-//        // Enable pinch to zoom without the zoom buttons
-//        webSettings.setBuiltInZoomControls(false);
-//
-//        // Allow use of Local Storage
-//        webSettings.setDomStorageEnabled(true);
-//
-//        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.HONEYCOMB) {
-//            // Hide the zoom controls for HONEYCOMB+
-//            webSettings.setDisplayZoomControls(false);
-//        }
-//
-//        // Enable remote debugging via chrome://inspect
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-//            WebView.setWebContentsDebuggingEnabled(true);
-//        }
 
+        relatedNewsAdapter = new RelatedNewsAdapter(this, newsItems);
+
+        //swipeRefreshLayout设置
+        swipeRefreshLayout.setMode(SwipeRefresh.Mode.BOTH);
+        swipeRefreshLayout.setColorSchemeColors(Color.RED, Color.BLACK, Color.GREEN, Color.YELLOW);
+
+        //recyclerview设置
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(relatedNewsAdapter);
     }
 
     private void initEvent() {
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefresh.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
+
+        swipeRefreshLayout.setOnPullUpRefreshListener(new SwipeRefreshLayout.OnPullUpRefreshListener() {
+            @Override
+            public void onPullUpRefresh() {
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
+
+        relatedNewsAdapter.setOnItemClickListener(new RelatedNewsAdapter.OnItemClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                NewsItem newsItem = newsItems.get(position);
+                String news_id = newsItem.get_id();
+                String content = newsItem.getContent();
+                String source = newsItem.getSource();
+                String news_type = newsItem.getNews_type();
+                String news_tags = newsItem.getNews_tags();
+                String title = newsItem.getTitle();
+                Log.d("news_id", "onClick---news_id: " + news_id);
+                Log.d("content", "onClick---content: " + content);
+                Log.d("source", "onClick---source: " + source);
+                Log.d("news_type", "onClick-----news_type " + news_type);
+                Log.d("news_tags", "onClick-----news_tags " + news_tags);
+                toNewsInfoActivity(news_id, content, title, source, news_type, news_tags);
+            }
+        });
     }
 
     private void initIntent(Intent intent) {
@@ -118,7 +142,6 @@ public class NewsInfoActivity extends BaseActivity {
             return;
         }
 
-        news_id = intent.getStringExtra(NEWS_ID);
         title = intent.getStringExtra(TITLE);
         source = intent.getStringExtra(SOURCE);
         news_type = intent.getStringExtra(NEWS_TYPE);
@@ -148,7 +171,7 @@ public class NewsInfoActivity extends BaseActivity {
         });
 
         String content = intent.getStringExtra(CONTENT);
-        Log.d("html-content", "html-content: " + content);
+//        Log.d("html-content", "html-content: " + content);
 //        content = "<img src='http://p0.ifengimg.com/pmop/2018/0219/ED77C409CF7D10AD0F61B41D125301C247A13D5B_size38_w532_h356.jpeg'/>";
         if (TextUtils.isEmpty(content)) {
             return;
@@ -163,7 +186,25 @@ public class NewsInfoActivity extends BaseActivity {
 //        }
 //        contentTv.setText(htmlContent);
         contentWv.loadData(content, "text/html;charset=utf-8", "UTF-8");
-        Log.d("content", "content--: " + content);
+//        Log.d("content", "content--: " + content);
+
+        news_id = intent.getStringExtra(NEWS_ID);
+        Log.d("news_id", "news_id-------: " + news_id);
+        newsBusiness.relatedNewsDisplay(news_id, new CommonCallback<List<NewsItem>>() {
+            @Override
+            public void onError(Exception e) {
+                Log.d("error-----", "error------------ " + e.getMessage());
+                T.showToast(e.getMessage());
+            }
+
+            @Override
+            public void onResponse(List<NewsItem> response) {
+                newsItems.clear();
+                newsItems.addAll(response);
+                Log.d("relatedNews", "relatedNews-list: " + newsItems.size());
+                relatedNewsAdapter.notifyDataSetChanged();
+            }
+        });
     }
 
     @Override
@@ -202,6 +243,17 @@ public class NewsInfoActivity extends BaseActivity {
     private void toRankActivity() {
         Intent intent = new Intent(this, NewsInfoActivity.class);
         intent.putExtra("source", source);
+        startActivity(intent);
+    }
+
+    private void toNewsInfoActivity(String news_id, String content, String title, String source, String news_type, String news_tags) {
+        Intent intent = new Intent(this, NewsInfoActivity.class);
+        intent.putExtra("news_id", news_id);
+        intent.putExtra("content", content);
+        intent.putExtra("title", title);
+        intent.putExtra("source", source);
+        intent.putExtra("news_type", news_type);
+        intent.putExtra("news_tags", news_tags);
         startActivity(intent);
     }
 

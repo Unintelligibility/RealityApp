@@ -135,6 +135,15 @@ public class NewsBusiness {
             }
         });
     }
+
+    public void relatedNewsDisplay(String newsid, CommonCallback<List<NewsItem>> commonCallback) {
+        OkHttpUtils
+                .get()
+                .url(Url.baseUrl + newsid + "/relate")
+                .tag(this)
+                .build()
+                .execute(commonCallback);
+    }
 //    public void newsListDisplay(Callback callback){
 //        Request.Builder builder = new Request.Builder();
 //        builder.url(Url.baseUrl+"read");

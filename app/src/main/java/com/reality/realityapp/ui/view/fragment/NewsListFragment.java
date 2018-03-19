@@ -143,16 +143,18 @@ public class NewsListFragment extends Fragment {
             @Override
             public void onClick(View view, int position) {
                 NewsItem newsItem = newsItems.get(String.valueOf(position));
+                String news_id = newsItem.get_id();
                 String content = newsItem.getContent();
                 String source = newsItem.getSource();
                 String news_type = newsItem.getNews_type();
                 String news_tags = newsItem.getNews_tags();
                 String title = newsItem.getTitle();
-                Log.d("content", "onClick---content: " + content);
-                Log.d("source", "onClick---source: " + source);
-                Log.d("news_type", "onClick-----news_type " + news_type);
-                Log.d("news_tags", "onClick-----news_tags " + news_tags);
-                toNewsInfoActivity(content, title, source, news_type, news_tags);
+//                Log.d("news_id", "onClick---news_id: " + news_id);
+//                Log.d("content", "onClick---content: " + content);
+//                Log.d("source", "onClick---source: " + source);
+//                Log.d("news_type", "onClick-----news_type " + news_type);
+//                Log.d("news_tags", "onClick-----news_tags " + news_tags);
+                toNewsInfoActivity(news_id, content, title, source, news_type, news_tags);
             }
         });
 
@@ -170,7 +172,7 @@ public class NewsListFragment extends Fragment {
         final String TAG = "NewsBusiness-request";
 //        T.showToast("size:"+recyclerView.getLayoutManager().getItemCount());
         String userid = UserInfoHolder.getInstance().getUser().getUserid();
-        Log.d(TAG, "userid1-----: " + userid);
+//        Log.d(TAG, "userid1-----: " + userid);
         newsBusiness.newsListDisplay(userid, new CommonCallback<Map<String, NewsItem>>() {
             @Override
             public void onError(Exception e) {
@@ -252,7 +254,7 @@ public class NewsListFragment extends Fragment {
         final String TAG = "NewsBusiness-request";
 //        T.showToast("size:"+recyclerView.getLayoutManager().getItemCount());
         String userid = UserInfoHolder.getInstance().getUser().getUserid();
-        Log.d(TAG, "userid-----: " + userid);
+//        Log.d(TAG, "userid-----: " + userid);
         newsBusiness.newsListDisplay(userid, new CommonCallback<Map<String, NewsItem>>() {
             @Override
             public void onError(Exception e) {
@@ -271,8 +273,9 @@ public class NewsListFragment extends Fragment {
         });
     }
 
-    private void toNewsInfoActivity(String content, String title, String source, String news_type, String news_tags) {
+    private void toNewsInfoActivity(String news_id, String content, String title, String source, String news_type, String news_tags) {
         Intent intent = new Intent(getActivity(), NewsInfoActivity.class);
+        intent.putExtra("news_id", news_id);
         intent.putExtra("content", content);
         intent.putExtra("title", title);
         intent.putExtra("source", source);

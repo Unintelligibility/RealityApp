@@ -59,7 +59,6 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.NewsListItem
         Picasso.with(context)
                 .load(newsItem.getPicture())
                 .into(new Target() {
-
                     @Override
                     public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
                         if (android.os.Build.VERSION.SDK_INT > 15) {

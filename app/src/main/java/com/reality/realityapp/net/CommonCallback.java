@@ -46,14 +46,14 @@ public abstract class CommonCallback<T> extends StringCallback {
 
     @Override
     public void onResponse(String response, int id) {
-        Log.d(TAG, "onResponse-json: "+response);
+//        Log.d(TAG, "onResponse-json: "+response);
         try {
             JSONObject resp = new JSONObject(response);
             int resultCode = resp.getInt("resultCode");
 
             if (resultCode == 1) {
                 String data = resp.getString("data");
-                Log.d(TAG, "data---: " + data);
+//                Log.d(TAG, "data---: " + data);
                 onResponse((T) GsonUtil.getGson().fromJson(data, type));
             } else {
                 onError(new Exception(resp.getString("resultMessage")));

@@ -1,7 +1,6 @@
 package com.reality.realityapp.ui.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,22 +11,19 @@ import android.widget.TextView;
 
 import com.reality.realityapp.R;
 import com.reality.realityapp.bean.NewsItem;
-import com.reality.realityapp.ui.activity.NewsInfoActivity;
 import com.squareup.picasso.Picasso;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
-import java.util.Map;
-import java.util.zip.Inflater;
 
 /**
- * Created by 铠联 on 2018/1/30.
+ * Created by 铠联 on 2018/3/19.
+ * 其实本来只需要NewsListAdapter一个适配器，但是后来调整了数据接口，新旧数据结构不同，
+ * 所以新写一个适配器
  */
 
-public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.NewsListItemViewHolder> {
+public class RelatedNewsAdapter extends RecyclerView.Adapter<RelatedNewsAdapter.RelatedNewsViewHolder> {
 
-    private Map<String,NewsItem> newsItems;
+    private List<NewsItem> newsItems;
     private Context context;
     private LayoutInflater inflater;
 
@@ -38,26 +34,26 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.NewsLi
     }
 
     public interface OnItemClickListener{
-        void onClick(View view,int position);
+        void onClick(View view, int position);
     }
 
-    public NewsListAdapter(Context context, Map<String,NewsItem> newsItems) {
+    public RelatedNewsAdapter(Context context, List<NewsItem> newsItems) {
         this.context = context;
         this.newsItems = newsItems;
         inflater = LayoutInflater.from(context);
     }
 
     @Override
-    public NewsListItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RelatedNewsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = inflater.inflate(R.layout.news_item, parent, false);
-        return new NewsListItemViewHolder(itemView);
+        return new RelatedNewsViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(NewsListItemViewHolder holder, final int position) {
-        NewsItem newsItem = newsItems.get(String.valueOf(position));
+    public void onBindViewHolder(RelatedNewsViewHolder holder, final int position) {
+        NewsItem newsItem = newsItems.get(position);
 
-        Log.d("picture", "picture: "+newsItem.getPicture());
+        Log.d("relate-picture", "relate-picture: "+newsItem.getPicture());
         Picasso.with(context)
                 .load(newsItem.getPicture())
                 .placeholder(R.drawable.item_image)
@@ -83,7 +79,7 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.NewsLi
         return newsItems.size();
     }
 
-    public class NewsListItemViewHolder extends RecyclerView.ViewHolder {
+    class RelatedNewsViewHolder extends RecyclerView.ViewHolder {
 
         public ImageView imageView;
         public TextView titleTv;
@@ -91,7 +87,7 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.NewsLi
         public TextView timeTv;
         public TextView reliabilityTv;
 
-        public NewsListItemViewHolder(View itemView) {
+        public RelatedNewsViewHolder(View itemView) {
             super(itemView);
 
             imageView = (ImageView) itemView.findViewById(R.id.id_iv_image);
