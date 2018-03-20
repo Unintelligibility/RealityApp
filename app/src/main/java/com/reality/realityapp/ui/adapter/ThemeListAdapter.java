@@ -9,11 +9,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.reality.realityapp.R;
-import com.reality.realityapp.bean.NewsItem;
+import com.reality.realityapp.bean.ThemeItem;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
@@ -23,9 +22,9 @@ import java.util.Map;
  * Created by 铠联 on 2018/1/30.
  */
 
-public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.NewsListItemViewHolder> {
+public class ThemeListAdapter extends RecyclerView.Adapter<ThemeListAdapter.NewsListItemViewHolder> {
 
-    private Map<String,NewsItem> newsItems;
+    private Map<String,ThemeItem> themItems;
     private Context context;
     private LayoutInflater inflater;
 
@@ -39,9 +38,9 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.NewsListItem
         void onClick(View view, int position);
     }
 
-    public ThemeAdapter(Context context, Map<String,NewsItem> newsItems) {
+    public ThemeListAdapter(Context context, Map<String,ThemeItem> themItems) {
         this.context = context;
-        this.newsItems = newsItems;
+        this.themItems = themItems;
         inflater = LayoutInflater.from(context);
     }
 
@@ -53,11 +52,11 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.NewsListItem
 
     @Override
     public void onBindViewHolder(final NewsListItemViewHolder holder, final int position) {
-        NewsItem newsItem = newsItems.get(String.valueOf(position));
+        ThemeItem themItem = themItems.get(String.valueOf(position));
 
-        Log.d("picture", "picture: "+newsItem.getPicture());
+        Log.d("picture", "picture: "+themItem.getPic_url());
         Picasso.with(context)
-                .load(newsItem.getPicture())
+                .load(themItem.getPic_url())
                 .into(new Target() {
                     @Override
                     public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
@@ -77,10 +76,9 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.NewsListItem
                     }
                 });
 
-        holder.titleTv.setText(newsItem.getTitle());
-        holder.sourceTv.setText(newsItem.getSource());
-        holder.timeTv.setText(newsItem.getTime());
-        holder.reliabilityTv.setText(newsItem.getReliability());
+        holder.titleTv.setText(themItem.getTheme_title());
+        holder.timeTv.setText(themItem.getTime());
+//        holder.reliabilityTv.setText(themItem.getReliability());
 
         if (onItemClickListener!=null){
             holder.titleTv.setOnClickListener(new View.OnClickListener() {
@@ -94,14 +92,13 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.NewsListItem
 
     @Override
     public int getItemCount() {
-        return newsItems.size();
+        return themItems.size();
     }
 
     class NewsListItemViewHolder extends RecyclerView.ViewHolder {
 
         public View themeView;
         public TextView titleTv;
-        public TextView sourceTv;
         public TextView timeTv;
         public TextView reliabilityTv;
 
@@ -110,7 +107,6 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.NewsListItem
 
             themeView = itemView.findViewById(R.id.id_bg_theme);
             titleTv = (TextView) itemView.findViewById(R.id.id_tv_title);
-            sourceTv= (TextView) itemView.findViewById(R.id.id_tv_source);
             timeTv= (TextView) itemView.findViewById(R.id.id_tv_time);
             reliabilityTv = (TextView) itemView.findViewById(R.id.id_tv_reliability);
 

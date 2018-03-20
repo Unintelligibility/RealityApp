@@ -28,6 +28,7 @@ public class ResApplication extends Application {
         CookieJarImpl cookieJar = new CookieJarImpl(new PersistentCookieStore(getApplicationContext()));
 
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .retryOnConnectionFailure(true)
                 .connectTimeout(10000L, TimeUnit.MILLISECONDS)
                 .readTimeout(10000L,TimeUnit.MILLISECONDS)
                 .cookieJar(cookieJar)

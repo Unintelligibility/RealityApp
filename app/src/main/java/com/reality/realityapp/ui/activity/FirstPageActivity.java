@@ -16,7 +16,7 @@ import com.reality.realityapp.ui.activity.base.BaseActivity;
 import com.reality.realityapp.ui.view.fragment.MyInfoFragment;
 import com.reality.realityapp.ui.view.fragment.NewsListFragment;
 import com.reality.realityapp.ui.view.fragment.RankFragment;
-import com.reality.realityapp.ui.view.fragment.ThemeFragment;
+import com.reality.realityapp.ui.view.fragment.ThemeListFragment;
 import com.reality.realityapp.utils.T;
 
 public class FirstPageActivity extends BaseActivity implements TabHost.TabContentFactory {
@@ -49,7 +49,7 @@ public class FirstPageActivity extends BaseActivity implements TabHost.TabConten
         //TODO 还未加入真正的页面切换,暂时定为3
         final Fragment[] fragments = new Fragment[]{
                 NewsListFragment.newInstance(),
-                ThemeFragment.newInstance(),
+                ThemeListFragment.newInstance(),
                 RankFragment.newInstance(),
                 MyInfoFragment.newInstance()
         };
