@@ -11,9 +11,11 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.webkit.JavascriptInterface;
+import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ScrollView;
 
 import com.reality.realityapp.R;
 import com.reality.realityapp.UserInfoHolder;
@@ -39,6 +41,7 @@ public class NewsInfoActivity extends BaseActivity {
     public static final String TITLE = "title";
 
     private WebView contentWv;
+    private ScrollView contentSv;
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerView;
     private RelatedNewsAdapter relatedNewsAdapter;
@@ -75,8 +78,9 @@ public class NewsInfoActivity extends BaseActivity {
     private void initView() {
 //        contentTv = (TextView) findViewById(R.id.id_tv_content);
         contentWv = (WebView) findViewById(R.id.id_wv_content);
-        swipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.id_swiperefresh);
-        recyclerView = (RecyclerView)findViewById(R.id.id_recyclerview);
+        contentSv = (ScrollView) findViewById(R.id.id_sv_content);
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.id_swiperefresh);
+        recyclerView = (RecyclerView) findViewById(R.id.id_recyclerview);
 
         WebSettings webSettings = contentWv.getSettings();
         webSettings.setJavaScriptEnabled(true);
@@ -100,6 +104,7 @@ public class NewsInfoActivity extends BaseActivity {
         //recyclerview设置
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(relatedNewsAdapter);
+
     }
 
     private void initEvent() {
@@ -168,7 +173,26 @@ public class NewsInfoActivity extends BaseActivity {
                 }
                 super.onPageStarted(view, url, favicon);
             }
+
         });
+
+//        contentWv.draw
+//        contentWv.setWebChromeClient(new WebChromeClient() {
+//            @Override
+//            public void onProgressChanged(WebView view, int newProgress) {
+//                super.onProgressChanged(view, newProgress);
+//                if (newProgress == 100) {
+//                    //使得相似新闻推荐列表在新闻详情显示之后可见，解决闪动问题
+//                    try {
+//                        Thread.sleep(500);
+//                    } catch (InterruptedException e) {
+//                        e.printStackTrace();
+//                    }
+//                    recyclerView.setVisibility(View.VISIBLE);
+//                    contentSv.fullScroll(View.FOCUS_UP);
+//                }
+//            }
+//        });
 
         String content = intent.getStringExtra(CONTENT);
 //        Log.d("html-content", "html-content: " + content);
@@ -186,7 +210,7 @@ public class NewsInfoActivity extends BaseActivity {
 //        }
 //        contentTv.setText(htmlContent);
         contentWv.loadData(content, "text/html;charset=utf-8", "UTF-8");
-//        Log.d("content", "content--: " + content);
+        Log.d("content", "content--: " + content);
 
         news_id = intent.getStringExtra(NEWS_ID);
         Log.d("news_id", "news_id-------: " + news_id);
@@ -203,6 +227,7 @@ public class NewsInfoActivity extends BaseActivity {
                 newsItems.addAll(response);
                 Log.d("relatedNews", "relatedNews-list: " + newsItems.size());
                 relatedNewsAdapter.notifyDataSetChanged();
+
             }
         });
     }
@@ -265,6 +290,9 @@ public class NewsInfoActivity extends BaseActivity {
             super.onPageFinished(view, url);
             imgReset();
             aReset();
+            //使得相似新闻推荐列表在新闻详情显示之后可见，解决闪动问题
+            recyclerView.setVisibility(View.VISIBLE);
+            contentSv.fullScroll(View.FOCUS_UP);
         }
 
         private void imgReset() {
