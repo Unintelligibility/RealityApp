@@ -5,8 +5,12 @@ package com.reality.realityapp.bean;
  */
 
 public class RankItem {
+    private String _id;
     private String source;
-    private String score;
+    private String count;
+    private String report_time;
+    private String reliability;
+    private String remark;
 
     public String getSource() {
         return source;
@@ -16,11 +20,43 @@ public class RankItem {
         this.source = source;
     }
 
-    public String getScore() {
-        return score;
+    public String get_id() {
+        return _id;
     }
 
-    public void setScore(String score) {
-        this.score = score;
+    public void set_id(String _id) {
+        this._id = _id;
+    }
+
+    public String getCount() {
+        return count;
+    }
+
+    public void setCount(String count) {
+        this.count = count;
+    }
+
+    public String getReport_time() {
+        return report_time;
+    }
+
+    public void setReport_time(String report_time) {
+        this.report_time = report_time;
+    }
+
+    public String getReliability() {
+        return reliability;
+    }
+
+    public void setReliability(String reliability) {
+        this.reliability = reliability;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 }

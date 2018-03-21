@@ -15,7 +15,7 @@ import com.reality.realityapp.business.NewsBusiness;
 import com.reality.realityapp.ui.activity.base.BaseActivity;
 import com.reality.realityapp.ui.view.fragment.MyInfoFragment;
 import com.reality.realityapp.ui.view.fragment.NewsListFragment;
-import com.reality.realityapp.ui.view.fragment.RankFragment;
+import com.reality.realityapp.ui.view.fragment.RankListFragment;
 import com.reality.realityapp.ui.view.fragment.ThemeListFragment;
 import com.reality.realityapp.utils.T;
 
@@ -37,7 +37,7 @@ public class FirstPageActivity extends BaseActivity implements TabHost.TabConten
 
         initEvent();
 
-        T.showToast("id:" + UserInfoHolder.getInstance().getUser().getUserid() + "token:" + UserInfoHolder.getInstance().getUser().getToken());
+        T.showToast("id------:" + UserInfoHolder.getInstance().getUser().getUserid() + "---------------token:" + UserInfoHolder.getInstance().getUser().getToken());
 
     }
 
@@ -50,7 +50,7 @@ public class FirstPageActivity extends BaseActivity implements TabHost.TabConten
         final Fragment[] fragments = new Fragment[]{
                 NewsListFragment.newInstance(),
                 ThemeListFragment.newInstance(),
-                RankFragment.newInstance(),
+                RankListFragment.newInstance(),
                 MyInfoFragment.newInstance()
         };
 

@@ -141,36 +141,6 @@ public class ThemeListFragment extends Fragment {
         });
     }
 
-
-//    private void refreshNews() {
-//        final String TAG = "NewsBusiness-request";
-//        newsBusiness.newsListDisplay(new Callback() {
-//            @Override
-//            public void onFailure(Call call, IOException e) {
-//                Log.d(TAG, "onFailure() called with: call = [" + call + "], e = [" + e + "]");
-//            }
-//
-//            @Override
-//            public void onResponse(Call call,Response response) throws IOException {
-//                Log.d(TAG, "onResponse() called with: call = [" + call + "], response = [" + response + "]");
-//
-//                textView = (TextView) recyclerView.getLayoutManager().findViewByPosition(0).findViewById(R.id.id_tv_title);
-//                final String data = response.body().string();
-//                Log.d(TAG, "onResponse: data:"+data);
-//                getActivity().runOnUiThread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        textView.setText(data);
-////                        newsListAdapter.notifyDataSetChanged();
-//                        if (swipeRefreshLayout.isRefreshing()){
-//                            swipeRefreshLayout.setRefreshing(false);
-//                        }
-//                    }
-//                });
-//            }
-//        });
-//    }
-
     /**
      * 加载更多新闻
      */
