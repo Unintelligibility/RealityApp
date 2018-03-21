@@ -15,11 +15,12 @@ import android.view.ViewGroup;
 import com.reality.realityapp.R;
 import com.reality.realityapp.UserInfoHolder;
 import com.reality.realityapp.bean.NewsItem;
+import com.reality.realityapp.bean.ThemeItem;
 import com.reality.realityapp.business.NewsBusiness;
 import com.reality.realityapp.net.CommonCallback;
 import com.reality.realityapp.ui.activity.NewsInfoActivity;
-import com.reality.realityapp.ui.adapter.NewsListAdapter;
-import com.reality.realityapp.ui.adapter.ThemeAdapter;
+import com.reality.realityapp.ui.activity.ThemeNewsListActivity;
+import com.reality.realityapp.ui.adapter.ThemeListAdapter;
 import com.reality.realityapp.ui.view.refresh.SwipeRefresh;
 import com.reality.realityapp.ui.view.refresh.SwipeRefreshLayout;
 import com.reality.realityapp.utils.T;
@@ -32,18 +33,18 @@ import java.util.Map;
  * Created by 铠联 on 2018/1/27.
  */
 
-public class ThemeFragment extends Fragment {
+public class ThemeListFragment extends Fragment {
 
     //    private BundleData bundleData;
-    private Map<String, NewsItem> newsItems = new HashMap<>();
+    private Map<String, ThemeItem> themeItems = new HashMap<>();
 
     private NewsBusiness newsBusiness = new NewsBusiness();
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerView;
-    private ThemeAdapter themeAdapter;
+    private ThemeListAdapter themeAdapter;
 
-    public static ThemeFragment newInstance() {
-        ThemeFragment fragment = new ThemeFragment();
+    public static ThemeListFragment newInstance() {
+        ThemeListFragment fragment = new ThemeListFragment();
         return fragment;
     }
 
@@ -74,7 +75,7 @@ public class ThemeFragment extends Fragment {
 
     private void initView() {
 //        newsItemList = NewsListMock.getNewItemList2();
-        themeAdapter = new ThemeAdapter(getActivity(), newsItems);
+        themeAdapter = new ThemeListAdapter(getActivity(), themeItems);
 
 
         //swipeRefreshLayout设置
@@ -102,26 +103,16 @@ public class ThemeFragment extends Fragment {
             }
         });
 
-        themeAdapter.setOnItemClickListener(new ThemeAdapter.OnItemClickListener() {
+        themeAdapter.setOnItemClickListener(new ThemeListAdapter.OnItemClickListener() {
             @Override
             public void onClick(View view, int position) {
-                NewsItem newsItem = newsItems.get(String.valueOf(position));
-                String content = newsItem.getContent();
-                String source = newsItem.getSource();
-                String news_id = newsItem.get_id();
-                Log.d("content", "onClick---content: " + content);
-                Log.d("source", "onClick---source: " + source);
-                Log.d("news_id", "onClick-----news_id " + news_id);
-                toNewsInfoActivity(content, source, news_id);
+                ThemeItem themeItem = themeItems.get(String.valueOf(position));
+                String theme_title = themeItem.getTheme_title();
+                toThemeNewsListActivity(theme_title);
             }
         });
 
     }
-//
-//    private Map<String ,NewsItem> getNewsItems(){
-//
-//    }
-
 
     /**
      * 刷新新闻列表
@@ -130,18 +121,18 @@ public class ThemeFragment extends Fragment {
         final String TAG = "NewsBusiness-request";
 //        T.showToast("size:"+recyclerView.getLayoutManager().getItemCount());
         String userid = UserInfoHolder.getInstance().getUser().getUserid();
-        Log.d(TAG, "userid-----: " + userid);
-        newsBusiness.newsListDisplay(userid, new CommonCallback<Map<String, NewsItem>>() {
+//        Log.d(TAG, "userid-----: " + userid);
+        newsBusiness.themeListDisplay(new CommonCallback<Map<String, ThemeItem>>() {
             @Override
             public void onError(Exception e) {
                 T.showToast(e.getMessage());
             }
 
             @Override
-            public void onResponse(Map<String, NewsItem> response) {
-                newsItems.clear();
-                newsItems.putAll(response);
-                Log.d(TAG, "map: " + newsItems.size());
+            public void onResponse(Map<String, ThemeItem> response) {
+                themeItems.clear();
+                themeItems.putAll(response);
+                Log.d(TAG, "theme-map: " + themeItems.size());
                 themeAdapter.notifyDataSetChanged();
                 if (swipeRefreshLayout.isRefreshing()) {
                     swipeRefreshLayout.setRefreshing(false);
@@ -149,36 +140,6 @@ public class ThemeFragment extends Fragment {
             }
         });
     }
-
-
-//    private void refreshNews() {
-//        final String TAG = "NewsBusiness-request";
-//        newsBusiness.newsListDisplay(new Callback() {
-//            @Override
-//            public void onFailure(Call call, IOException e) {
-//                Log.d(TAG, "onFailure() called with: call = [" + call + "], e = [" + e + "]");
-//            }
-//
-//            @Override
-//            public void onResponse(Call call,Response response) throws IOException {
-//                Log.d(TAG, "onResponse() called with: call = [" + call + "], response = [" + response + "]");
-//
-//                textView = (TextView) recyclerView.getLayoutManager().findViewByPosition(0).findViewById(R.id.id_tv_title);
-//                final String data = response.body().string();
-//                Log.d(TAG, "onResponse: data:"+data);
-//                getActivity().runOnUiThread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        textView.setText(data);
-////                        newsListAdapter.notifyDataSetChanged();
-//                        if (swipeRefreshLayout.isRefreshing()){
-//                            swipeRefreshLayout.setRefreshing(false);
-//                        }
-//                    }
-//                });
-//            }
-//        });
-//    }
 
     /**
      * 加载更多新闻
@@ -188,16 +149,15 @@ public class ThemeFragment extends Fragment {
 //        T.showToast("size:"+recyclerView.getLayoutManager().getItemCount());
         String userid = UserInfoHolder.getInstance().getUser().getUserid();
         Log.d(TAG, "userid-----theme: " + userid);
-        newsBusiness.newsListDisplay(userid, new CommonCallback<Map<String, NewsItem>>() {
+        newsBusiness.themeListDisplay(new CommonCallback<Map<String, ThemeItem>>() {
             @Override
             public void onError(Exception e) {
                 T.showToast(e.getMessage());
             }
 
             @Override
-            public void onResponse(Map<String, NewsItem> response) {
-                newsItems.putAll(response);
-                Log.d(TAG, "map----------------------: " + newsItems.size());
+            public void onResponse(Map<String, ThemeItem> response) {
+                themeItems.putAll(response);
                 themeAdapter.notifyDataSetChanged();
                 if (swipeRefreshLayout.isRefreshing()) {
                     swipeRefreshLayout.setRefreshing(false);
@@ -206,11 +166,9 @@ public class ThemeFragment extends Fragment {
         });
     }
 
-    private void toNewsInfoActivity(String content, String source, String news_id) {
-        Intent intent = new Intent(getActivity(), NewsInfoActivity.class);
-        intent.putExtra("content", content);
-        intent.putExtra("source", source);
-        intent.putExtra("news_id", news_id);
+    private void toThemeNewsListActivity(String theme_title) {
+        Intent intent = new Intent(getActivity(), ThemeNewsListActivity.class);
+        intent.putExtra("theme_title", theme_title);
         startActivity(intent);
     }
 

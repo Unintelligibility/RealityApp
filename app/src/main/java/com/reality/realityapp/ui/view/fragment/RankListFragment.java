@@ -14,35 +14,36 @@ import android.view.ViewGroup;
 
 import com.reality.realityapp.R;
 import com.reality.realityapp.UserInfoHolder;
-import com.reality.realityapp.bean.NewsItem;
-import com.reality.realityapp.business.NewsBusiness;
+import com.reality.realityapp.bean.RankItem;
+import com.reality.realityapp.business.RankBusiness;
 import com.reality.realityapp.net.CommonCallback;
 import com.reality.realityapp.ui.activity.NewsInfoActivity;
 import com.reality.realityapp.ui.adapter.NewsListAdapter;
+import com.reality.realityapp.ui.adapter.RankListAdapter;
 import com.reality.realityapp.ui.view.refresh.SwipeRefresh;
 import com.reality.realityapp.ui.view.refresh.SwipeRefreshLayout;
 import com.reality.realityapp.utils.T;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 用来存放首页新闻（专题）列表的fragment（容器）,由viewPager控制，可在不同fragment间切换
  * Created by 铠联 on 2018/1/27.
  */
 
-public class RankFragment extends Fragment {
+public class RankListFragment extends Fragment {
 
     //    private BundleData bundleData;
-    private Map<String, NewsItem> newsItems = new HashMap<>();
+    private List<RankItem> rankItems = new ArrayList<>();
 
-    private NewsBusiness newsBusiness = new NewsBusiness();
+    private RankBusiness newsBusiness = new RankBusiness();
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerView;
-    private NewsListAdapter newsListAdapter;
+    private RankListAdapter rankListAdapter;
 
-    public static RankFragment newInstance() {
-        RankFragment fragment = new RankFragment();
+    public static RankListFragment newInstance() {
+        RankListFragment fragment = new RankListFragment();
 //        Bundle bundle = new Bundle();
 //        BundleData bundleData = new BundleData();
 //        bundleData.setNewsItems(newsItems);
@@ -72,32 +73,23 @@ public class RankFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_newslist, null);
+        View view = inflater.inflate(R.layout.fragment_ranklist, null);
 
         swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.id_swiperefresh);
         recyclerView = (RecyclerView) view.findViewById(R.id.id_recyclerview);
 
         initView();
 
-        refreshNews();
+        refreshRank();
 
         initEvent();
 
-//        textView.setText(title);
-//
-//        textView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                newsBusiness.newsArrayDisplay(textView,getActivity());
-//
-//            }
-//        });
         return view;
     }
 
     private void initView() {
 //        newsItemList = NewsListMock.getNewItemList2();
-        newsListAdapter = new NewsListAdapter(getActivity(), newsItems);
+        rankListAdapter = new RankListAdapter(getActivity(), rankItems);
 
 
         //swipeRefreshLayout设置
@@ -106,7 +98,7 @@ public class RankFragment extends Fragment {
 
         //recyclerview设置
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setAdapter(newsListAdapter);
+        recyclerView.setAdapter(rankListAdapter);
 
     }
 
@@ -114,86 +106,54 @@ public class RankFragment extends Fragment {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefresh.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                refreshNews();
+                refreshRank();
             }
         });
 
         swipeRefreshLayout.setOnPullUpRefreshListener(new SwipeRefreshLayout.OnPullUpRefreshListener() {
             @Override
             public void onPullUpRefresh() {
-                loadMore();
+                return;
             }
         });
 
-        newsListAdapter.setOnItemClickListener(new NewsListAdapter.OnItemClickListener() {
-            @Override
-            public void onClick(View view, int position) {
-                NewsItem newsItem = newsItems.get(String.valueOf(position));
-                String content = newsItem.getContent();
-                String source = newsItem.getSource();
-                String news_id = newsItem.get_id();
-                Log.d("content", "onClick---content: " + content);
-                Log.d("source", "onClick---source: " + source);
-                Log.d("news_id", "onClick-----news_id " + news_id);
-                toNewsInfoActivity(content, source, news_id);
-            }
-        });
+//        rankListAdapter.setOnItemClickListener(new NewsListAdapter.OnItemClickListener() {
+//            @Override
+//            public void onClick(View view, int position) {
+//                RankItem newsItem = rankItems.get(position);
+//                String content = newsItem.getContent();
+//                String source = newsItem.getSource();
+//                Log.d("content", "onClick---content: " + content);
+//                Log.d("source", "onClick---source: " + source);
+//                Log.d("news_id", "onClick-----news_id " + news_id);
+//                toNewsInfoActivity(content, source, news_id);
+//            }
+//        });
 
     }
-//
-//    private Map<String ,NewsItem> getNewsItems(){
-//
-//    }
-
 
     /**
      * 刷新新闻列表
      */
-    private void refreshNews() {
+    private void refreshRank() {
         final String TAG = "NewsBusiness-request";
 //        T.showToast("size:"+recyclerView.getLayoutManager().getItemCount());
-        String userid = UserInfoHolder.getInstance().getUser().getUserid();
-        Log.d(TAG, "userid-----: " + userid);
-        newsBusiness.newsListDisplay(userid, new CommonCallback<Map<String, NewsItem>>() {
+//        String rank_id = UserInfoHolder.getInstance().getUser().getUserid();
+        newsBusiness.rankListDisplay(new CommonCallback<List<RankItem>>() {
             @Override
             public void onError(Exception e) {
                 T.showToast(e.getMessage());
             }
 
             @Override
-            public void onResponse(Map<String, NewsItem> response) {
-                newsItems.clear();
-                newsItems.putAll(response);
-//                Log.d(TAG, "map: " + newsItems.size());
-                newsListAdapter.notifyDataSetChanged();
+            public void onResponse(List<RankItem> response) {
+                rankItems.clear();
+                rankItems.addAll(response);
+                Log.d(TAG, "rankItems_size: " + rankItems.size());
+                rankListAdapter.notifyDataSetChanged();
                 if (swipeRefreshLayout.isRefreshing()) {
                     swipeRefreshLayout.setRefreshing(false);
                 }
-//                for (int i = 0; i < recyclerView.getLayoutManager().getItemCount(); i++) {
-//                    final TextView titleTv = (TextView) recyclerView.getLayoutManager().findViewByPosition(i).findViewById(R.id.id_tv_title);
-//                    final TextView sourceTv = (TextView) recyclerView.getLayoutManager().findViewByPosition(i).findViewById(R.id.id_tv_source);
-//                    final TextView timeTv = (TextView) recyclerView.getLayoutManager().findViewByPosition(i).findViewById(R.id.id_tv_time);
-//                    final TextView reliabilityTv = (TextView) recyclerView.getLayoutManager().findViewByPosition(i).findViewById(R.id.id_tv_reliability);
-//                    final String title = response.get(String.valueOf(i)).getTitle();
-//                    final String source = response.get(String.valueOf(i)).getSource();
-//                    final String time = response.get(String.valueOf(i)).getTime();
-//                    final String reliability = response.get(String.valueOf(i)).getReliability();
-//                    Log.d(TAG, "onResponse: title:" + title);
-//
-//                    getActivity().runOnUiThread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            titleTv.setText(title);
-//                            sourceTv.setText(source);
-//                            timeTv.setText(time);
-//                            reliabilityTv.setText(reliability);
-////                        newsListAdapter.notifyDataSetChanged();
-//                            if (swipeRefreshLayout.isRefreshing()) {
-//                                swipeRefreshLayout.setRefreshing(false);
-//                            }
-//                        }
-//                    });
-//                }
             }
         });
     }
@@ -227,32 +187,6 @@ public class RankFragment extends Fragment {
 //            }
 //        });
 //    }
-
-    /**
-     * 加载更多新闻
-     */
-    private void loadMore() {
-        final String TAG = "NewsBusiness-request";
-//        T.showToast("size:"+recyclerView.getLayoutManager().getItemCount());
-        String userid = UserInfoHolder.getInstance().getUser().getUserid();
-        Log.d(TAG, "userid-----: " + userid);
-        newsBusiness.newsListDisplay(userid, new CommonCallback<Map<String, NewsItem>>() {
-            @Override
-            public void onError(Exception e) {
-                T.showToast(e.getMessage());
-            }
-
-            @Override
-            public void onResponse(Map<String, NewsItem> response) {
-                newsItems.putAll(response);
-//                Log.d(TAG, "map: " + newsItems.size());
-                newsListAdapter.notifyDataSetChanged();
-                if (swipeRefreshLayout.isRefreshing()) {
-                    swipeRefreshLayout.setRefreshing(false);
-                }
-            }
-        });
-    }
 
     private void toNewsInfoActivity(String content, String source, String news_id) {
         Intent intent = new Intent(getActivity(), NewsInfoActivity.class);

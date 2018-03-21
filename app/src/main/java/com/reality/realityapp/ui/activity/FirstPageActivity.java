@@ -15,8 +15,8 @@ import com.reality.realityapp.business.NewsBusiness;
 import com.reality.realityapp.ui.activity.base.BaseActivity;
 import com.reality.realityapp.ui.view.fragment.MyInfoFragment;
 import com.reality.realityapp.ui.view.fragment.NewsListFragment;
-import com.reality.realityapp.ui.view.fragment.RankFragment;
-import com.reality.realityapp.ui.view.fragment.ThemeFragment;
+import com.reality.realityapp.ui.view.fragment.RankListFragment;
+import com.reality.realityapp.ui.view.fragment.ThemeListFragment;
 import com.reality.realityapp.utils.T;
 
 public class FirstPageActivity extends BaseActivity implements TabHost.TabContentFactory {
@@ -37,7 +37,7 @@ public class FirstPageActivity extends BaseActivity implements TabHost.TabConten
 
         initEvent();
 
-        T.showToast("id:" + UserInfoHolder.getInstance().getUser().getUserid() + "token:" + UserInfoHolder.getInstance().getUser().getToken());
+        T.showToast("id------:" + UserInfoHolder.getInstance().getUser().getUserid() + "---------------token:" + UserInfoHolder.getInstance().getUser().getToken());
 
     }
 
@@ -49,8 +49,8 @@ public class FirstPageActivity extends BaseActivity implements TabHost.TabConten
         //TODO 还未加入真正的页面切换,暂时定为3
         final Fragment[] fragments = new Fragment[]{
                 NewsListFragment.newInstance(),
-                ThemeFragment.newInstance(),
-                RankFragment.newInstance(),
+                ThemeListFragment.newInstance(),
+                RankListFragment.newInstance(),
                 MyInfoFragment.newInstance()
         };
 

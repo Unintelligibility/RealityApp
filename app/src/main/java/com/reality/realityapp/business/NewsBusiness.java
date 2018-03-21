@@ -6,6 +6,7 @@ import android.util.Log;
 import android.widget.TextView;
 
 import com.reality.realityapp.bean.NewsItem;
+import com.reality.realityapp.bean.ThemeItem;
 import com.reality.realityapp.bean.Token;
 import com.reality.realityapp.constant.Url;
 import com.reality.realityapp.net.CommonCallback;
@@ -103,7 +104,7 @@ public class NewsBusiness {
             jsonObject.put("news_type", news_type);
             jsonObject.put("news_tags", news_tags);
             jsonObject.put("reading_time", reading_time);
-            Log.d(TAG, "title: "+title);
+            Log.d(TAG, "title: " + title);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -140,6 +141,24 @@ public class NewsBusiness {
         OkHttpUtils
                 .get()
                 .url(Url.baseUrl + newsid + "/relate")
+                .tag(this)
+                .build()
+                .execute(commonCallback);
+    }
+
+    public void themeListDisplay(CommonCallback<Map<String, ThemeItem>> commonCallback) {
+        OkHttpUtils
+                .get()
+                .url(Url.baseUrl + "theme_list")
+                .tag(this)
+                .build()
+                .execute(commonCallback);
+    }
+
+    public void themeNewsListDisplay(String theme_title, CommonCallback<Map<String, NewsItem>> commonCallback) {
+        OkHttpUtils
+                .get()
+                .url(Url.baseUrl + theme_title + "/theme_news")
                 .tag(this)
                 .build()
                 .execute(commonCallback);

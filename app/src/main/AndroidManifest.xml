@@ -29,8 +29,9 @@
         <activity android:name=".ui.activity.ThemeSelectActivity" />
         <activity
             android:name=".ui.activity.NewsInfoActivity"
-            android:hardwareAccelerated="true"></activity>
+            android:hardwareAccelerated="true" />
         <activity android:name=".ui.activity.RankInfoActivity" />
+        <activity android:name=".ui.activity.ThemeNewsListActivity"></activity>
     </application>
 
 </manifest>

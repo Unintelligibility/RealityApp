@@ -28,7 +28,7 @@ public class RankBusiness {
     public void rankListDisplay(CommonCallback<List<RankItem>> commonCallback){
         OkHttpUtils
                 .get()
-                .url(Url.baseUrl+"read")
+                .url(Url.baseUrl+"source")
                 .tag(this)
                 .build()
                 .execute(commonCallback);
