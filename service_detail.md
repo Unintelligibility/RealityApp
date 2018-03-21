@@ -289,7 +289,7 @@ return
 }
 ```
 
-#### source_rank 获取排名列表
+#### source 获取排名列表
 
 get
 
@@ -316,6 +316,35 @@ return
         },
     #....
      }
+}
+```
+
+#### /\<string:keyword>/\<int:start>/\<int:size>/search
+
+get
+
+return
+
+```python
+{
+    "resultCode": 1,
+    "data": [
+        {
+            "_id": "5aad49b5413ec79777e274cc",
+            "title": " 俄企前高管被吊死在家中 曾是普京的批评者",
+            "url": "https://www.myzaker.com/article/5aad21fa1bc8e04b1c00004b/",
+            "picture": "http://zkres1.myzaker.com/201803/5aad21f91bc8e04b1c00004a_640.jpg",
+            "source": "凤凰社会",
+            "time": "2018-03-17",
+            "content_text": " 俄企前高管被吊死在家中 曾是普京的批评者\n.死者是 68 岁的尼古拉 · 格鲁什科夫（Nikolai Glushkov），他是俄罗斯国际航空公司前副总裁，12 日被发现吊死在伦敦西南部新马尔登的住所中，尸检结果显示他是因 \" 颈部压迫 \" 而死亡。.1999 年，格鲁什科夫曾因洗钱和欺诈罪在俄罗斯被判入狱 5 年；2006 年，他在被判另一项欺诈罪、缓期执刑期间逃到英国寻求政治避难、并成为俄罗斯总统普京的批评者。.到目前为止，警方没发现他的死亡与前俄罗斯间谍斯克里帕尔中毒事件相关的迹象。（老任）.（原标题：英国又出命案：俄企前高管吊死在伦敦家中警方认定为谋杀）.\n",
+            "content": "<div class=\"article_header\">\n<h1> 俄企前高管被吊死在家中 曾是普京的批评者</h1>\n<div class=\"article_tips\"><a href=\"//www.myzaker.com/source/13755\" target=\"_blank\">\n<span class=\"article-logo-container\">\n<div class=\"article-logo-mask\">\n<img class=\"auther-logo\" src=\"https://zkres.myzaker.com/data/image/logo/13755.png\">\n</div>\n</span>\n<span class=\"auther\">凤凰社会</span> <span class=\"time\">2018-03-17</span></a></div>\n</div><div class=\"article_content\">\n<div id=\"content\"><p></p><div class=\"img_box\" id=\"id_imagebox_0\" onclick=\"\"><div class=\"content_img_div perview_img_div\"><img class=\"lazy opacity_0 \" id=\"img_0\" src=\"http://zkres1.myzaker.com/201803/5aad21f91bc8e04b1c00004a_640.jpg\" data-height=\"424\" data-width=\"680\"></div></div>死者是 68 岁的尼古拉 · 格鲁什科夫（Nikolai Glushkov），他是俄罗斯国际航空公司前副总裁，12 日被发现吊死在伦敦西南部新马尔登的住所中，尸检结果显示他是因 \" 颈部压迫 \" 而死亡。<p>1999 年，格鲁什科夫曾因洗钱和欺诈罪在俄罗斯被判入狱 5 年；2006 年，他在被判另一项欺诈罪、缓期执刑期间逃到英国寻求政治避难、并成为俄罗斯总统普京的批评者。</p><p>到目前为止，警方没发现他的死亡与前俄罗斯间谍斯克里帕尔中毒事件相关的迹象。（老任）</p><p>（原标题：英国又出命案：俄企前高管吊死在伦敦家中警方认定为谋杀）</p><div id=\"recommend_bottom\"></div><div id=\"article_bottom\"></div><p id=\"ID_disclaimer\" style=\"text-align:center;color:#666;font-size:10px;\"></p></div>\n</div>",
+            "news_type": "首页",
+            "news_tags": "普京;伦敦"
+        },
+        {
+            
+        }
+    ]
 }
 ```
 
