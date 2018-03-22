@@ -99,7 +99,7 @@ public class ThemeListFragment extends Fragment {
         swipeRefreshLayout.setOnPullUpRefreshListener(new SwipeRefreshLayout.OnPullUpRefreshListener() {
             @Override
             public void onPullUpRefresh() {
-                loadMore();
+                refreshThemes();
             }
         });
 

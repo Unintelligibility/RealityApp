@@ -8,6 +8,8 @@ import android.support.annotation.StringDef;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,6 +55,7 @@ public class NewsListFragment extends Fragment {
     private NewsBusiness newsBusiness = new NewsBusiness();
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerView;
+    private SearchView searchView;
     private NewsListAdapter newsListAdapter;
 
     public static NewsListFragment newInstance() {
@@ -90,6 +93,7 @@ public class NewsListFragment extends Fragment {
 
         swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.id_swiperefresh);
         recyclerView = (RecyclerView) view.findViewById(R.id.id_recyclerview);
+        searchView = (SearchView) view.findViewById(R.id.id_sv_search);
 
         initView();
 
@@ -155,6 +159,47 @@ public class NewsListFragment extends Fragment {
 //                Log.d("news_type", "onClick-----news_type " + news_type);
 //                Log.d("news_tags", "onClick-----news_tags " + news_tags);
                 toNewsInfoActivity(news_id, content, title, source, news_type, news_tags);
+            }
+        });
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                swipeRefreshLayout.setRefreshing(true);
+                Log.d("query-string", "onQueryTextSubmit: "+query);
+                if (TextUtils.isEmpty(query)){
+                    refreshNews();
+                }
+                else {
+                    newsBusiness.newsSearch(query, 0, 20, new CommonCallback<Map<String, NewsItem>>() {
+                        @Override
+                        public void onError(Exception e) {
+                            T.showToast(e.getMessage());
+                        }
+
+                        @Override
+                        public void onResponse(Map<String, NewsItem> response) {
+                            newsItems.clear();
+                            newsItems.putAll(response);
+                            newsListAdapter.notifyDataSetChanged();
+                            if (swipeRefreshLayout.isRefreshing()) {
+                                swipeRefreshLayout.setRefreshing(false);
+                            }
+
+                        }
+                    });
+                }
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                Log.d("query-string", "onQueryTextChange: "+newText);
+                if (TextUtils.isEmpty(newText)){
+                    swipeRefreshLayout.setRefreshing(true);
+                    refreshNews();
+                }
+                return true;
             }
         });
 

@@ -31,5 +31,6 @@ dependencies {
     compile 'com.zhy:okhttputils:2.6.2'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.google.code.gson:gson:2.3'
+    compile 'com.carson_ho:SearchLayout:1.0.1'
     testCompile 'junit:junit:4.12'
 }

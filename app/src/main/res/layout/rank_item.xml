@@ -25,7 +25,7 @@
         android:maxLines="2"
         android:text="新华社"
         android:textColor="#111"
-        android:textSize="28dp" />
+        android:textSize="26dp" />
 
     <TextView
         android:id="@+id/id_tv_count"

@@ -61,6 +61,15 @@ public class NewsBusiness {
                 .execute(commonCallback);
     }
 
+    public void newsSearch(String keyword, int start, int size, CommonCallback<Map<String, NewsItem>> commonCallback) {
+        OkHttpUtils
+                .get()
+                .url(Url.baseUrl + keyword + "/" + String.valueOf(start) + "/" + String.valueOf(size) + "/search")
+                .tag(this)
+                .build()
+                .execute(commonCallback);
+    }
+
     public void sendReadInfo(String news_id, long reading_time, CommonCallback<Token> commonCallback) {
         JSONObject jsonObject = new JSONObject();
         try {
