@@ -4,6 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TabHost;
@@ -26,8 +27,6 @@ public class FirstPageActivity extends BaseActivity implements TabHost.TabConten
 
     private ViewPager viewPager;
 
-    private NewsBusiness newsBusiness = new NewsBusiness();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +36,7 @@ public class FirstPageActivity extends BaseActivity implements TabHost.TabConten
 
         initEvent();
 
-        T.showToast("id------:" + UserInfoHolder.getInstance().getUser().getUserid() + "---------------token:" + UserInfoHolder.getInstance().getUser().getToken());
+//        T.showToast("id------:" + UserInfoHolder.getInstance().getUser().getUserid() + "---------------token:" + UserInfoHolder.getInstance().getUser().getToken());
 
     }
 
@@ -46,7 +45,6 @@ public class FirstPageActivity extends BaseActivity implements TabHost.TabConten
         //fragment组成的viewpager
         viewPager = (ViewPager) findViewById(R.id.id_viewpager);
 
-        //TODO 还未加入真正的页面切换,暂时定为3
         final Fragment[] fragments = new Fragment[]{
                 NewsListFragment.newInstance(),
                 ThemeListFragment.newInstance(),
