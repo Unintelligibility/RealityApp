@@ -166,7 +166,7 @@ public class NewsListFragment extends Fragment {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 swipeRefreshLayout.setRefreshing(true);
-                Log.d("query-string", "onQueryTextSubmit: "+query);
+//                Log.d("query-string", "onQueryTextSubmit: "+query);
                 if (TextUtils.isEmpty(query)){
                     refreshNews();
                 }
@@ -194,7 +194,7 @@ public class NewsListFragment extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                Log.d("query-string", "onQueryTextChange: "+newText);
+//                Log.d("query-string", "onQueryTextChange: "+newText);
                 if (TextUtils.isEmpty(newText)){
                     swipeRefreshLayout.setRefreshing(true);
                     refreshNews();

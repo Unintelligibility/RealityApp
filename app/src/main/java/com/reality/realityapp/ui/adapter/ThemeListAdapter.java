@@ -29,6 +29,7 @@ public class ThemeListAdapter extends RecyclerView.Adapter<ThemeListAdapter.News
     private LayoutInflater inflater;
 
     private OnItemClickListener onItemClickListener;
+    private Target target;
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener){
         this.onItemClickListener = onItemClickListener;
@@ -55,26 +56,30 @@ public class ThemeListAdapter extends RecyclerView.Adapter<ThemeListAdapter.News
         ThemeItem themItem = themItems.get(String.valueOf(position));
 
         Log.d("picture", "picture: "+themItem.getPic_url());
+        target = new Target() {
+            @Override
+            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                Log.d("picture", "pic-loaded: ");
+                if (android.os.Build.VERSION.SDK_INT > 15) {
+                    holder.themeView.setBackground(new BitmapDrawable(context.getResources(), bitmap));
+                } else {
+                    holder.themeView.setBackgroundDrawable(new BitmapDrawable(context.getResources(), bitmap));
+                }
+            }
+
+            @Override
+            public void onBitmapFailed(final Drawable errorDrawable) {
+                Log.d("picture", "pic-failure: ");
+            }
+
+            @Override
+            public void onPrepareLoad(final Drawable placeHolderDrawable) {
+
+            }
+        };
         Picasso.with(context)
                 .load(themItem.getPic_url())
-                .into(new Target() {
-                    @Override
-                    public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-                        if (android.os.Build.VERSION.SDK_INT > 15) {
-                            holder.themeView.setBackground(new BitmapDrawable(context.getResources(), bitmap));
-                        } else {
-                            holder.themeView.setBackgroundDrawable(new BitmapDrawable(context.getResources(), bitmap));
-                        }
-                    }
-
-                    @Override
-                    public void onBitmapFailed(final Drawable errorDrawable) {
-                    }
-
-                    @Override
-                    public void onPrepareLoad(final Drawable placeHolderDrawable) {
-                    }
-                });
+                .into(target);
 
         holder.titleTv.setText(themItem.getTheme_title());
         holder.timeTv.setText(themItem.getTime());

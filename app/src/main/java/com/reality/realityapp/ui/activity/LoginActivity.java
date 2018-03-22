@@ -88,7 +88,7 @@ public class LoginActivity extends BaseActivity {
                     @Override
                     public void onResponse(Token response) {
                         stopLoadingProgress();
-                        T.showToast("登陆成功:" + response.getToken());
+                        T.showToast("登陆成功");
                         OkHttpUtils.getInstance().getOkHttpClient().newBuilder().addInterceptor(new BasicAuthInterceptor(response.getToken(), ""));
 
                         //保存用户的信息
@@ -166,7 +166,7 @@ public class LoginActivity extends BaseActivity {
 
         String username = intent.getStringExtra(KEY_USERNAME);
         String password = intent.getStringExtra(KEY_PASSWORD);
-        Log.d("login activity", "string: " + username);
+//        Log.d("login activity", "string: " + username);
         if (TextUtils.isEmpty(username) || TextUtils.isEmpty(password)) {
             return;
         }

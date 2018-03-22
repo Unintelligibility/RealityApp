@@ -117,7 +117,7 @@ public class ThemeListFragment extends Fragment {
     /**
      * 刷新新闻列表
      */
-    private void refreshThemes() {
+    public void refreshThemes() {
         final String TAG = "NewsBusiness-request";
 //        T.showToast("size:"+recyclerView.getLayoutManager().getItemCount());
         String userid = UserInfoHolder.getInstance().getUser().getUserid();
@@ -171,5 +171,4 @@ public class ThemeListFragment extends Fragment {
         intent.putExtra("theme_title", theme_title);
         startActivity(intent);
     }
-
 }
