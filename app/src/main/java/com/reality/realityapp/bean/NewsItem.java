@@ -13,8 +13,8 @@ public class NewsItem implements Serializable{
     private String content;
     private String source;
     private String time;
-    private String reliability;
-    private String isBadTitle;
+    private int fake;
+    private int clickbait;
     private String picture_info;
     private String news_type;
     private String news_tags;
@@ -75,20 +75,20 @@ public class NewsItem implements Serializable{
         this.picture_info = picture_info;
     }
 
-    public String getReliability() {
-        return reliability;
+    public int getFake() {
+        return fake;
     }
 
-    public void setReliability(String reliability) {
-        this.reliability = reliability;
+    public void setFake(int fake) {
+        this.fake = fake;
     }
 
-    public String getIsBadTitle() {
-        return isBadTitle;
+    public int getClickbait() {
+        return clickbait;
     }
 
-    public void setIsBadTitle(String isBadTitle) {
-        this.isBadTitle = isBadTitle;
+    public void setClickbait(int clickbait) {
+        this.clickbait = clickbait;
     }
 
     public String getNews_type() {

@@ -105,7 +105,6 @@ public class ThemeListAdapter extends RecyclerView.Adapter<ThemeListAdapter.News
         public View themeView;
         public TextView titleTv;
         public TextView timeTv;
-        public TextView reliabilityTv;
 
         public NewsListItemViewHolder(View itemView) {
             super(itemView);
@@ -113,7 +112,6 @@ public class ThemeListAdapter extends RecyclerView.Adapter<ThemeListAdapter.News
             themeView = itemView.findViewById(R.id.id_bg_theme);
             titleTv = (TextView) itemView.findViewById(R.id.id_tv_title);
             timeTv= (TextView) itemView.findViewById(R.id.id_tv_time);
-            reliabilityTv = (TextView) itemView.findViewById(R.id.id_tv_reliability);
 
         }
     }

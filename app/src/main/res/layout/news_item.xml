@@ -14,8 +14,9 @@
         android:layout_alignParentStart="true"
         android:layout_alignTop="@+id/linearLayout"
         android:scaleType="centerCrop"
-        android:src="@drawable/item_image"
-        app:srcCompat="@drawable/alan2"></ImageView>
+        android:src="@drawable/item_image2"
+        app:srcCompat="@drawable/item_image2"
+        ></ImageView>
 
     <TextView
         android:id="@+id/id_tv_source"
@@ -40,17 +41,21 @@
         android:textColor="#222"
         android:textSize="13dp" />
 
-    <TextView
-        android:id="@+id/id_tv_reliability"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/id_tv_time"
-        android:layout_alignBottom="@+id/id_tv_time"
-        android:layout_alignEnd="@+id/linearLayout"
-        android:layout_marginEnd="12dp"
-        android:text="比较可信"
-        android:textColor="#666"
-        android:textSize="13dp" />
+
+    <ImageView
+        android:id="@+id/id_clickbait_image"
+        android:layout_width="60dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginRight="10dp"
+        android:layout_below="@+id/linearLayout"
+        android:layout_alignParentRight="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bad_title"
+        app:srcCompat="@drawable/bad_title"
+        android:visibility="invisible"
+        ></ImageView>
+
 
     <LinearLayout
         android:id="@+id/linearLayout"

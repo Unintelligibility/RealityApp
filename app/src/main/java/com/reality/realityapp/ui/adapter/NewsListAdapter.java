@@ -60,13 +60,15 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.NewsLi
         Log.d("picture", "picture: "+newsItem.getPicture());
         Picasso.with(context)
                 .load(newsItem.getPicture())
-                .placeholder(R.drawable.item_image)
+                .placeholder(R.drawable.item_image2)
                 .into(holder.imageView);
 
         holder.titleTv.setText(newsItem.getTitle());
         holder.sourceTv.setText(newsItem.getSource());
         holder.timeTv.setText(newsItem.getTime());
-        holder.reliabilityTv.setText(newsItem.getReliability());
+        if (newsItem.getClickbait()==1) {
+            holder.clickbaitIv.setVisibility(View.VISIBLE);
+        }
 
         if (onItemClickListener!=null){
             holder.titleTv.setOnClickListener(new View.OnClickListener() {
@@ -89,7 +91,7 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.NewsLi
         public TextView titleTv;
         public TextView sourceTv;
         public TextView timeTv;
-        public TextView reliabilityTv;
+        public ImageView clickbaitIv;
 
         public NewsListItemViewHolder(View itemView) {
             super(itemView);
@@ -98,7 +100,7 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.NewsLi
             titleTv = (TextView) itemView.findViewById(R.id.id_tv_title);
             sourceTv= (TextView) itemView.findViewById(R.id.id_tv_source);
             timeTv= (TextView) itemView.findViewById(R.id.id_tv_time);
-            reliabilityTv = (TextView) itemView.findViewById(R.id.id_tv_reliability);
+            clickbaitIv = (ImageView) itemView.findViewById(R.id.id_clickbait_image);
 
         }
     }

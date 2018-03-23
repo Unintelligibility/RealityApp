@@ -8,7 +8,7 @@
     android:layout_marginRight="16dp"
     android:layout_marginTop="10dp"
     android:layout_marginBottom="10dp"
-    android:background="@drawable/item_image">
+    android:background="@drawable/item_image1">
 
     <!--<TextView-->
         <!--android:id="@+id/id_tv_source"-->
@@ -31,22 +31,10 @@
         android:layout_alignBottom="@+id/id_tv_source"
         android:layout_marginStart="8dp"
         android:layout_toEndOf="@+id/id_tv_source"
-        android:text="12月29日"
+        android:text="加载中……"
         android:textColor="#222"
         android:textSize="13dp"
         />
-
-    <TextView
-        android:id="@+id/id_tv_reliability"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/id_tv_time"
-        android:layout_alignBottom="@+id/id_tv_time"
-        android:layout_alignEnd="@+id/linearLayout"
-        android:layout_marginEnd="12dp"
-        android:text="比较可信"
-        android:textColor="#666"
-        android:textSize="13dp" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -63,7 +51,7 @@
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:maxLines="2"
-            android:text="阿兰：没有人跟我谈转会，我在中国很开心"
+            android:text=" "
             android:textColor="@color/white"
             android:textSize="18dp"
             android:textStyle="bold"
