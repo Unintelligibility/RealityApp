@@ -30,11 +30,11 @@ public class RankListAdapter extends RecyclerView.Adapter<RankListAdapter.Relate
 
     private OnItemClickListener onItemClickListener;
 
-    public void setOnItemClickListener(OnItemClickListener onItemClickListener){
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }
 
-    public interface OnItemClickListener{
+    public interface OnItemClickListener {
         void onClick(View view, int position);
     }
 
@@ -59,10 +59,14 @@ public class RankListAdapter extends RecyclerView.Adapter<RankListAdapter.Relate
 //                .load(rankItem.getPicture())
 //                .placeholder(R.drawable.item_image)
 //                .into(holder.imageView);
-
-        holder.rankTv.setText(String.valueOf(position+1));
-        holder.sourceTv.setText(rankItem.getSource());
-        holder.countTv.setText(rankItem.getCount());
+        if (position>=1) {
+            holder.rankTv.setText(String.valueOf(position));
+        }
+        else {
+            holder.rankTv.setText("排名");
+        }
+            holder.sourceTv.setText(rankItem.getSource());
+            holder.countTv.setText(rankItem.getCount());
 
 //        if (onItemClickListener!=null){
 //            holder.titleTv.setOnClickListener(new View.OnClickListener() {
@@ -90,7 +94,7 @@ public class RankListAdapter extends RecyclerView.Adapter<RankListAdapter.Relate
             super(itemView);
 
             rankTv = (TextView) itemView.findViewById(R.id.id_tv_rank);
-            sourceTv= (TextView) itemView.findViewById(R.id.id_tv_source);
+            sourceTv = (TextView) itemView.findViewById(R.id.id_tv_source);
             countTv = (TextView) itemView.findViewById(R.id.id_tv_count);
 
         }

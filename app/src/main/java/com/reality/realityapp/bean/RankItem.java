@@ -12,6 +12,11 @@ public class RankItem {
     private String reliability;
     private String remark;
 
+    public RankItem(String source, String count) {
+        this.source = source;
+        this.count = count;
+    }
+
     public String getSource() {
         return source;
     }

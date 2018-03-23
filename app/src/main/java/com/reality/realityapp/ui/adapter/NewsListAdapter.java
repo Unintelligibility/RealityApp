@@ -72,6 +72,9 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.NewsLi
         if (newsItem.getClickbait()==1) {
             holder.clickbaitIv.setVisibility(View.VISIBLE);
         }
+        else {
+            holder.clickbaitIv.setVisibility(View.INVISIBLE);
+        }
 
         if (onItemClickListener!=null){
             holder.titleTv.setOnClickListener(new View.OnClickListener() {

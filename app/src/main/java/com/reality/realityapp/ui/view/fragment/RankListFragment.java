@@ -41,6 +41,7 @@ public class RankListFragment extends Fragment {
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerView;
     private RankListAdapter rankListAdapter;
+    private final RankItem rankItemTitle = new RankItem("媒体","发行量");
 
     public static RankListFragment newInstance() {
         RankListFragment fragment = new RankListFragment();
@@ -148,6 +149,7 @@ public class RankListFragment extends Fragment {
             @Override
             public void onResponse(List<RankItem> response) {
                 rankItems.clear();
+                rankItems.add(rankItemTitle);
                 rankItems.addAll(response);
 //                Log.d(TAG, "rankItems_size: " + rankItems.size());
                 rankListAdapter.notifyDataSetChanged();

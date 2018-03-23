@@ -20,7 +20,7 @@
 
     <TextView
         android:id="@+id/id_tv_source"
-        android:layout_width="190dp"
+        android:layout_width="170dp"
         android:layout_height="40dp"
         android:maxLines="2"
         android:text="新华社"
