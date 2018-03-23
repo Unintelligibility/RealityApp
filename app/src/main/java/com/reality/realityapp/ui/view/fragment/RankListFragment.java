@@ -142,14 +142,14 @@ public class RankListFragment extends Fragment {
         newsBusiness.rankListDisplay(new CommonCallback<List<RankItem>>() {
             @Override
             public void onError(Exception e) {
-                T.showToast(e.getMessage());
+                T.showToast("网络不通畅，请刷新");
             }
 
             @Override
             public void onResponse(List<RankItem> response) {
                 rankItems.clear();
                 rankItems.addAll(response);
-                Log.d(TAG, "rankItems_size: " + rankItems.size());
+//                Log.d(TAG, "rankItems_size: " + rankItems.size());
                 rankListAdapter.notifyDataSetChanged();
                 if (swipeRefreshLayout.isRefreshing()) {
                     swipeRefreshLayout.setRefreshing(false);

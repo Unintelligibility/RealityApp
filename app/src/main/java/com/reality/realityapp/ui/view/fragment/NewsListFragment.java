@@ -174,7 +174,7 @@ public class NewsListFragment extends Fragment {
                     newsBusiness.newsSearch(query, 0, 20, new CommonCallback<Map<String, NewsItem>>() {
                         @Override
                         public void onError(Exception e) {
-                            T.showToast(e.getMessage());
+                            T.showToast("网络不通畅，请刷新");
                         }
 
                         @Override
@@ -221,7 +221,7 @@ public class NewsListFragment extends Fragment {
         newsBusiness.newsListDisplay(userid, new CommonCallback<Map<String, NewsItem>>() {
             @Override
             public void onError(Exception e) {
-                T.showToast(e.getMessage());
+                T.showToast("网络不通畅，请刷新");
             }
 
             @Override
@@ -303,7 +303,7 @@ public class NewsListFragment extends Fragment {
         newsBusiness.newsListDisplay(userid, new CommonCallback<Map<String, NewsItem>>() {
             @Override
             public void onError(Exception e) {
-                T.showToast(e.getMessage());
+                T.showToast("网络不通畅，请刷新");
             }
 
             @Override

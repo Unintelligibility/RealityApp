@@ -57,6 +57,7 @@ public class NewsBusiness {
                 .get()
                 .url(Url.baseUrl + userid + "/read")
                 .tag(this)
+//                .addHeader("Connection","close")
                 .build()
                 .execute(commonCallback);
     }
@@ -66,6 +67,7 @@ public class NewsBusiness {
                 .get()
                 .url(Url.baseUrl + keyword + "/" + String.valueOf(start) + "/" + String.valueOf(size) + "/search")
                 .tag(this)
+//                .addHeader("Connection","close")
                 .build()
                 .execute(commonCallback);
     }
@@ -151,6 +153,7 @@ public class NewsBusiness {
                 .get()
                 .url(Url.baseUrl + newsid + "/relate")
                 .tag(this)
+//                .addHeader("Connection","close")
                 .build()
                 .execute(commonCallback);
     }
@@ -160,6 +163,7 @@ public class NewsBusiness {
                 .get()
                 .url(Url.baseUrl + "theme_list")
                 .tag(this)
+//                .addHeader("Connection","close")
                 .build()
                 .execute(commonCallback);
     }
@@ -169,6 +173,7 @@ public class NewsBusiness {
                 .get()
                 .url(Url.baseUrl + theme_title + "/theme_news")
                 .tag(this)
+//                .addHeader("Connection","close")
                 .build()
                 .execute(commonCallback);
     }

@@ -125,7 +125,7 @@ public class ThemeListFragment extends Fragment {
         newsBusiness.themeListDisplay(new CommonCallback<Map<String, ThemeItem>>() {
             @Override
             public void onError(Exception e) {
-                T.showToast(e.getMessage());
+                T.showToast("网络不通畅，请刷新");
             }
 
             @Override
@@ -152,7 +152,7 @@ public class ThemeListFragment extends Fragment {
         newsBusiness.themeListDisplay(new CommonCallback<Map<String, ThemeItem>>() {
             @Override
             public void onError(Exception e) {
-                T.showToast(e.getMessage());
+                T.showToast("网络不通畅，请刷新");
             }
 
             @Override

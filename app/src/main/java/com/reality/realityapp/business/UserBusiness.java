@@ -49,6 +49,7 @@ public class UserBusiness {
                 .content(jsonObject.toString())
                 .url(Url.baseUrl+"signin")
                 .tag(this)
+//                .addHeader("Connection","close")
                 .build()
                 .execute(commonCallback);
     }

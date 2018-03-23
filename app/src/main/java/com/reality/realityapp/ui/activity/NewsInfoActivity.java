@@ -217,8 +217,8 @@ public class NewsInfoActivity extends BaseActivity {
         newsBusiness.relatedNewsDisplay(news_id, new CommonCallback<List<NewsItem>>() {
             @Override
             public void onError(Exception e) {
-                Log.d("error-----", "error------------ " + e.getMessage());
-                T.showToast(e.getMessage());
+//                Log.d("error-----", "error------------ " + e.getMessage());
+                T.showToast("网络不通畅，请刷新");
             }
 
             @Override
@@ -241,7 +241,7 @@ public class NewsInfoActivity extends BaseActivity {
     private void sendReadTime() {
         endMillis = System.currentTimeMillis();
         reading_time = endMillis - startMillis;
-        Log.d("readingTime", "reading_time: " + reading_time);
+//        Log.d("readingTime", "reading_time: " + reading_time);
         String username = UserInfoHolder.getInstance().getUser().getUsername();
         String password = UserInfoHolder.getInstance().getUser().getPassword();
         newsBusiness.sendReadInfo2(username, password, title, source, news_type, news_tags, reading_time);
