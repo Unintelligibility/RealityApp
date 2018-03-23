@@ -31,7 +31,8 @@
             android:name=".ui.activity.NewsInfoActivity"
             android:hardwareAccelerated="true" />
         <activity android:name=".ui.activity.RankInfoActivity" />
-        <activity android:name=".ui.activity.ThemeNewsListActivity"></activity>
+        <activity android:name=".ui.activity.ThemeNewsListActivity" />
+        <activity android:name=".ui.activity.base.BaseActivity"></activity>
     </application>
 
 </manifest>

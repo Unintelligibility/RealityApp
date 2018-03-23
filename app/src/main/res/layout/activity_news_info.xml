@@ -8,6 +8,8 @@
     android:orientation="vertical"
     tools:context="com.reality.realityapp.ui.activity.NewsInfoActivity">
 
+    <include layout="@layout/common_toolbar"></include>
+
     <ScrollView
         android:id="@+id/id_sv_content"
         android:layout_width="match_parent"

@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -65,9 +66,12 @@ public class NewsInfoActivity extends BaseActivity {
         setContentView(R.layout.activity_news_info);
 
         startMillis = System.currentTimeMillis();
-//        setUpToolBar();
+
         getWindow().addFlags(
                 WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED);
+
+        setUpToolBar();
+
         initView();
 
         initEvent();
@@ -334,5 +338,11 @@ public class NewsInfoActivity extends BaseActivity {
                     "})()");
         }
 
+    }
+
+    @Override
+    protected void onPause() {
+        contentWv.reload();
+        super.onPause();
     }
 }
