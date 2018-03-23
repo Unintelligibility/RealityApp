@@ -19,7 +19,7 @@ import com.reality.realityapp.UserInfoHolder;
 
 public class MyInfoFragment extends Fragment {
     private TextView textinput_username;
-    String username = UserInfoHolder.getInstance().getUser().getUsername();
+    private String username = UserInfoHolder.getInstance().getUser().getUsername();
     public static MyInfoFragment newInstance(){
         MyInfoFragment myInfoFragment = new MyInfoFragment();
         return myInfoFragment;
@@ -38,7 +38,8 @@ public class MyInfoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_myinfo, null);
 
-//        textinput_username = (TextView)v.findViewById(R.layout.);
+        textinput_username = (TextView)v.findViewById(R.id.id_username);
+        textinput_username.setText(username);
         return v;
 //        return super.onCreateView(inflater, container, savedInstanceState);
     }
