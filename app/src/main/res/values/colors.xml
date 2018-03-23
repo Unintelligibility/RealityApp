@@ -12,6 +12,7 @@
     <color name="darkgray">#808080</color>
     <color name="blue">#0000FF</color>
     <color name="lightred">#90FF0000</color>
+    <color name="deepred">#DC143C</color>
     <color name="lightgray">#90505050</color>
     <color name="deepgray">#333</color>
     <color name="deepgray2">#666</color>

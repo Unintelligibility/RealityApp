@@ -11,11 +11,10 @@
         android:layout_width="160dip"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/id_btn_login"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="84dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="90dp"
         android:scaleType="centerInside"
-        app:srcCompat="@drawable/jianwenlogo" />
+        app:srcCompat="@drawable/jianwenlogo1" />
 
     <TextView
         android:id="@+id/id_tv_title"
@@ -65,7 +64,7 @@
         android:layout_marginRight="60dp"
         android:layout_marginTop="50dp"
         android:text="@string/login_submit"
-        style="@style/Button_Large_Grey"
+        style="@style/Button_Large_Red"
         />
 
     <TextView
