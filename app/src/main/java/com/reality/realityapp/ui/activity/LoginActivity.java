@@ -82,7 +82,12 @@ public class LoginActivity extends BaseActivity {
                     @Override
                     public void onError(Exception e) {
                         stopLoadingProgress();
-                        T.showToast(e.getMessage());
+                        if (TextUtils.equals(e.getMessage(),"用户名密码错误")) {
+                            T.showToast(e.getMessage());
+                        }
+                        else{
+                            T.showToast("网络不通畅，请刷新");
+                        }
                     }
 
                     @Override

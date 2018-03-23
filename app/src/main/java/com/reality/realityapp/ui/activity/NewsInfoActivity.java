@@ -289,10 +289,22 @@ public class NewsInfoActivity extends BaseActivity {
         public void onPageFinished(WebView view, String url) {
             super.onPageFinished(view, url);
             imgReset();
+            pReset();
             aReset();
             //使得相似新闻推荐列表在新闻详情显示之后可见，解决闪动问题
             recyclerView.setVisibility(View.VISIBLE);
             contentSv.fullScroll(View.FOCUS_UP);
+        }
+
+        private void pReset() {
+            contentWv.loadUrl("javascript:(function(){" +
+                    "var objs = document.getElementsByTagName('p'); " +
+                    "for(var i=0;i<objs.length;i++)  " +
+                    "{"
+                    + "var img = objs[i];   " +
+                    " img.style.lineHeight = '200%';" +
+                    "}" +
+                    "})()");
         }
 
         private void imgReset() {

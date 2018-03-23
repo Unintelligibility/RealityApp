@@ -66,6 +66,9 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.NewsLi
         holder.titleTv.setText(newsItem.getTitle());
         holder.sourceTv.setText(newsItem.getSource());
         holder.timeTv.setText(newsItem.getTime());
+//        Log.d("onBindViewHolder", "title:"+newsItem.getTitle());
+//        Log.d("onBindViewHolder", "clickbait:"+newsItem.getClickbait());
+//        Log.d("onBindViewHolder", "fake:"+newsItem.getFake());
         if (newsItem.getClickbait()==1) {
             holder.clickbaitIv.setVisibility(View.VISIBLE);
         }
