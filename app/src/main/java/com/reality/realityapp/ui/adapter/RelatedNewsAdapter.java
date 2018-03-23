@@ -73,6 +73,12 @@ public class RelatedNewsAdapter extends RecyclerView.Adapter<RelatedNewsAdapter.
                     onItemClickListener.onClick(v,position);
                 }
             });
+            holder.imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onItemClickListener.onClick(v,position);
+                }
+            });
         }
     }
 

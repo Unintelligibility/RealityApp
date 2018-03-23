@@ -92,6 +92,12 @@ public class ThemeListAdapter extends RecyclerView.Adapter<ThemeListAdapter.News
                     onItemClickListener.onClick(v,position);
                 }
             });
+            holder.themeView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onItemClickListener.onClick(v,position);
+                }
+            });
         }
     }
 

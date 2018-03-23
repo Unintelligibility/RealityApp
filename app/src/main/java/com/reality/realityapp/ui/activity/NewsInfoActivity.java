@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebChromeClient;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -88,7 +89,7 @@ public class NewsInfoActivity extends BaseActivity {
 
         WebSettings webSettings = contentWv.getSettings();
         webSettings.setJavaScriptEnabled(true);
-        webSettings.setAllowFileAccess(true);
+//        webSettings.setAllowFileAccess(true);
 //        webSettings.setUseWideViewPort(true);
 //        webSettings.setLoadWithOverviewMode(true);
 //
@@ -96,8 +97,9 @@ public class NewsInfoActivity extends BaseActivity {
         webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
         webSettings.setLoadsImagesAutomatically(true);
         webSettings.setMediaPlaybackRequiresUserGesture(false);
-        contentWv.setLayerType(View.LAYER_TYPE_HARDWARE, null);
-        contentWv.addJavascriptInterface(this, "nativeMethod");
+//        contentWv.setLayerType(View.LAYER_TYPE_HARDWARE, null);
+        contentWv.setLayerType(View.LAYER_TYPE_NONE, null);
+//        contentWv.addJavascriptInterface(this, "nativeMethod");
 
         relatedNewsAdapter = new RelatedNewsAdapter(this, newsItems);
 
@@ -161,10 +163,15 @@ public class NewsInfoActivity extends BaseActivity {
 
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                T.showToast("rankInfo1");
-                sendReadTime();
-                toRankActivity();
-                T.showToast("rankInfo2");
+//                T.showToast("rankInfo1");
+//                sendReadTime();
+//                toRankActivity();
+//                T.showToast("rankInfo2");
+                return true;
+            }
+
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
                 return true;
             }
 
@@ -268,12 +275,12 @@ public class NewsInfoActivity extends BaseActivity {
 //        });
 //    }
 
-    @JavascriptInterface
-    private void toRankActivity() {
-        Intent intent = new Intent(this, NewsInfoActivity.class);
-        intent.putExtra("source", source);
-        startActivity(intent);
-    }
+//    @JavascriptInterface
+//    private void toRankActivity() {
+//        Intent intent = new Intent(this, NewsInfoActivity.class);
+//        intent.putExtra("source", source);
+//        startActivity(intent);
+//    }
 
     private void toNewsInfoActivity(String news_id, String content, String title, String source, String news_type, String news_tags) {
         Intent intent = new Intent(this, NewsInfoActivity.class);

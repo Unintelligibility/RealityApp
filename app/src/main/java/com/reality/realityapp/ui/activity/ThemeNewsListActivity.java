@@ -44,6 +44,8 @@ public class ThemeNewsListActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_theme_news_list);
 
+        setUpToolBar();
+
         initView();
 
         initEvent();

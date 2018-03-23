@@ -80,6 +80,12 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.NewsLi
                     onItemClickListener.onClick(v,position);
                 }
             });
+            holder.imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onItemClickListener.onClick(v,position);
+                }
+            });
         }
     }
 
