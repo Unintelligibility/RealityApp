@@ -47,7 +47,7 @@ public class UserBusiness {
                 .postString()
                 .mediaType(MediaType.parse("application/json"))
                 .content(jsonObject.toString())
-                .url(Url.baseUrl+"signin")
+                .url(Url.testUrl+"signin")
                 .tag(this)
 //                .addHeader("Connection","close")
                 .build()
@@ -66,7 +66,7 @@ public class UserBusiness {
                 .postString()
                 .mediaType(MediaType.parse("application/json"))
                 .content(jsonObject.toString())
-                .url(Url.baseUrl+"signup")
+                .url(Url.testUrl+"signup")
                 .tag(this)
                 .build()
                 .execute(commonCallback);
@@ -98,7 +98,7 @@ public class UserBusiness {
         //创建一个RequestBody(参数1：数据类型 参数2传递的json串)
         RequestBody requestBody = RequestBody.create(JSON, jsonObject.toString());
         Request request = new Request.Builder()
-                .url(Url.baseUrl+"interest")//请求的url
+                .url(Url.testUrl+"interest")//请求的url
                 .post(requestBody)
                 .build();
 

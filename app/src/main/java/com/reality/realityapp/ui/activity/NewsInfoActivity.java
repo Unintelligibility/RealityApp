@@ -1,5 +1,7 @@
 package com.reality.realityapp.ui.activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -9,10 +11,10 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
-import android.webkit.JavascriptInterface;
-import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -47,6 +49,7 @@ public class NewsInfoActivity extends BaseActivity {
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerView;
     private RelatedNewsAdapter relatedNewsAdapter;
+    private Toolbar toolbar;
 
     //查看新闻详情的起止时间（毫秒）
     private long startMillis;
@@ -80,12 +83,76 @@ public class NewsInfoActivity extends BaseActivity {
         initIntent(getIntent());
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_news,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.id_menu_report:
+                AlertDialog.Builder builder=new AlertDialog.Builder(NewsInfoActivity.this);
+                builder.setIcon(android.R.drawable.ic_dialog_info);
+                builder.setTitle("请选择你举报的原因");
+                final String []itemsId=new String[]{"内容虚假","盗版侵权","内容低俗","危险言论","封建迷信"};
+                final boolean []checkedItems=new boolean[]{false,false,false,false,false};//这里的true是默认第几个人已经被选中
+                builder.setMultiChoiceItems(itemsId, checkedItems,new DialogInterface.OnMultiChoiceClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which, boolean ischeck) {
+                        checkedItems[which]=ischeck;
+                    }
+                });
+                //设置一个确定按钮
+                builder.setPositiveButton("确定", null);
+                builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                builder.setCancelable(false);
+                final AlertDialog dialog = builder.create();
+                dialog.show();
+                dialog.getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        Log.d("checkedItems", "checkedItems: "+checkedItems);
+                        String text="";
+                        boolean hasSelected=false;
+                        for(int i=0;i<itemsId.length;i++)
+                        {
+                            text+=checkedItems[i]?itemsId[i]+",":"";
+                            if (checkedItems[i]){
+                                hasSelected = checkedItems[i];
+                                break;
+                            }
+                        }
+                        if (hasSelected) {
+                            T.showToast("举报成功！感谢您的反馈！");
+                            dialog.dismiss();
+                        }
+                        else {
+                            T.showToast("还未选择举报原因！");
+                            return;
+                        }
+                    }
+                });
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     private void initView() {
 //        contentTv = (TextView) findViewById(R.id.id_tv_content);
         contentWv = (WebView) findViewById(R.id.id_wv_content);
         contentSv = (ScrollView) findViewById(R.id.id_sv_content);
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.id_swiperefresh);
         recyclerView = (RecyclerView) findViewById(R.id.id_recyclerview);
+        toolbar = (Toolbar) findViewById(R.id.id_toolbar);
 
         WebSettings webSettings = contentWv.getSettings();
         webSettings.setJavaScriptEnabled(true);
@@ -97,7 +164,6 @@ public class NewsInfoActivity extends BaseActivity {
         webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
         webSettings.setLoadsImagesAutomatically(true);
         webSettings.setMediaPlaybackRequiresUserGesture(false);
-//        contentWv.setLayerType(View.LAYER_TYPE_HARDWARE, null);
         contentWv.setLayerType(View.LAYER_TYPE_NONE, null);
 //        contentWv.addJavascriptInterface(this, "nativeMethod");
 
@@ -146,6 +212,8 @@ public class NewsInfoActivity extends BaseActivity {
                 toNewsInfoActivity(news_id, content, title, source, news_type, news_tags);
             }
         });
+
+
     }
 
     private void initIntent(Intent intent) {

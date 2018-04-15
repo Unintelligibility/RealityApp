@@ -46,7 +46,7 @@ public class NewsBusiness {
     public void newsListFirstDisplay(CommonCallback<Map<String, NewsItem>> commonCallback) {
         OkHttpUtils
                 .get()
-                .url(Url.baseUrl + "read")
+                .url(Url.testUrl + "read")
                 .tag(this)
                 .build()
                 .execute(commonCallback);
@@ -55,7 +55,7 @@ public class NewsBusiness {
     public void newsListDisplay(String userid, CommonCallback<Map<String, NewsItem>> commonCallback) {
         OkHttpUtils
                 .get()
-                .url(Url.baseUrl + userid + "/read")
+                .url(Url.testUrl + userid + "/read")
                 .tag(this)
 //                .addHeader("Connection","close")
                 .build()
@@ -65,7 +65,7 @@ public class NewsBusiness {
     public void newsSearch(String keyword, int start, int size, CommonCallback<Map<String, NewsItem>> commonCallback) {
         OkHttpUtils
                 .get()
-                .url(Url.baseUrl + keyword + "/" + String.valueOf(start) + "/" + String.valueOf(size) + "/search")
+                .url(Url.testUrl + keyword + "/" + String.valueOf(start) + "/" + String.valueOf(size) + "/search")
                 .tag(this)
 //                .addHeader("Connection","close")
                 .build()
@@ -84,7 +84,7 @@ public class NewsBusiness {
                 .postString()
                 .mediaType(MediaType.parse("application/json"))
                 .content(jsonObject.toString())
-                .url(Url.baseUrl + "read_info")
+                .url(Url.testUrl + "read_info")
                 .tag(this)
                 .build()
                 .execute(commonCallback);
@@ -125,7 +125,7 @@ public class NewsBusiness {
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
         RequestBody requestBody = RequestBody.create(JSON, jsonObject.toString());
         Request request = new Request.Builder()
-                .url(Url.baseUrl + "read_info")//请求的url
+                .url(Url.testUrl + "read_info")//请求的url
                 .post(requestBody)
                 .build();
 
@@ -151,7 +151,7 @@ public class NewsBusiness {
     public void relatedNewsDisplay(String newsid, CommonCallback<List<NewsItem>> commonCallback) {
         OkHttpUtils
                 .get()
-                .url(Url.baseUrl + newsid + "/relate")
+                .url(Url.testUrl + newsid + "/relate")
                 .tag(this)
 //                .addHeader("Connection","close")
                 .build()
@@ -161,7 +161,7 @@ public class NewsBusiness {
     public void themeListDisplay(CommonCallback<Map<String, ThemeItem>> commonCallback) {
         OkHttpUtils
                 .get()
-                .url(Url.baseUrl + "theme_list")
+                .url(Url.testUrl + "theme_list")
                 .tag(this)
 //                .addHeader("Connection","close")
                 .build()
@@ -171,7 +171,7 @@ public class NewsBusiness {
     public void themeNewsListDisplay(String theme_title, CommonCallback<Map<String, NewsItem>> commonCallback) {
         OkHttpUtils
                 .get()
-                .url(Url.baseUrl + theme_title + "/theme_news")
+                .url(Url.testUrl + theme_title + "/theme_news")
                 .tag(this)
 //                .addHeader("Connection","close")
                 .build()
@@ -179,7 +179,7 @@ public class NewsBusiness {
     }
 //    public void newsListDisplay(Callback callback){
 //        Request.Builder builder = new Request.Builder();
-//        builder.url(Url.baseUrl+"read");
+//        builder.url(Url.testUrl+"read");
 //        final Request request = builder.build();
 //        Call call = okHttpClient.newCall(request);
 //        call.enqueue(callback);
@@ -193,7 +193,7 @@ public class NewsBusiness {
 //            @Override
 //            public void run() {
 //                Request.Builder builder = new Request.Builder();
-//                builder.url(Url.baseUrl+"read");
+//                builder.url(Url.testUrl+"read");
 //                Request request = builder.build();
 //                Log.d(TAG,"run: "+request);
 //                Call call = okHttpClient.newCall(request);
