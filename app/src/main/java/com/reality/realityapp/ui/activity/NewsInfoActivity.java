@@ -96,8 +96,8 @@ public class NewsInfoActivity extends BaseActivity {
                 AlertDialog.Builder builder=new AlertDialog.Builder(NewsInfoActivity.this);
                 builder.setIcon(android.R.drawable.ic_dialog_info);
                 builder.setTitle("请选择你举报的原因");
-                final String []itemsId=new String[]{"内容虚假","盗版侵权","内容低俗","危险言论","封建迷信"};
-                final boolean []checkedItems=new boolean[]{false,false,false,false,false};//这里的true是默认第几个人已经被选中
+                final String []itemsId=new String[]{"虚假言论","标题夸大","违法违规","内容低俗"};
+                final boolean []checkedItems=new boolean[]{false,false,false,false};//这里的true是默认第几个人已经被选中
                 builder.setMultiChoiceItems(itemsId, checkedItems,new DialogInterface.OnMultiChoiceClickListener() {
 
                     @Override
